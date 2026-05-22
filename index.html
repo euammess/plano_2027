@@ -1,10 +1,8 @@
-<!DOCTYPE html>
-<html lang="pt-BR">
-<head>
+<html lang="pt-BR"><head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Plano Estratégico Amazonas</title>
-<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600&amp;family=DM+Mono:wght@400;500&amp;display=swap" rel="stylesheet">
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
 :root{
@@ -319,7 +317,7 @@ body.light .resumo-item-obs{color:#444}
   body > *:not(.resumo-overlay){display:none}
 }
 </style>
-</head>
+<script>window.__INIT_DATA__={"updatedAt":"22/05/2026","eixo2":[{"id":"e2-1","subtema":"Seg. Pública / Saúde / Assist. Social","status":"entregue","obs":"Em produção na gráfica"},{"id":"e2-2","subtema":"Recebimento dos Livros na Agência","status":"17/06","obs":"Aguardando entrega pela gráfica"},{"id":"e2-3","subtema":"Lançamento — Teatro Manauara","status":"22/06","obs":"09h30 — data confirmada"}],"eixo3":[{"id":"e3-1","subtema":"Educação","responsavel":"Ana Maria Souza","etapa":2,"prazo":"25/06/2026","obs":"Material entregue passando por revisões de IA para correções","_etapaInicial":1},{"id":"e3-2","subtema":"Cultura","responsavel":"—","etapa":10,"prazo":"22/06/2026","obs":"Correção do design físico","_etapaInicial":10},{"id":"e3-3","subtema":"FAPEAM","responsavel":"Aline Alves","etapa":8,"prazo":"—","obs":"Diagramação","_etapaInicial":8},{"id":"e3-4","subtema":"CETAM","responsavel":"Ana Maria Souza","etapa":1,"prazo":"22/05/2026","obs":"Equipe técnica","_etapaInicial":1},{"id":"e3-5","subtema":"Meio Ambiente","responsavel":"Marcelo Pereira","etapa":1,"prazo":"30/06/2026","obs":"Aguardando resumo de dois especialistas","_etapaInicial":1},{"id":"e3-6","subtema":"Habitação","responsavel":"Claudia","etapa":5,"prazo":"21/05/2026","obs":"Correção Claudia","_etapaInicial":5},{"id":"e3-7","subtema":"Governo Digital","responsavel":"Aline","etapa":2,"prazo":"22/05/2026","obs":"Sob validação das fontes citadas","_etapaInicial":2},{"id":"e3-8","subtema":"Pol. Indigenistas","responsavel":"—","etapa":9,"prazo":"22/06/2026","obs":"Fila de correção design físico (após Cultura)","_etapaInicial":9},{"id":"e3-9","subtema":"Outros Órgãos ADM","responsavel":"Lúcio Meireles","etapa":1,"prazo":"—","obs":"Equipe técnica","_etapaInicial":1}]}</script></head>
 <body>
 <div class="app">
 
@@ -331,7 +329,7 @@ body.light .resumo-item-obs{color:#444}
   </div>
   <div class="sidebar-section">Visão Geral</div>
   <div class="sidebar-item active" onclick="showView('dashboard',this)">
-    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg>
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect><rect x="14" y="14" width="7" height="7"></rect></svg>
     Progresso Geral
   </div>
   <div class="sidebar-section">Eixos</div>
@@ -347,10 +345,10 @@ body.light .resumo-item-obs{color:#444}
   </div>
   <div class="sidebar-bottom">
     <button class="token-btn" onclick="openTokenModal()">
-      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 2l-2 2m-7.61 7.61a5.5 5.5 0 1 1-7.778 7.778 5.5 5.5 0 0 1 7.777-7.777zm0 0L15.5 7.5m0 0l3 3L22 7l-3-3m-3.5 3.5L19 4"/></svg>
+      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 2l-2 2m-7.61 7.61a5.5 5.5 0 1 1-7.778 7.778 5.5 5.5 0 0 1 7.777-7.777zm0 0L15.5 7.5m0 0l3 3L22 7l-3-3m-3.5 3.5L19 4"></path></svg>
       Configurar token GitHub
     </button>
-    <div class="save-status" id="save-status-s"></div>
+    <div class="save-status" id="save-status-s" style="color: var(--text3);">Salvando…</div>
   </div>
 </aside>
 
@@ -359,11 +357,11 @@ body.light .resumo-item-obs{color:#444}
   <div class="topbar">
     <div class="topbar-left">
       <h1 id="view-title">Progresso Geral</h1>
-      <p>Atualizado em <span id="last-update">—</span></p>
+      <p>Atualizado em <span id="last-update">22/05/2026</span></p>
     </div>
     <div class="topbar-right">
-      <button class="btn btn-ghost" onclick="saveToGithub()" id="save-btn">
-        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+      <button class="btn btn-ghost" onclick="saveToGithub()" id="save-btn" disabled="">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"></polyline><polyline points="8 6 2 12 8 18"></polyline></svg>
         Salvar no GitHub
       </button>
       <button class="btn btn-ghost" onclick="openResumo()" style="white-space:nowrap">📋 Resumo</button>
@@ -371,7 +369,433 @@ body.light .resumo-item-obs{color:#444}
       <button class="btn btn-primary" onclick="openEditModal(null,'eixo3')" id="top-add-btn">+ Novo</button>
     </div>
   </div>
-  <div class="content" id="main-content"></div>
+  <div class="content" id="main-content">
+  <div class="eixo2-block">
+    <div class="section-header" style="margin-bottom:12px">
+      <div class="section-title"><span class="eixo-badge badge-e2">Eixo 2</span><span style="color:var(--green);font-weight:400">Produção textual concluída</span></div>
+      <button class="btn btn-ghost" style="font-size:11px;padding:4px 10px" onclick="showView('eixo2',null)">Ver →</button>
+    </div>
+    <div class="e2-timeline"><div class="e2-card"><div class="e2-card-label">Situação atual</div><div class="e2-status status-done">✓ Entregue</div><div class="e2-card-title">Seg. Pública / Saúde / Assist. Social</div><div class="e2-card-obs">Em produção na gráfica</div></div><div class="e2-card"><div class="e2-card-label">Próximo evento</div><div class="e2-status status-date">📅 17/06</div><div class="e2-card-title">Recebimento dos Livros na Agência</div><div class="e2-card-obs">Aguardando entrega pela gráfica</div></div><div class="e2-card"><div class="e2-card-label">Evento final</div><div class="e2-status status-launch">🎯 22/06</div><div class="e2-card-title">Lançamento — Teatro Manauara</div><div class="e2-card-obs">09h30 — data confirmada</div></div></div>
+  </div>
+  <div class="kpi-row">
+    <div class="kpi-card"><div class="kpi-val" style="color:var(--accent)">9</div><div class="kpi-label">Total Eixo 3</div><div class="kpi-sub">subtemas</div></div>
+    <div class="kpi-card"><div class="kpi-val" style="color:var(--green)">0</div><div class="kpi-label">Concluídos</div><div class="kpi-sub">capítulo OK</div></div>
+    <div class="kpi-card"><div class="kpi-val" style="color:var(--teal)">3</div><div class="kpi-label">Fase final</div><div class="kpi-sub">etapas 7–10</div></div>
+    <div class="kpi-card"><div class="kpi-val" style="color:var(--purple)">5</div><div class="kpi-label">Fase inicial</div><div class="kpi-sub">etapas 1–3</div></div>
+    <div class="kpi-card"><div class="kpi-val" style="color:var(--amber)">39%</div><div class="kpi-label">Progresso médio</div><div class="kpi-sub">Eixo 3</div></div>
+  </div>
+  <div class="section-header"><div class="section-title"><span class="eixo-badge badge-e3">Eixo 3</span>Infraestrutura, Educação e Tecnologia</div></div>
+  <div class="e3-table-wrap" style="background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden">
+    <table class="e3-table"><thead><tr>
+      <th style="width:22%">Subtema</th><th style="width:16%">Responsável</th><th style="width:35%">Progresso</th><th style="width:12%">Prazo</th><th style="width:10%"></th>
+    </tr></thead><tbody><tr class="e3-row" onclick="toggleExpand('e3-1')">
+      <td><div class="subtema-name">Educação</div></td>
+      <td><div class="resp-name">Ana Maria Souza</div></td>
+      <td>
+        <div class="prog-wrap"><div class="prog-bar"><div class="prog-fill" style="width:18%;background:var(--purple)"></div></div><span class="prog-pct">18%</span></div>
+        <div class="etapa-tag">Etapa 2/11 — Aline (direcionamento)</div>
+      </td>
+      <td><span class="prazo-tag ">25/06/2026</span></td>
+      <td><button class="btn btn-ghost" style="font-size:11px;padding:4px 10px" onclick="openEditModal('e3-1','eixo3');event.stopPropagation()">Editar</button></td>
+    </tr>
+    <tr class="expand-row" id="expand-e3-1">
+      <td colspan="5" class="expand-cell">
+        <div class="expand-inner">
+          <div class="expand-block"><h4>Observações</h4><p>Material entregue passando por revisões de IA para correções</p></div>
+          <div class="expand-block" style="grid-column:span 2"><h4>Fluxo de produção</h4>
+            <div class="pipe-steps-mini"><div class="pipe-step-mini"><span class="num step-done">1</span><span class="step-label done-label">Equipe Técnica (Farid, Ana, Marcelo)</span></div><div class="pipe-step-mini"><span class="num step-current">2</span><span class="step-label current-label">Aline (direcionamento)</span></div><div class="pipe-step-mini"><span class="num step-todo">3</span><span class="step-label ">1ª Skill IA (Karina)</span></div><div class="pipe-step-mini"><span class="num step-todo">4</span><span class="step-label ">Correção e validação IA (Lúcio)</span></div><div class="pipe-step-mini"><span class="num step-todo">5</span><span class="step-label ">Correção Claudia</span></div><div class="pipe-step-mini"><span class="num step-todo">6</span><span class="step-label ">Aline (direcionamento)</span></div><div class="pipe-step-mini"><span class="num step-todo">7</span><span class="step-label ">2ª Skill IA (Karina)</span></div><div class="pipe-step-mini"><span class="num step-todo">8</span><span class="step-label ">Diagramação (Raquel e Matheus)</span></div><div class="pipe-step-mini"><span class="num step-todo">9</span><span class="step-label ">Impressão e leitura física (Aline)</span></div><div class="pipe-step-mini"><span class="num step-todo">10</span><span class="step-label ">Correção design físico (Raquel e Matheus)</span></div><div class="pipe-step-mini"><span class="num step-todo">11</span><span class="step-label ">Capítulo OK</span></div></div>
+          </div>
+        </div>
+      </td>
+    </tr><tr class="e3-row" onclick="toggleExpand('e3-2')">
+      <td><div class="subtema-name">Cultura</div></td>
+      <td><div class="resp-name">—</div></td>
+      <td>
+        <div class="prog-wrap"><div class="prog-bar"><div class="prog-fill" style="width:91%;background:var(--teal)"></div></div><span class="prog-pct">91%</span></div>
+        <div class="etapa-tag">Etapa 10/11 — Correção design físico (Raquel e Matheus)</div>
+      </td>
+      <td><span class="prazo-tag ">22/06/2026</span></td>
+      <td><button class="btn btn-ghost" style="font-size:11px;padding:4px 10px" onclick="openEditModal('e3-2','eixo3');event.stopPropagation()">Editar</button></td>
+    </tr>
+    <tr class="expand-row" id="expand-e3-2">
+      <td colspan="5" class="expand-cell">
+        <div class="expand-inner">
+          <div class="expand-block"><h4>Observações</h4><p>Correção do design físico</p></div>
+          <div class="expand-block" style="grid-column:span 2"><h4>Fluxo de produção</h4>
+            <div class="pipe-steps-mini"><div class="pipe-step-mini"><span class="num step-done">1</span><span class="step-label done-label">Equipe Técnica (Farid, Ana, Marcelo)</span></div><div class="pipe-step-mini"><span class="num step-done">2</span><span class="step-label done-label">Aline (direcionamento)</span></div><div class="pipe-step-mini"><span class="num step-done">3</span><span class="step-label done-label">1ª Skill IA (Karina)</span></div><div class="pipe-step-mini"><span class="num step-done">4</span><span class="step-label done-label">Correção e validação IA (Lúcio)</span></div><div class="pipe-step-mini"><span class="num step-done">5</span><span class="step-label done-label">Correção Claudia</span></div><div class="pipe-step-mini"><span class="num step-done">6</span><span class="step-label done-label">Aline (direcionamento)</span></div><div class="pipe-step-mini"><span class="num step-done">7</span><span class="step-label done-label">2ª Skill IA (Karina)</span></div><div class="pipe-step-mini"><span class="num step-done">8</span><span class="step-label done-label">Diagramação (Raquel e Matheus)</span></div><div class="pipe-step-mini"><span class="num step-done">9</span><span class="step-label done-label">Impressão e leitura física (Aline)</span></div><div class="pipe-step-mini"><span class="num step-current">10</span><span class="step-label current-label">Correção design físico (Raquel e Matheus)</span></div><div class="pipe-step-mini"><span class="num step-todo">11</span><span class="step-label ">Capítulo OK</span></div></div>
+          </div>
+        </div>
+      </td>
+    </tr><tr class="e3-row" onclick="toggleExpand('e3-3')">
+      <td><div class="subtema-name">FAPEAM</div></td>
+      <td><div class="resp-name">Aline Alves</div></td>
+      <td>
+        <div class="prog-wrap"><div class="prog-bar"><div class="prog-fill" style="width:73%;background:var(--teal)"></div></div><span class="prog-pct">73%</span></div>
+        <div class="etapa-tag">Etapa 8/11 — Diagramação (Raquel e Matheus)</div>
+      </td>
+      <td><span class="prazo-tag ">—</span></td>
+      <td><button class="btn btn-ghost" style="font-size:11px;padding:4px 10px" onclick="openEditModal('e3-3','eixo3');event.stopPropagation()">Editar</button></td>
+    </tr>
+    <tr class="expand-row" id="expand-e3-3">
+      <td colspan="5" class="expand-cell">
+        <div class="expand-inner">
+          <div class="expand-block"><h4>Observações</h4><p>Diagramação</p></div>
+          <div class="expand-block" style="grid-column:span 2"><h4>Fluxo de produção</h4>
+            <div class="pipe-steps-mini"><div class="pipe-step-mini"><span class="num step-done">1</span><span class="step-label done-label">Equipe Técnica (Farid, Ana, Marcelo)</span></div><div class="pipe-step-mini"><span class="num step-done">2</span><span class="step-label done-label">Aline (direcionamento)</span></div><div class="pipe-step-mini"><span class="num step-done">3</span><span class="step-label done-label">1ª Skill IA (Karina)</span></div><div class="pipe-step-mini"><span class="num step-done">4</span><span class="step-label done-label">Correção e validação IA (Lúcio)</span></div><div class="pipe-step-mini"><span class="num step-done">5</span><span class="step-label done-label">Correção Claudia</span></div><div class="pipe-step-mini"><span class="num step-done">6</span><span class="step-label done-label">Aline (direcionamento)</span></div><div class="pipe-step-mini"><span class="num step-done">7</span><span class="step-label done-label">2ª Skill IA (Karina)</span></div><div class="pipe-step-mini"><span class="num step-current">8</span><span class="step-label current-label">Diagramação (Raquel e Matheus)</span></div><div class="pipe-step-mini"><span class="num step-todo">9</span><span class="step-label ">Impressão e leitura física (Aline)</span></div><div class="pipe-step-mini"><span class="num step-todo">10</span><span class="step-label ">Correção design físico (Raquel e Matheus)</span></div><div class="pipe-step-mini"><span class="num step-todo">11</span><span class="step-label ">Capítulo OK</span></div></div>
+          </div>
+        </div>
+      </td>
+    </tr><tr class="e3-row" onclick="toggleExpand('e3-4')">
+      <td><div class="subtema-name">CETAM</div></td>
+      <td><div class="resp-name">Ana Maria Souza</div></td>
+      <td>
+        <div class="prog-wrap"><div class="prog-bar"><div class="prog-fill" style="width:9%;background:var(--purple)"></div></div><span class="prog-pct">9%</span></div>
+        <div class="etapa-tag">Etapa 1/11 — Equipe Técnica (Farid, Ana, Marcelo)</div>
+      </td>
+      <td><span class="prazo-tag overdue">22/05/2026</span></td>
+      <td><button class="btn btn-ghost" style="font-size:11px;padding:4px 10px" onclick="openEditModal('e3-4','eixo3');event.stopPropagation()">Editar</button></td>
+    </tr>
+    <tr class="expand-row" id="expand-e3-4">
+      <td colspan="5" class="expand-cell">
+        <div class="expand-inner">
+          <div class="expand-block"><h4>Observações</h4><p>Equipe técnica</p></div>
+          <div class="expand-block" style="grid-column:span 2"><h4>Fluxo de produção</h4>
+            <div class="pipe-steps-mini"><div class="pipe-step-mini"><span class="num step-current">1</span><span class="step-label current-label">Equipe Técnica (Farid, Ana, Marcelo)</span></div><div class="pipe-step-mini"><span class="num step-todo">2</span><span class="step-label ">Aline (direcionamento)</span></div><div class="pipe-step-mini"><span class="num step-todo">3</span><span class="step-label ">1ª Skill IA (Karina)</span></div><div class="pipe-step-mini"><span class="num step-todo">4</span><span class="step-label ">Correção e validação IA (Lúcio)</span></div><div class="pipe-step-mini"><span class="num step-todo">5</span><span class="step-label ">Correção Claudia</span></div><div class="pipe-step-mini"><span class="num step-todo">6</span><span class="step-label ">Aline (direcionamento)</span></div><div class="pipe-step-mini"><span class="num step-todo">7</span><span class="step-label ">2ª Skill IA (Karina)</span></div><div class="pipe-step-mini"><span class="num step-todo">8</span><span class="step-label ">Diagramação (Raquel e Matheus)</span></div><div class="pipe-step-mini"><span class="num step-todo">9</span><span class="step-label ">Impressão e leitura física (Aline)</span></div><div class="pipe-step-mini"><span class="num step-todo">10</span><span class="step-label ">Correção design físico (Raquel e Matheus)</span></div><div class="pipe-step-mini"><span class="num step-todo">11</span><span class="step-label ">Capítulo OK</span></div></div>
+          </div>
+        </div>
+      </td>
+    </tr><tr class="e3-row" onclick="toggleExpand('e3-5')">
+      <td><div class="subtema-name">Meio Ambiente</div></td>
+      <td><div class="resp-name">Marcelo Pereira</div></td>
+      <td>
+        <div class="prog-wrap"><div class="prog-bar"><div class="prog-fill" style="width:9%;background:var(--purple)"></div></div><span class="prog-pct">9%</span></div>
+        <div class="etapa-tag">Etapa 1/11 — Equipe Técnica (Farid, Ana, Marcelo)</div>
+      </td>
+      <td><span class="prazo-tag ">30/06/2026</span></td>
+      <td><button class="btn btn-ghost" style="font-size:11px;padding:4px 10px" onclick="openEditModal('e3-5','eixo3');event.stopPropagation()">Editar</button></td>
+    </tr>
+    <tr class="expand-row" id="expand-e3-5">
+      <td colspan="5" class="expand-cell">
+        <div class="expand-inner">
+          <div class="expand-block"><h4>Observações</h4><p>Aguardando resumo de dois especialistas</p></div>
+          <div class="expand-block" style="grid-column:span 2"><h4>Fluxo de produção</h4>
+            <div class="pipe-steps-mini"><div class="pipe-step-mini"><span class="num step-current">1</span><span class="step-label current-label">Equipe Técnica (Farid, Ana, Marcelo)</span></div><div class="pipe-step-mini"><span class="num step-todo">2</span><span class="step-label ">Aline (direcionamento)</span></div><div class="pipe-step-mini"><span class="num step-todo">3</span><span class="step-label ">1ª Skill IA (Karina)</span></div><div class="pipe-step-mini"><span class="num step-todo">4</span><span class="step-label ">Correção e validação IA (Lúcio)</span></div><div class="pipe-step-mini"><span class="num step-todo">5</span><span class="step-label ">Correção Claudia</span></div><div class="pipe-step-mini"><span class="num step-todo">6</span><span class="step-label ">Aline (direcionamento)</span></div><div class="pipe-step-mini"><span class="num step-todo">7</span><span class="step-label ">2ª Skill IA (Karina)</span></div><div class="pipe-step-mini"><span class="num step-todo">8</span><span class="step-label ">Diagramação (Raquel e Matheus)</span></div><div class="pipe-step-mini"><span class="num step-todo">9</span><span class="step-label ">Impressão e leitura física (Aline)</span></div><div class="pipe-step-mini"><span class="num step-todo">10</span><span class="step-label ">Correção design físico (Raquel e Matheus)</span></div><div class="pipe-step-mini"><span class="num step-todo">11</span><span class="step-label ">Capítulo OK</span></div></div>
+          </div>
+        </div>
+      </td>
+    </tr><tr class="e3-row" onclick="toggleExpand('e3-6')">
+      <td><div class="subtema-name">Habitação</div></td>
+      <td><div class="resp-name">Claudia</div></td>
+      <td>
+        <div class="prog-wrap"><div class="prog-bar"><div class="prog-fill" style="width:45%;background:var(--accent)"></div></div><span class="prog-pct">45%</span></div>
+        <div class="etapa-tag">Etapa 5/11 — Correção Claudia</div>
+      </td>
+      <td><span class="prazo-tag overdue">21/05/2026</span></td>
+      <td><button class="btn btn-ghost" style="font-size:11px;padding:4px 10px" onclick="openEditModal('e3-6','eixo3');event.stopPropagation()">Editar</button></td>
+    </tr>
+    <tr class="expand-row" id="expand-e3-6">
+      <td colspan="5" class="expand-cell">
+        <div class="expand-inner">
+          <div class="expand-block"><h4>Observações</h4><p>Correção Claudia</p></div>
+          <div class="expand-block" style="grid-column:span 2"><h4>Fluxo de produção</h4>
+            <div class="pipe-steps-mini"><div class="pipe-step-mini"><span class="num step-done">1</span><span class="step-label done-label">Equipe Técnica (Farid, Ana, Marcelo)</span></div><div class="pipe-step-mini"><span class="num step-done">2</span><span class="step-label done-label">Aline (direcionamento)</span></div><div class="pipe-step-mini"><span class="num step-done">3</span><span class="step-label done-label">1ª Skill IA (Karina)</span></div><div class="pipe-step-mini"><span class="num step-done">4</span><span class="step-label done-label">Correção e validação IA (Lúcio)</span></div><div class="pipe-step-mini"><span class="num step-current">5</span><span class="step-label current-label">Correção Claudia</span></div><div class="pipe-step-mini"><span class="num step-todo">6</span><span class="step-label ">Aline (direcionamento)</span></div><div class="pipe-step-mini"><span class="num step-todo">7</span><span class="step-label ">2ª Skill IA (Karina)</span></div><div class="pipe-step-mini"><span class="num step-todo">8</span><span class="step-label ">Diagramação (Raquel e Matheus)</span></div><div class="pipe-step-mini"><span class="num step-todo">9</span><span class="step-label ">Impressão e leitura física (Aline)</span></div><div class="pipe-step-mini"><span class="num step-todo">10</span><span class="step-label ">Correção design físico (Raquel e Matheus)</span></div><div class="pipe-step-mini"><span class="num step-todo">11</span><span class="step-label ">Capítulo OK</span></div></div>
+          </div>
+        </div>
+      </td>
+    </tr><tr class="e3-row" onclick="toggleExpand('e3-7')">
+      <td><div class="subtema-name">Governo Digital</div></td>
+      <td><div class="resp-name">Aline</div></td>
+      <td>
+        <div class="prog-wrap"><div class="prog-bar"><div class="prog-fill" style="width:18%;background:var(--purple)"></div></div><span class="prog-pct">18%</span></div>
+        <div class="etapa-tag">Etapa 2/11 — Aline (direcionamento)</div>
+      </td>
+      <td><span class="prazo-tag overdue">22/05/2026</span></td>
+      <td><button class="btn btn-ghost" style="font-size:11px;padding:4px 10px" onclick="openEditModal('e3-7','eixo3');event.stopPropagation()">Editar</button></td>
+    </tr>
+    <tr class="expand-row" id="expand-e3-7">
+      <td colspan="5" class="expand-cell">
+        <div class="expand-inner">
+          <div class="expand-block"><h4>Observações</h4><p>Sob validação das fontes citadas</p></div>
+          <div class="expand-block" style="grid-column:span 2"><h4>Fluxo de produção</h4>
+            <div class="pipe-steps-mini"><div class="pipe-step-mini"><span class="num step-done">1</span><span class="step-label done-label">Equipe Técnica (Farid, Ana, Marcelo)</span></div><div class="pipe-step-mini"><span class="num step-current">2</span><span class="step-label current-label">Aline (direcionamento)</span></div><div class="pipe-step-mini"><span class="num step-todo">3</span><span class="step-label ">1ª Skill IA (Karina)</span></div><div class="pipe-step-mini"><span class="num step-todo">4</span><span class="step-label ">Correção e validação IA (Lúcio)</span></div><div class="pipe-step-mini"><span class="num step-todo">5</span><span class="step-label ">Correção Claudia</span></div><div class="pipe-step-mini"><span class="num step-todo">6</span><span class="step-label ">Aline (direcionamento)</span></div><div class="pipe-step-mini"><span class="num step-todo">7</span><span class="step-label ">2ª Skill IA (Karina)</span></div><div class="pipe-step-mini"><span class="num step-todo">8</span><span class="step-label ">Diagramação (Raquel e Matheus)</span></div><div class="pipe-step-mini"><span class="num step-todo">9</span><span class="step-label ">Impressão e leitura física (Aline)</span></div><div class="pipe-step-mini"><span class="num step-todo">10</span><span class="step-label ">Correção design físico (Raquel e Matheus)</span></div><div class="pipe-step-mini"><span class="num step-todo">11</span><span class="step-label ">Capítulo OK</span></div></div>
+          </div>
+        </div>
+      </td>
+    </tr><tr class="e3-row" onclick="toggleExpand('e3-8')">
+      <td><div class="subtema-name">Pol. Indigenistas</div></td>
+      <td><div class="resp-name">—</div></td>
+      <td>
+        <div class="prog-wrap"><div class="prog-bar"><div class="prog-fill" style="width:82%;background:var(--teal)"></div></div><span class="prog-pct">82%</span></div>
+        <div class="etapa-tag">Etapa 9/11 — Impressão e leitura física (Aline)</div>
+      </td>
+      <td><span class="prazo-tag ">22/06/2026</span></td>
+      <td><button class="btn btn-ghost" style="font-size:11px;padding:4px 10px" onclick="openEditModal('e3-8','eixo3');event.stopPropagation()">Editar</button></td>
+    </tr>
+    <tr class="expand-row" id="expand-e3-8">
+      <td colspan="5" class="expand-cell">
+        <div class="expand-inner">
+          <div class="expand-block"><h4>Observações</h4><p>Fila de correção design físico (após Cultura)</p></div>
+          <div class="expand-block" style="grid-column:span 2"><h4>Fluxo de produção</h4>
+            <div class="pipe-steps-mini"><div class="pipe-step-mini"><span class="num step-done">1</span><span class="step-label done-label">Equipe Técnica (Farid, Ana, Marcelo)</span></div><div class="pipe-step-mini"><span class="num step-done">2</span><span class="step-label done-label">Aline (direcionamento)</span></div><div class="pipe-step-mini"><span class="num step-done">3</span><span class="step-label done-label">1ª Skill IA (Karina)</span></div><div class="pipe-step-mini"><span class="num step-done">4</span><span class="step-label done-label">Correção e validação IA (Lúcio)</span></div><div class="pipe-step-mini"><span class="num step-done">5</span><span class="step-label done-label">Correção Claudia</span></div><div class="pipe-step-mini"><span class="num step-done">6</span><span class="step-label done-label">Aline (direcionamento)</span></div><div class="pipe-step-mini"><span class="num step-done">7</span><span class="step-label done-label">2ª Skill IA (Karina)</span></div><div class="pipe-step-mini"><span class="num step-done">8</span><span class="step-label done-label">Diagramação (Raquel e Matheus)</span></div><div class="pipe-step-mini"><span class="num step-current">9</span><span class="step-label current-label">Impressão e leitura física (Aline)</span></div><div class="pipe-step-mini"><span class="num step-todo">10</span><span class="step-label ">Correção design físico (Raquel e Matheus)</span></div><div class="pipe-step-mini"><span class="num step-todo">11</span><span class="step-label ">Capítulo OK</span></div></div>
+          </div>
+        </div>
+      </td>
+    </tr><tr class="e3-row" onclick="toggleExpand('e3-9')">
+      <td><div class="subtema-name">Outros Órgãos ADM</div></td>
+      <td><div class="resp-name">Lúcio Meireles</div></td>
+      <td>
+        <div class="prog-wrap"><div class="prog-bar"><div class="prog-fill" style="width:9%;background:var(--purple)"></div></div><span class="prog-pct">9%</span></div>
+        <div class="etapa-tag">Etapa 1/11 — Equipe Técnica (Farid, Ana, Marcelo)</div>
+      </td>
+      <td><span class="prazo-tag ">—</span></td>
+      <td><button class="btn btn-ghost" style="font-size:11px;padding:4px 10px" onclick="openEditModal('e3-9','eixo3');event.stopPropagation()">Editar</button></td>
+    </tr>
+    <tr class="expand-row" id="expand-e3-9">
+      <td colspan="5" class="expand-cell">
+        <div class="expand-inner">
+          <div class="expand-block"><h4>Observações</h4><p>Equipe técnica</p></div>
+          <div class="expand-block" style="grid-column:span 2"><h4>Fluxo de produção</h4>
+            <div class="pipe-steps-mini"><div class="pipe-step-mini"><span class="num step-current">1</span><span class="step-label current-label">Equipe Técnica (Farid, Ana, Marcelo)</span></div><div class="pipe-step-mini"><span class="num step-todo">2</span><span class="step-label ">Aline (direcionamento)</span></div><div class="pipe-step-mini"><span class="num step-todo">3</span><span class="step-label ">1ª Skill IA (Karina)</span></div><div class="pipe-step-mini"><span class="num step-todo">4</span><span class="step-label ">Correção e validação IA (Lúcio)</span></div><div class="pipe-step-mini"><span class="num step-todo">5</span><span class="step-label ">Correção Claudia</span></div><div class="pipe-step-mini"><span class="num step-todo">6</span><span class="step-label ">Aline (direcionamento)</span></div><div class="pipe-step-mini"><span class="num step-todo">7</span><span class="step-label ">2ª Skill IA (Karina)</span></div><div class="pipe-step-mini"><span class="num step-todo">8</span><span class="step-label ">Diagramação (Raquel e Matheus)</span></div><div class="pipe-step-mini"><span class="num step-todo">9</span><span class="step-label ">Impressão e leitura física (Aline)</span></div><div class="pipe-step-mini"><span class="num step-todo">10</span><span class="step-label ">Correção design físico (Raquel e Matheus)</span></div><div class="pipe-step-mini"><span class="num step-todo">11</span><span class="step-label ">Capítulo OK</span></div></div>
+          </div>
+        </div>
+      </td>
+    </tr></tbody></table>
+  </div>
+  <div class="e3-cards"><div class="e3-card">
+      <div class="e3-card-header" onclick="toggleExpandCard('card-exp-e3-1')">
+        <div class="e3-card-top">
+          <div>
+            <div class="e3-card-name">Educação</div>
+            <div class="e3-card-resp">Ana Maria Souza</div>
+          </div>
+          <div class="e3-card-right">
+            <span class="prazo-tag " style="font-size:12px">25/06/2026</span>
+          </div>
+        </div>
+        <div class="e3-card-prog">
+          <div class="e3-card-bar"><div class="e3-card-fill" style="width:18%;background:var(--purple)"></div></div>
+          <span class="e3-card-pct">18%</span>
+        </div>
+        <div class="e3-card-etapa">Etapa 2/11 — Aline (direcionamento)</div>
+      </div>
+      <div class="e3-card-expand" id="card-exp-e3-1">
+        <div class="e3-card-expand-section"><h4>Observações</h4><p>Material entregue passando por revisões de IA para correções</p></div>
+        <div class="e3-card-expand-section"><h4>Fluxo</h4>
+          <div class="pipe-steps-mini"><div class="pipe-step-mini"><span class="num step-done">1</span><span class="step-label done-label">Equipe Técnica (Farid, Ana, Marcelo)</span></div><div class="pipe-step-mini"><span class="num step-current">2</span><span class="step-label current-label">Aline (direcionamento)</span></div><div class="pipe-step-mini"><span class="num step-todo">3</span><span class="step-label ">1ª Skill IA (Karina)</span></div><div class="pipe-step-mini"><span class="num step-todo">4</span><span class="step-label ">Correção e validação IA (Lúcio)</span></div><div class="pipe-step-mini"><span class="num step-todo">5</span><span class="step-label ">Correção Claudia</span></div><div class="pipe-step-mini"><span class="num step-todo">6</span><span class="step-label ">Aline (direcionamento)</span></div><div class="pipe-step-mini"><span class="num step-todo">7</span><span class="step-label ">2ª Skill IA (Karina)</span></div><div class="pipe-step-mini"><span class="num step-todo">8</span><span class="step-label ">Diagramação (Raquel e Matheus)</span></div><div class="pipe-step-mini"><span class="num step-todo">9</span><span class="step-label ">Impressão e leitura física (Aline)</span></div><div class="pipe-step-mini"><span class="num step-todo">10</span><span class="step-label ">Correção design físico (Raquel e Matheus)</span></div><div class="pipe-step-mini"><span class="num step-todo">11</span><span class="step-label ">Capítulo OK</span></div></div>
+        </div>
+        <div class="e3-card-actions">
+          <button class="btn btn-ghost" style="flex:1;justify-content:center" onclick="openEditModal('e3-1','eixo3')">Editar</button>
+        </div>
+      </div>
+    </div><div class="e3-card">
+      <div class="e3-card-header" onclick="toggleExpandCard('card-exp-e3-2')">
+        <div class="e3-card-top">
+          <div>
+            <div class="e3-card-name">Cultura</div>
+            <div class="e3-card-resp">—</div>
+          </div>
+          <div class="e3-card-right">
+            <span class="prazo-tag " style="font-size:12px">22/06/2026</span>
+          </div>
+        </div>
+        <div class="e3-card-prog">
+          <div class="e3-card-bar"><div class="e3-card-fill" style="width:91%;background:var(--teal)"></div></div>
+          <span class="e3-card-pct">91%</span>
+        </div>
+        <div class="e3-card-etapa">Etapa 10/11 — Correção design físico (Raquel e Matheus)</div>
+      </div>
+      <div class="e3-card-expand" id="card-exp-e3-2">
+        <div class="e3-card-expand-section"><h4>Observações</h4><p>Correção do design físico</p></div>
+        <div class="e3-card-expand-section"><h4>Fluxo</h4>
+          <div class="pipe-steps-mini"><div class="pipe-step-mini"><span class="num step-done">1</span><span class="step-label done-label">Equipe Técnica (Farid, Ana, Marcelo)</span></div><div class="pipe-step-mini"><span class="num step-done">2</span><span class="step-label done-label">Aline (direcionamento)</span></div><div class="pipe-step-mini"><span class="num step-done">3</span><span class="step-label done-label">1ª Skill IA (Karina)</span></div><div class="pipe-step-mini"><span class="num step-done">4</span><span class="step-label done-label">Correção e validação IA (Lúcio)</span></div><div class="pipe-step-mini"><span class="num step-done">5</span><span class="step-label done-label">Correção Claudia</span></div><div class="pipe-step-mini"><span class="num step-done">6</span><span class="step-label done-label">Aline (direcionamento)</span></div><div class="pipe-step-mini"><span class="num step-done">7</span><span class="step-label done-label">2ª Skill IA (Karina)</span></div><div class="pipe-step-mini"><span class="num step-done">8</span><span class="step-label done-label">Diagramação (Raquel e Matheus)</span></div><div class="pipe-step-mini"><span class="num step-done">9</span><span class="step-label done-label">Impressão e leitura física (Aline)</span></div><div class="pipe-step-mini"><span class="num step-current">10</span><span class="step-label current-label">Correção design físico (Raquel e Matheus)</span></div><div class="pipe-step-mini"><span class="num step-todo">11</span><span class="step-label ">Capítulo OK</span></div></div>
+        </div>
+        <div class="e3-card-actions">
+          <button class="btn btn-ghost" style="flex:1;justify-content:center" onclick="openEditModal('e3-2','eixo3')">Editar</button>
+        </div>
+      </div>
+    </div><div class="e3-card">
+      <div class="e3-card-header" onclick="toggleExpandCard('card-exp-e3-3')">
+        <div class="e3-card-top">
+          <div>
+            <div class="e3-card-name">FAPEAM</div>
+            <div class="e3-card-resp">Aline Alves</div>
+          </div>
+          <div class="e3-card-right">
+            <span class="prazo-tag " style="font-size:12px">—</span>
+          </div>
+        </div>
+        <div class="e3-card-prog">
+          <div class="e3-card-bar"><div class="e3-card-fill" style="width:73%;background:var(--teal)"></div></div>
+          <span class="e3-card-pct">73%</span>
+        </div>
+        <div class="e3-card-etapa">Etapa 8/11 — Diagramação (Raquel e Matheus)</div>
+      </div>
+      <div class="e3-card-expand" id="card-exp-e3-3">
+        <div class="e3-card-expand-section"><h4>Observações</h4><p>Diagramação</p></div>
+        <div class="e3-card-expand-section"><h4>Fluxo</h4>
+          <div class="pipe-steps-mini"><div class="pipe-step-mini"><span class="num step-done">1</span><span class="step-label done-label">Equipe Técnica (Farid, Ana, Marcelo)</span></div><div class="pipe-step-mini"><span class="num step-done">2</span><span class="step-label done-label">Aline (direcionamento)</span></div><div class="pipe-step-mini"><span class="num step-done">3</span><span class="step-label done-label">1ª Skill IA (Karina)</span></div><div class="pipe-step-mini"><span class="num step-done">4</span><span class="step-label done-label">Correção e validação IA (Lúcio)</span></div><div class="pipe-step-mini"><span class="num step-done">5</span><span class="step-label done-label">Correção Claudia</span></div><div class="pipe-step-mini"><span class="num step-done">6</span><span class="step-label done-label">Aline (direcionamento)</span></div><div class="pipe-step-mini"><span class="num step-done">7</span><span class="step-label done-label">2ª Skill IA (Karina)</span></div><div class="pipe-step-mini"><span class="num step-current">8</span><span class="step-label current-label">Diagramação (Raquel e Matheus)</span></div><div class="pipe-step-mini"><span class="num step-todo">9</span><span class="step-label ">Impressão e leitura física (Aline)</span></div><div class="pipe-step-mini"><span class="num step-todo">10</span><span class="step-label ">Correção design físico (Raquel e Matheus)</span></div><div class="pipe-step-mini"><span class="num step-todo">11</span><span class="step-label ">Capítulo OK</span></div></div>
+        </div>
+        <div class="e3-card-actions">
+          <button class="btn btn-ghost" style="flex:1;justify-content:center" onclick="openEditModal('e3-3','eixo3')">Editar</button>
+        </div>
+      </div>
+    </div><div class="e3-card">
+      <div class="e3-card-header" onclick="toggleExpandCard('card-exp-e3-4')">
+        <div class="e3-card-top">
+          <div>
+            <div class="e3-card-name">CETAM</div>
+            <div class="e3-card-resp">Ana Maria Souza</div>
+          </div>
+          <div class="e3-card-right">
+            <span class="prazo-tag overdue" style="font-size:12px">22/05/2026</span>
+          </div>
+        </div>
+        <div class="e3-card-prog">
+          <div class="e3-card-bar"><div class="e3-card-fill" style="width:9%;background:var(--purple)"></div></div>
+          <span class="e3-card-pct">9%</span>
+        </div>
+        <div class="e3-card-etapa">Etapa 1/11 — Equipe Técnica (Farid, Ana, Marcelo)</div>
+      </div>
+      <div class="e3-card-expand" id="card-exp-e3-4">
+        <div class="e3-card-expand-section"><h4>Observações</h4><p>Equipe técnica</p></div>
+        <div class="e3-card-expand-section"><h4>Fluxo</h4>
+          <div class="pipe-steps-mini"><div class="pipe-step-mini"><span class="num step-current">1</span><span class="step-label current-label">Equipe Técnica (Farid, Ana, Marcelo)</span></div><div class="pipe-step-mini"><span class="num step-todo">2</span><span class="step-label ">Aline (direcionamento)</span></div><div class="pipe-step-mini"><span class="num step-todo">3</span><span class="step-label ">1ª Skill IA (Karina)</span></div><div class="pipe-step-mini"><span class="num step-todo">4</span><span class="step-label ">Correção e validação IA (Lúcio)</span></div><div class="pipe-step-mini"><span class="num step-todo">5</span><span class="step-label ">Correção Claudia</span></div><div class="pipe-step-mini"><span class="num step-todo">6</span><span class="step-label ">Aline (direcionamento)</span></div><div class="pipe-step-mini"><span class="num step-todo">7</span><span class="step-label ">2ª Skill IA (Karina)</span></div><div class="pipe-step-mini"><span class="num step-todo">8</span><span class="step-label ">Diagramação (Raquel e Matheus)</span></div><div class="pipe-step-mini"><span class="num step-todo">9</span><span class="step-label ">Impressão e leitura física (Aline)</span></div><div class="pipe-step-mini"><span class="num step-todo">10</span><span class="step-label ">Correção design físico (Raquel e Matheus)</span></div><div class="pipe-step-mini"><span class="num step-todo">11</span><span class="step-label ">Capítulo OK</span></div></div>
+        </div>
+        <div class="e3-card-actions">
+          <button class="btn btn-ghost" style="flex:1;justify-content:center" onclick="openEditModal('e3-4','eixo3')">Editar</button>
+        </div>
+      </div>
+    </div><div class="e3-card">
+      <div class="e3-card-header" onclick="toggleExpandCard('card-exp-e3-5')">
+        <div class="e3-card-top">
+          <div>
+            <div class="e3-card-name">Meio Ambiente</div>
+            <div class="e3-card-resp">Marcelo Pereira</div>
+          </div>
+          <div class="e3-card-right">
+            <span class="prazo-tag " style="font-size:12px">30/06/2026</span>
+          </div>
+        </div>
+        <div class="e3-card-prog">
+          <div class="e3-card-bar"><div class="e3-card-fill" style="width:9%;background:var(--purple)"></div></div>
+          <span class="e3-card-pct">9%</span>
+        </div>
+        <div class="e3-card-etapa">Etapa 1/11 — Equipe Técnica (Farid, Ana, Marcelo)</div>
+      </div>
+      <div class="e3-card-expand" id="card-exp-e3-5">
+        <div class="e3-card-expand-section"><h4>Observações</h4><p>Aguardando resumo de dois especialistas</p></div>
+        <div class="e3-card-expand-section"><h4>Fluxo</h4>
+          <div class="pipe-steps-mini"><div class="pipe-step-mini"><span class="num step-current">1</span><span class="step-label current-label">Equipe Técnica (Farid, Ana, Marcelo)</span></div><div class="pipe-step-mini"><span class="num step-todo">2</span><span class="step-label ">Aline (direcionamento)</span></div><div class="pipe-step-mini"><span class="num step-todo">3</span><span class="step-label ">1ª Skill IA (Karina)</span></div><div class="pipe-step-mini"><span class="num step-todo">4</span><span class="step-label ">Correção e validação IA (Lúcio)</span></div><div class="pipe-step-mini"><span class="num step-todo">5</span><span class="step-label ">Correção Claudia</span></div><div class="pipe-step-mini"><span class="num step-todo">6</span><span class="step-label ">Aline (direcionamento)</span></div><div class="pipe-step-mini"><span class="num step-todo">7</span><span class="step-label ">2ª Skill IA (Karina)</span></div><div class="pipe-step-mini"><span class="num step-todo">8</span><span class="step-label ">Diagramação (Raquel e Matheus)</span></div><div class="pipe-step-mini"><span class="num step-todo">9</span><span class="step-label ">Impressão e leitura física (Aline)</span></div><div class="pipe-step-mini"><span class="num step-todo">10</span><span class="step-label ">Correção design físico (Raquel e Matheus)</span></div><div class="pipe-step-mini"><span class="num step-todo">11</span><span class="step-label ">Capítulo OK</span></div></div>
+        </div>
+        <div class="e3-card-actions">
+          <button class="btn btn-ghost" style="flex:1;justify-content:center" onclick="openEditModal('e3-5','eixo3')">Editar</button>
+        </div>
+      </div>
+    </div><div class="e3-card">
+      <div class="e3-card-header" onclick="toggleExpandCard('card-exp-e3-6')">
+        <div class="e3-card-top">
+          <div>
+            <div class="e3-card-name">Habitação</div>
+            <div class="e3-card-resp">Claudia</div>
+          </div>
+          <div class="e3-card-right">
+            <span class="prazo-tag overdue" style="font-size:12px">21/05/2026</span>
+          </div>
+        </div>
+        <div class="e3-card-prog">
+          <div class="e3-card-bar"><div class="e3-card-fill" style="width:45%;background:var(--accent)"></div></div>
+          <span class="e3-card-pct">45%</span>
+        </div>
+        <div class="e3-card-etapa">Etapa 5/11 — Correção Claudia</div>
+      </div>
+      <div class="e3-card-expand" id="card-exp-e3-6">
+        <div class="e3-card-expand-section"><h4>Observações</h4><p>Correção Claudia</p></div>
+        <div class="e3-card-expand-section"><h4>Fluxo</h4>
+          <div class="pipe-steps-mini"><div class="pipe-step-mini"><span class="num step-done">1</span><span class="step-label done-label">Equipe Técnica (Farid, Ana, Marcelo)</span></div><div class="pipe-step-mini"><span class="num step-done">2</span><span class="step-label done-label">Aline (direcionamento)</span></div><div class="pipe-step-mini"><span class="num step-done">3</span><span class="step-label done-label">1ª Skill IA (Karina)</span></div><div class="pipe-step-mini"><span class="num step-done">4</span><span class="step-label done-label">Correção e validação IA (Lúcio)</span></div><div class="pipe-step-mini"><span class="num step-current">5</span><span class="step-label current-label">Correção Claudia</span></div><div class="pipe-step-mini"><span class="num step-todo">6</span><span class="step-label ">Aline (direcionamento)</span></div><div class="pipe-step-mini"><span class="num step-todo">7</span><span class="step-label ">2ª Skill IA (Karina)</span></div><div class="pipe-step-mini"><span class="num step-todo">8</span><span class="step-label ">Diagramação (Raquel e Matheus)</span></div><div class="pipe-step-mini"><span class="num step-todo">9</span><span class="step-label ">Impressão e leitura física (Aline)</span></div><div class="pipe-step-mini"><span class="num step-todo">10</span><span class="step-label ">Correção design físico (Raquel e Matheus)</span></div><div class="pipe-step-mini"><span class="num step-todo">11</span><span class="step-label ">Capítulo OK</span></div></div>
+        </div>
+        <div class="e3-card-actions">
+          <button class="btn btn-ghost" style="flex:1;justify-content:center" onclick="openEditModal('e3-6','eixo3')">Editar</button>
+        </div>
+      </div>
+    </div><div class="e3-card">
+      <div class="e3-card-header" onclick="toggleExpandCard('card-exp-e3-7')">
+        <div class="e3-card-top">
+          <div>
+            <div class="e3-card-name">Governo Digital</div>
+            <div class="e3-card-resp">Aline</div>
+          </div>
+          <div class="e3-card-right">
+            <span class="prazo-tag overdue" style="font-size:12px">22/05/2026</span>
+          </div>
+        </div>
+        <div class="e3-card-prog">
+          <div class="e3-card-bar"><div class="e3-card-fill" style="width:18%;background:var(--purple)"></div></div>
+          <span class="e3-card-pct">18%</span>
+        </div>
+        <div class="e3-card-etapa">Etapa 2/11 — Aline (direcionamento)</div>
+      </div>
+      <div class="e3-card-expand" id="card-exp-e3-7">
+        <div class="e3-card-expand-section"><h4>Observações</h4><p>Sob validação das fontes citadas</p></div>
+        <div class="e3-card-expand-section"><h4>Fluxo</h4>
+          <div class="pipe-steps-mini"><div class="pipe-step-mini"><span class="num step-done">1</span><span class="step-label done-label">Equipe Técnica (Farid, Ana, Marcelo)</span></div><div class="pipe-step-mini"><span class="num step-current">2</span><span class="step-label current-label">Aline (direcionamento)</span></div><div class="pipe-step-mini"><span class="num step-todo">3</span><span class="step-label ">1ª Skill IA (Karina)</span></div><div class="pipe-step-mini"><span class="num step-todo">4</span><span class="step-label ">Correção e validação IA (Lúcio)</span></div><div class="pipe-step-mini"><span class="num step-todo">5</span><span class="step-label ">Correção Claudia</span></div><div class="pipe-step-mini"><span class="num step-todo">6</span><span class="step-label ">Aline (direcionamento)</span></div><div class="pipe-step-mini"><span class="num step-todo">7</span><span class="step-label ">2ª Skill IA (Karina)</span></div><div class="pipe-step-mini"><span class="num step-todo">8</span><span class="step-label ">Diagramação (Raquel e Matheus)</span></div><div class="pipe-step-mini"><span class="num step-todo">9</span><span class="step-label ">Impressão e leitura física (Aline)</span></div><div class="pipe-step-mini"><span class="num step-todo">10</span><span class="step-label ">Correção design físico (Raquel e Matheus)</span></div><div class="pipe-step-mini"><span class="num step-todo">11</span><span class="step-label ">Capítulo OK</span></div></div>
+        </div>
+        <div class="e3-card-actions">
+          <button class="btn btn-ghost" style="flex:1;justify-content:center" onclick="openEditModal('e3-7','eixo3')">Editar</button>
+        </div>
+      </div>
+    </div><div class="e3-card">
+      <div class="e3-card-header" onclick="toggleExpandCard('card-exp-e3-8')">
+        <div class="e3-card-top">
+          <div>
+            <div class="e3-card-name">Pol. Indigenistas</div>
+            <div class="e3-card-resp">—</div>
+          </div>
+          <div class="e3-card-right">
+            <span class="prazo-tag " style="font-size:12px">22/06/2026</span>
+          </div>
+        </div>
+        <div class="e3-card-prog">
+          <div class="e3-card-bar"><div class="e3-card-fill" style="width:82%;background:var(--teal)"></div></div>
+          <span class="e3-card-pct">82%</span>
+        </div>
+        <div class="e3-card-etapa">Etapa 9/11 — Impressão e leitura física (Aline)</div>
+      </div>
+      <div class="e3-card-expand" id="card-exp-e3-8">
+        <div class="e3-card-expand-section"><h4>Observações</h4><p>Fila de correção design físico (após Cultura)</p></div>
+        <div class="e3-card-expand-section"><h4>Fluxo</h4>
+          <div class="pipe-steps-mini"><div class="pipe-step-mini"><span class="num step-done">1</span><span class="step-label done-label">Equipe Técnica (Farid, Ana, Marcelo)</span></div><div class="pipe-step-mini"><span class="num step-done">2</span><span class="step-label done-label">Aline (direcionamento)</span></div><div class="pipe-step-mini"><span class="num step-done">3</span><span class="step-label done-label">1ª Skill IA (Karina)</span></div><div class="pipe-step-mini"><span class="num step-done">4</span><span class="step-label done-label">Correção e validação IA (Lúcio)</span></div><div class="pipe-step-mini"><span class="num step-done">5</span><span class="step-label done-label">Correção Claudia</span></div><div class="pipe-step-mini"><span class="num step-done">6</span><span class="step-label done-label">Aline (direcionamento)</span></div><div class="pipe-step-mini"><span class="num step-done">7</span><span class="step-label done-label">2ª Skill IA (Karina)</span></div><div class="pipe-step-mini"><span class="num step-done">8</span><span class="step-label done-label">Diagramação (Raquel e Matheus)</span></div><div class="pipe-step-mini"><span class="num step-current">9</span><span class="step-label current-label">Impressão e leitura física (Aline)</span></div><div class="pipe-step-mini"><span class="num step-todo">10</span><span class="step-label ">Correção design físico (Raquel e Matheus)</span></div><div class="pipe-step-mini"><span class="num step-todo">11</span><span class="step-label ">Capítulo OK</span></div></div>
+        </div>
+        <div class="e3-card-actions">
+          <button class="btn btn-ghost" style="flex:1;justify-content:center" onclick="openEditModal('e3-8','eixo3')">Editar</button>
+        </div>
+      </div>
+    </div><div class="e3-card">
+      <div class="e3-card-header" onclick="toggleExpandCard('card-exp-e3-9')">
+        <div class="e3-card-top">
+          <div>
+            <div class="e3-card-name">Outros Órgãos ADM</div>
+            <div class="e3-card-resp">Lúcio Meireles</div>
+          </div>
+          <div class="e3-card-right">
+            <span class="prazo-tag " style="font-size:12px">—</span>
+          </div>
+        </div>
+        <div class="e3-card-prog">
+          <div class="e3-card-bar"><div class="e3-card-fill" style="width:9%;background:var(--purple)"></div></div>
+          <span class="e3-card-pct">9%</span>
+        </div>
+        <div class="e3-card-etapa">Etapa 1/11 — Equipe Técnica (Farid, Ana, Marcelo)</div>
+      </div>
+      <div class="e3-card-expand" id="card-exp-e3-9">
+        <div class="e3-card-expand-section"><h4>Observações</h4><p>Equipe técnica</p></div>
+        <div class="e3-card-expand-section"><h4>Fluxo</h4>
+          <div class="pipe-steps-mini"><div class="pipe-step-mini"><span class="num step-current">1</span><span class="step-label current-label">Equipe Técnica (Farid, Ana, Marcelo)</span></div><div class="pipe-step-mini"><span class="num step-todo">2</span><span class="step-label ">Aline (direcionamento)</span></div><div class="pipe-step-mini"><span class="num step-todo">3</span><span class="step-label ">1ª Skill IA (Karina)</span></div><div class="pipe-step-mini"><span class="num step-todo">4</span><span class="step-label ">Correção e validação IA (Lúcio)</span></div><div class="pipe-step-mini"><span class="num step-todo">5</span><span class="step-label ">Correção Claudia</span></div><div class="pipe-step-mini"><span class="num step-todo">6</span><span class="step-label ">Aline (direcionamento)</span></div><div class="pipe-step-mini"><span class="num step-todo">7</span><span class="step-label ">2ª Skill IA (Karina)</span></div><div class="pipe-step-mini"><span class="num step-todo">8</span><span class="step-label ">Diagramação (Raquel e Matheus)</span></div><div class="pipe-step-mini"><span class="num step-todo">9</span><span class="step-label ">Impressão e leitura física (Aline)</span></div><div class="pipe-step-mini"><span class="num step-todo">10</span><span class="step-label ">Correção design físico (Raquel e Matheus)</span></div><div class="pipe-step-mini"><span class="num step-todo">11</span><span class="step-label ">Capítulo OK</span></div></div>
+        </div>
+        <div class="e3-card-actions">
+          <button class="btn btn-ghost" style="flex:1;justify-content:center" onclick="openEditModal('e3-9','eixo3')">Editar</button>
+        </div>
+      </div>
+    </div><button class="add-btn" style="padding:12px 0;width:100%;justify-content:center;border:1px dashed var(--border2);border-radius:var(--radius)" onclick="openEditModal(null,'eixo3')">+ Adicionar subtema</button></div></div>
 </div>
 
 <!-- BOTTOM NAV (mobile) -->
@@ -421,8 +845,8 @@ body.light .resumo-item-obs{color:#444}
 <div class="modal-overlay" id="edit-modal">
   <div class="modal">
     <h3 id="modal-title">Editar subtema</h3>
-    <input type="hidden" id="edit-id">
-    <input type="hidden" id="edit-eixo">
+    <input type="hidden" id="edit-id" value="e3-1">
+    <input type="hidden" id="edit-eixo" value="eixo3">
     <div class="form-group"><label>Subtema</label><input type="text" id="edit-subtema" placeholder="Nome do subtema"></div>
     <div class="form-group"><label>Responsável</label><input type="text" id="edit-resp" placeholder="Nome do responsável"></div>
     <div class="form-group">
@@ -461,11 +885,11 @@ body.light .resumo-item-obs{color:#444}
     <p class="token-hint">Gere em <a href="https://github.com/settings/tokens" target="_blank">github.com/settings/tokens</a> → Generate new token (classic) → escopo <strong>repo</strong>.</p>
     <div style="display:flex;gap:8px;margin-top:20px">
       <button class="btn btn-ghost" style="flex:1" onclick="saveToGithub()">
-        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"></polyline><polyline points="8 6 2 12 8 18"></polyline></svg>
         Salvar no GitHub
       </button>
     </div>
-    <div class="save-status" id="save-status-m" style="text-align:left;margin-top:6px"></div>
+    <div class="save-status" id="save-status-m" style="text-align: left; margin-top: 6px; color: var(--text3);">Salvando…</div>
     <div class="modal-actions" style="margin-top:12px">
       <button class="btn btn-ghost" onclick="closeModal('token-modal')">Cancelar</button>
       <button class="btn btn-primary" onclick="saveToken()">Salvar token</button>
@@ -807,114 +1231,7 @@ function closeModal(id){document.getElementById(id).classList.remove('open')}
 function buildFullHTML(){
   let src=document.documentElement.outerHTML;
   src=src.replace(/<script>window\.__INIT_DATA__=[\s\S]*?<\/script>/g,'');
-  const dataTag=`<script>window.__INIT_DATA__=${JSON.stringify(DATA)}<\/script>`;
-  return src.replace('</head>',dataTag+'</head>');
-}
+  const dataTag=`
 
 
-// ── RESUMO EXECUTIVO ──
-function openResumo(){
-  const now = new Date();
-  document.getElementById('resumo-data').textContent =
-    'Gerado em ' + now.toLocaleDateString('pt-BR') + ' às ' + now.toLocaleTimeString('pt-BR',{hour:'2-digit',minute:'2-digit'});
-
-  const e3 = DATA.eixo3;
-  const total = e3.length;
-  const avgPct = Math.round(e3.reduce((a,i)=>a+pct(i.etapa),0)/total);
-  const concluidos = e3.filter(i=>i.etapa>=11).length;
-  const avancados = e3.filter(i=>i.etapa>=7&&i.etapa<11).length;
-  const emRisco = e3.filter(i=>isOverdue(i.prazo)&&i.etapa<11).length;
-  const evolucaoDia = e3.filter(i=>i._etapaInicial&&i.etapa>i._etapaInicial).length;
-  const ganhoMedio = e3.reduce((a,i)=>{
-    const delta=i._etapaInicial?Math.max(0,i.etapa-i._etapaInicial):0;
-    return a+Math.round((delta/11)*100);
-  },0);
-
-  // métricas cor
-  const c1 = avgPct>=70?'var(--green)':avgPct>=40?'var(--accent)':'var(--purple)';
-  const c2 = evolucaoDia>0?'var(--teal)':'var(--text3)';
-  const c3 = emRisco>0?'var(--red)':'var(--green)';
-
-  // subtemas ordenados por progresso desc
-  const sorted=[...e3].sort((a,b)=>b.etapa-a.etapa);
-
-  const itensHTML = sorted.map(item=>{
-    const pc=isOverdue(item.prazo)?'prazo-vencido':isUrgent(item.prazo)?'prazo-urgente':'prazo-ok';
-    const prazoTxt=item.prazo&&item.prazo!=='—'
-      ?`<span class="resumo-item-prazo ${pc}" style="margin-left:8px">· Prazo: ${item.prazo}${isOverdue(item.prazo)?' ⚠':isUrgent(item.prazo)?' ⚠':''}</span>`:'';
-    return`<div class="resumo-item">
-      <div style="display:flex;align-items:baseline;justify-content:space-between;margin-bottom:5px">
-        <span class="resumo-item-nome">${item.subtema}</span>
-        <span style="font-size:11px;color:var(--text2);flex-shrink:0;margin-left:8px">${item.responsavel}</span>
-      </div>
-      <div class="resumo-item-obs">${item.obs||'Sem observações'}${prazoTxt}</div>
-    </div>`;
-  }).join('');
-
-
-
-  document.getElementById('resumo-body').innerHTML = `
-    <div class="resumo-metricas">
-      <div class="resumo-metrica">
-        <div class="val" style="color:${c1}">${avgPct}%</div>
-        <div class="lbl">Conclusão geral</div>
-        <div class="sub">média Eixo 3</div>
-      </div>
-      <div class="resumo-metrica">
-        <div class="val" style="color:${c2}">${evolucaoDia}</div>
-        <div class="lbl">Itens evoluídos hoje</div>
-        <div class="sub">${ganhoMedio>0?'+'+ganhoMedio+'% acumulado':'desde abertura'}</div>
-      </div>
-      <div class="resumo-metrica">
-        <div class="val" style="color:${c3}">${emRisco}</div>
-        <div class="lbl">Em risco</div>
-        <div class="sub">${concluidos} concluído${concluidos!==1?'s':''} · ${avancados} fase final</div>
-      </div>
-    </div>
-
-    <div class="resumo-geral">
-      <div class="resumo-geral-top">
-        <span>Progresso geral do Eixo 3</span>
-        <span class="pct">${avgPct}%</span>
-      </div>
-      <div class="resumo-bigbar"><div class="resumo-bigbar-fill" style="width:${avgPct}%"></div></div>
-      <div class="resumo-bigbar-labels">
-        <span>0% — Início</span>
-        <span>50% — Meio do fluxo</span>
-        <span>100% — Concluído</span>
-      </div>
-    </div>
-
-    <div>
-      <div class="resumo-lista-titulo">Eixo 3 — Subtemas (${total} itens)</div>
-      ${itensHTML}
-    </div>
-
-
-  `;
-
-  document.getElementById('resumo-modal').classList.add('open');
-}
-
-// ── TEMA ──
-function toggleTheme(){
-  const isLight=document.body.classList.toggle("light");
-  document.getElementById("theme-icon").textContent=isLight?"🌙":"☀️";
-  localStorage.setItem("theme",isLight?"light":"dark");
-}
-(function(){
-  const saved=localStorage.getItem("theme");
-  if(saved==="light"){document.body.classList.add("light");const i=document.getElementById("theme-icon");if(i)i.textContent="🌙";}
-})();
-
-// ── INIT ──
-if(window.__INIT_DATA__)DATA=window.__INIT_DATA__;
-// snapshot etapa inicial para medir evolução do dia
-DATA.eixo3.forEach(i=>{ if(!i._etapaInicial) i._etapaInicial=i.etapa; });
-const _c=getGHConfig();
-if(_c.user){document.getElementById('gh-user-input').value=_c.user;document.getElementById('gh-repo-input').value=_c.repo}
-document.getElementById('last-update').textContent=DATA.updatedAt;
-render();
-</script>
-</body>
-</html>
+</div></body></html>
