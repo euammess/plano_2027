@@ -764,8 +764,10 @@ function closeModal(id){document.getElementById(id).classList.remove('open')}
 
 // ── BUILD HTML ──
 function buildFullHTML(){
-  const src=document.documentElement.outerHTML;
-  return src.replace('</head>',`<script>window.__INIT_DATA__=${JSON.stringify(DATA)}<\/script></head>`);
+  let src=document.documentElement.outerHTML;
+  src=src.replace(/<script>window\.__INIT_DATA__=[\s\S]*?<\/script>/g,'');
+  const dataTag=`<script>window.__INIT_DATA__=${JSON.stringify(DATA)}<\/script>`;
+  return src.replace('</head>',dataTag+'</head>');
 }
 
 
