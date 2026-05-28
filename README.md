@@ -31,8 +31,11 @@ O painel gerencia o fluxo de produção de grandes eixos estratégicos, dividido
 ---
 
 ## 📸 Demonstração da Interface
-
+Pagina Principal - Elementos Textuais:
 ![Layout do Painel de Controle dos Eixos](painel.png)
+
+Página Principal - Construção do Livro:
+![Layout do Painel de Controle dos Eixos](painel1.png)
 
 > ⚠️ **Nota:** O layout e a estrutura refletem o ecossistema real de gerenciamento do plano, unindo tecnologia e visão estratégica de projetos.
 
