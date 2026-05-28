@@ -32,6 +32,7 @@ O painel gerencia o fluxo de produção de grandes eixos estratégicos, dividido
 
 ## 📸 Demonstração da Interface
 > Link para acesso do page: https://euammess.github.io/plano_2027/
+
 Pagina Principal - Elementos Textuais:
 ![Layout do Painel de Controle dos Eixos](painel.png)
 
