@@ -1,8 +1,10 @@
-<html lang="pt-BR"><head>
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Plano Estratégico Amazonas</title>
-<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600&amp;family=DM+Mono:wght@400;500&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
 :root{
@@ -20,7 +22,10 @@ body.light{
   --accent:#4f7cff;--accent2:#3d63d4;
   --green:#16a85f;--amber:#c97d0a;--red:#d93040;--purple:#7c4fd4;--teal:#0fa896;
 }
-body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;font-size:14px;line-height:1.5;-webkit-tap-highlight-color:transparent;transition:background .2s,color .2s}
+body.light *{font-weight:500}
+body.light h1,body.light h2,body.light h3,body.light h4,body.light .kpi-val,body.light .subtema-name,body.light .e3-card-name,body.light .e2-card-title,body.light .resumo-item-nome,body.light .topbar-left h1{font-weight:700}
+body.light .sidebar-logo h2,body.light .section-title,body.light .resumo-geral-top span,body.light .resumo-lista-titulo,body.light .e2-status{font-weight:600}
+body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;font-size:16px;line-height:1.5;-webkit-tap-highlight-color:transparent;transition:background .2s,color .2s}
 
 /* ═══ DESKTOP LAYOUT ═══ */
 .app{display:grid;grid-template-columns:220px 1fr;min-height:100vh}
@@ -32,24 +37,24 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);min
 
 /* ═══ SIDEBAR ═══ */
 .sidebar-logo{padding:20px 16px 12px;border-bottom:1px solid var(--border);margin-bottom:8px}
-.sidebar-logo .logo-tag{font-size:10px;font-weight:500;color:var(--accent);letter-spacing:.08em;text-transform:uppercase;margin-bottom:4px}
-.sidebar-logo h2{font-size:14px;font-weight:600;line-height:1.3}
-.sidebar-section{padding:8px 10px 4px;font-size:10px;font-weight:600;color:var(--text3);letter-spacing:.08em;text-transform:uppercase;margin-top:8px}
-.sidebar-item{display:flex;align-items:center;gap:8px;padding:7px 12px;border-radius:var(--radius-sm);margin:1px 8px;cursor:pointer;color:var(--text2);font-size:13px;transition:all .15s;user-select:none}
+.sidebar-logo .logo-tag{font-size:12px;font-weight:500;color:var(--accent);letter-spacing:.08em;text-transform:uppercase;margin-bottom:4px}
+.sidebar-logo h2{font-size:16px;font-weight:600;line-height:1.3}
+.sidebar-section{padding:8px 10px 4px;font-size:12px;font-weight:600;font-weight:600;color:var(--text3);letter-spacing:.08em;text-transform:uppercase;margin-top:8px}
+.sidebar-item{display:flex;align-items:center;gap:8px;padding:7px 12px;border-radius:var(--radius-sm);margin:1px 8px;cursor:pointer;color:var(--text2);font-size:15px;font-weight:500;transition:all .15s;user-select:none}
 .sidebar-item:hover,.sidebar-item:active{background:var(--surface2);color:var(--text)}
 .sidebar-item.active{background:rgba(79,124,255,.12);color:var(--accent)}
 .sidebar-item .dot{width:8px;height:8px;border-radius:50%;flex-shrink:0}
-.sidebar-item .count{margin-left:auto;font-size:11px;background:var(--surface2);padding:1px 6px;border-radius:10px;color:var(--text3)}
+.sidebar-item .count{margin-left:auto;font-size:13px;background:var(--surface2);padding:1px 6px;border-radius:10px;color:var(--text3)}
 .sidebar-bottom{margin-top:auto;padding:12px;border-top:1px solid var(--border)}
-.token-btn{width:100%;padding:8px 12px;border-radius:var(--radius-sm);border:1px solid var(--border2);background:transparent;color:var(--text2);font-family:'DM Sans',sans-serif;font-size:12px;cursor:pointer;display:flex;align-items:center;gap:6px;transition:all .15s}
+.token-btn{width:100%;padding:8px 12px;border-radius:var(--radius-sm);border:1px solid var(--border2);background:transparent;color:var(--text2);font-family:'DM Sans',sans-serif;font-size:14px;cursor:pointer;display:flex;align-items:center;gap:6px;transition:all .15s}
 .token-btn:hover{border-color:var(--accent);color:var(--accent)}
 .save-status{font-size:11px;color:var(--text3);text-align:center;margin-top:6px;min-height:16px}
 
 /* ═══ TOPBAR ═══ */
-.topbar-left h1{font-size:18px;font-weight:600}
-.topbar-left p{font-size:12px;color:var(--text2);margin-top:2px}
+.topbar-left h1{font-size:20px;font-weight:600}
+.topbar-left p{font-size:14px;color:var(--text2);margin-top:2px}
 .topbar-right{display:flex;gap:8px;align-items:center}
-.btn{padding:7px 14px;border-radius:var(--radius-sm);font-size:13px;font-weight:500;cursor:pointer;border:none;font-family:'DM Sans',sans-serif;transition:all .15s;display:flex;align-items:center;gap:6px;white-space:nowrap}
+.btn{padding:7px 14px;border-radius:var(--radius-sm);font-size:15px;font-weight:500;cursor:pointer;border:none;font-family:'DM Sans',sans-serif;transition:all .15s;display:flex;align-items:center;gap:6px;white-space:nowrap}
 .btn-primary{background:var(--accent);color:#fff}
 .btn-primary:hover,.btn-primary:active{background:var(--accent2)}
 .btn-ghost{background:transparent;color:var(--text2);border:1px solid var(--border2)}
@@ -59,7 +64,7 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);min
 /* ═══ SECTION HEADER ═══ */
 .section-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px}
 .section-title{display:flex;align-items:center;gap:8px;font-size:13px;font-weight:600;color:var(--text)}
-.eixo-badge{font-size:10px;padding:2px 8px;border-radius:10px;font-weight:600}
+.eixo-badge{font-size:12px;padding:2px 8px;border-radius:10px;font-weight:600}
 .badge-e2{background:rgba(245,166,35,.15);color:var(--amber)}
 .badge-e3{background:rgba(79,124,255,.15);color:var(--accent)}
 
@@ -67,10 +72,10 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);min
 .eixo2-block{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:18px 20px;margin-bottom:24px;border-left:3px solid var(--amber)}
 .e2-timeline{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:14px}
 .e2-card{background:var(--surface2);border-radius:var(--radius-sm);padding:12px 14px;border:1px solid var(--border)}
-.e2-card-label{font-size:11px;color:var(--text3);margin-bottom:6px;font-family:'DM Mono',monospace}
-.e2-card-title{font-size:13px;font-weight:700;color:var(--text);margin-bottom:8px}
-.e2-card-obs{font-size:12px;color:var(--text2)}
-.e2-status{display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:600;padding:3px 8px;border-radius:10px;margin-bottom:6px}
+.e2-card-label{font-size:13px;color:var(--text3);margin-bottom:6px;font-family:'DM Mono',monospace}
+.e2-card-title{font-size:15px;font-weight:700;color:var(--text);margin-bottom:8px}
+.e2-card-obs{font-size:14px;color:var(--text2)}
+.e2-status{display:inline-flex;align-items:center;gap:5px;font-size:13px;font-weight:600;padding:3px 8px;border-radius:10px;margin-bottom:6px}
 .status-done{background:rgba(34,201,122,.12);color:var(--green)}
 .status-date{background:rgba(79,124,255,.12);color:var(--accent)}
 .status-launch{background:rgba(155,109,255,.12);color:var(--purple)}
@@ -78,27 +83,50 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);min
 /* ═══ KPI ═══ */
 .kpi-row{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;margin-bottom:24px}
 .kpi-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:14px 16px}
-.kpi-val{font-size:24px;font-weight:600;font-family:'DM Mono',monospace;line-height:1}
-.kpi-label{font-size:11px;color:var(--text2);margin-top:5px}
-.kpi-sub{font-size:10px;color:var(--text3);margin-top:2px}
+.kpi-val{font-size:26px;font-weight:600;font-family:'DM Mono',monospace;line-height:1}
+.kpi-label{font-size:13px;color:var(--text2);margin-top:5px}
+.kpi-sub{font-size:12px;color:var(--text3);margin-top:2px}
 
 /* ═══ EIXO 3 TABLE (desktop) ═══ */
 .e3-table{width:100%;border-collapse:collapse}
-.e3-table th{font-size:10px;font-weight:600;color:var(--text3);text-transform:uppercase;letter-spacing:.07em;padding:8px 12px;text-align:left;border-bottom:1px solid var(--border)}
+.e3-table th{font-size:12px;font-weight:600;color:var(--text3);text-transform:uppercase;letter-spacing:.07em;padding:8px 12px;text-align:left;border-bottom:1px solid var(--border)}
 .e3-table td{padding:0}
 .e3-row{border-bottom:1px solid var(--border);cursor:pointer;transition:background .1s}
 .e3-row:hover{background:rgba(255,255,255,.02)}
 .e3-row td{padding:12px}
 .e3-row td:first-child{padding-left:14px}
-.subtema-name{font-size:13px;font-weight:500;color:var(--text)}
-.resp-name{font-size:12px;color:var(--text2)}
-body.light .subtema-name{color:#111}
-body.light .resp-name{color:#333}
-body.light .prazo-tag{color:#444}
-body.light .etapa-tag{color:#555}
-body.light .e3-card-name{color:#111}
-body.light .e3-card-resp{color:#333}
-body.light .e3-card-etapa{color:#555}
+.subtema-name{font-size:15px;font-weight:500;color:var(--text)}
+.resp-name{font-size:14px;color:var(--text2)}
+body.light .subtema-name{color:#000;font-weight:700}
+body.light .resp-name{color:#111;font-weight:700}
+body.light .prazo-tag{color:#111;font-weight:700}
+body.light .etapa-tag{color:#222;font-weight:600}
+body.light .e3-card-name{color:#000;font-weight:700}
+body.light .e3-card-resp{color:#111;font-weight:700}
+body.light .e3-card-etapa{color:#222;font-weight:600}
+body.light .prog-pct{color:#000;font-weight:700}
+body.light .e3-card-pct{color:#000;font-weight:700}
+body.light .kpi-val{color-adjust:exact}
+body.light .kpi-label{color:#111;font-weight:600}
+body.light .kpi-sub{color:#333;font-weight:500}
+body.light .e2-card-title{color:#000;font-weight:700}
+body.light .e2-card-obs{color:#111;font-weight:500}
+body.light .section-title{color:#000}
+body.light .topbar-left h1{color:#000;font-weight:700}
+body.light .topbar-left p{color:#222;font-weight:500}
+body.light .expand-block p{color:#111;font-weight:500}
+body.light .pipe-step-mini .step-label{color:#111;font-weight:500}
+body.light .pipe-step-mini .current-label{color:#000;font-weight:700}
+body.light .resumo-item-nome{color:#000;font-weight:700}
+body.light .resumo-item-obs{color:#111;font-weight:500}
+body.light .logo-tag{font-weight:300!important}
+body.light .eixo2-light{font-weight:300!important}
+body.light .prog-pct{font-weight:700}
+body.light .e3-card-pct{font-weight:700}
+body.light .prazo-tag{font-weight:700}
+body.light .prazo-tag.urgent{color:#b85c00;font-weight:700}
+body.light .prazo-tag.overdue{color:#c0001a;font-weight:700}
+body.light .prazo-tag:not(.urgent):not(.overdue){color:#1a1d2e;font-weight:700}
 
 /* ═══ LIGHT MODE — MOBILE ═══ */
 body.light .bottom-nav{background:#ffffff;border-top:1px solid #e0e2ea}
@@ -133,14 +161,14 @@ body.light .e3-table-wrap{background:#ffffff;border-color:#e0e2ea}
 body.light .e3-table th{border-bottom-color:#e0e2ea}
 body.light .e3-row{border-bottom-color:#e0e2ea}
 body.light .fab{box-shadow:0 4px 16px rgba(79,124,255,.25)}
-.prazo-tag{font-size:11px;font-family:'DM Mono',monospace;color:var(--text3)}
+.prazo-tag{font-size:13px;font-family:'DM Mono',monospace;color:var(--text3)}
 .prazo-tag.urgent{color:var(--amber)}
 .prazo-tag.overdue{color:var(--red)}
 .prog-wrap{display:flex;align-items:center;gap:8px}
 .prog-bar{flex:1;height:6px;background:var(--surface2);border-radius:3px;overflow:hidden}
 .prog-fill{height:100%;border-radius:3px;transition:width .4s ease}
-.prog-pct{font-size:10px;font-family:'DM Mono',monospace;color:var(--text3);min-width:28px;text-align:right}
-.etapa-tag{font-size:10px;color:var(--text3);margin-top:3px}
+.prog-pct{font-size:12px;font-family:'DM Mono',monospace;color:var(--text3);min-width:32px;text-align:right}
+.etapa-tag{font-size:12px;color:var(--text3);margin-top:3px}
 .pill{display:inline-flex;align-items:center;gap:4px;padding:3px 8px;border-radius:10px;font-size:11px;font-weight:500}
 .pill-dot{width:5px;height:5px;border-radius:50%}
 .expand-row{display:none}
@@ -148,10 +176,10 @@ body.light .fab{box-shadow:0 4px 16px rgba(79,124,255,.25)}
 .expand-cell{padding:0 14px 14px!important;background:var(--surface2)}
 .expand-inner{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px}
 .expand-block{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-sm);padding:12px}
-.expand-block h4{font-size:10px;font-weight:600;color:var(--text3);text-transform:uppercase;letter-spacing:.07em;margin-bottom:8px}
-.expand-block p{font-size:12px;color:var(--text2);line-height:1.6}
+.expand-block h4{font-size:12px;font-weight:600;color:var(--text3);text-transform:uppercase;letter-spacing:.07em;margin-bottom:8px}
+.expand-block p{font-size:14px;color:var(--text2);line-height:1.6}
 .pipe-steps-mini{display:flex;flex-direction:column;gap:4px}
-.pipe-step-mini{display:flex;align-items:center;gap:8px;font-size:11px}
+.pipe-step-mini{display:flex;align-items:center;gap:8px;font-size:13px}
 .pipe-step-mini .num{width:18px;height:18px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:9px;font-family:'DM Mono',monospace;flex-shrink:0}
 .step-done{background:rgba(34,201,122,.15);color:var(--green);border:1px solid rgba(34,201,122,.25)}
 .step-current{background:rgba(79,124,255,.2);color:var(--accent);border:1px solid rgba(79,124,255,.4)}
@@ -160,7 +188,7 @@ body.light .fab{box-shadow:0 4px 16px rgba(79,124,255,.25)}
 .step-label.done-label{color:var(--text3);text-decoration:line-through}
 .step-label.current-label{color:var(--text);font-weight:500}
 .add-row td{padding:10px 14px}
-.add-btn{display:inline-flex;align-items:center;gap:6px;font-size:12px;color:var(--text3);cursor:pointer;padding:4px 8px;border-radius:var(--radius-sm);border:none;background:transparent;font-family:'DM Sans',sans-serif;transition:all .15s}
+.add-btn{display:inline-flex;align-items:center;gap:6px;font-size:14px;color:var(--text3);cursor:pointer;padding:4px 8px;border-radius:var(--radius-sm);border:none;background:transparent;font-family:'DM Sans',sans-serif;transition:all .15s}
 .add-btn:hover{color:var(--accent);background:rgba(79,124,255,.08)}
 
 /* ═══ MOBILE CARDS (eixo3) ═══ */
@@ -168,37 +196,37 @@ body.light .fab{box-shadow:0 4px 16px rgba(79,124,255,.25)}
 .e3-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden}
 .e3-card-header{padding:14px 16px;cursor:pointer;display:flex;flex-direction:column;gap:8px}
 .e3-card-top{display:flex;align-items:flex-start;justify-content:space-between;gap:8px}
-.e3-card-name{font-size:14px;font-weight:500;color:var(--text)}
-.e3-card-resp{font-size:12px;color:var(--text2);margin-top:2px}
+.e3-card-name{font-size:16px;font-weight:500;color:var(--text)}
+.e3-card-resp{font-size:14px;color:var(--text2);margin-top:2px}
 .e3-card-right{display:flex;flex-direction:column;align-items:flex-end;gap:4px;flex-shrink:0}
 .e3-card-prog{display:flex;align-items:center;gap:8px;width:100%}
 .e3-card-bar{flex:1;height:5px;background:var(--surface2);border-radius:3px;overflow:hidden}
 .e3-card-fill{height:100%;border-radius:3px}
-.e3-card-pct{font-size:11px;font-family:'DM Mono',monospace;color:var(--text3);min-width:30px;text-align:right}
-.e3-card-etapa{font-size:11px;color:var(--text3)}
+.e3-card-pct{font-size:13px;font-family:'DM Mono',monospace;color:var(--text3);min-width:34px;text-align:right}
+.e3-card-etapa{font-size:13px;color:var(--text3)}
 .e3-card-expand{display:none;border-top:1px solid var(--border);padding:14px 16px;background:var(--surface2)}
 .e3-card-expand.open{display:block}
 .e3-card-expand-section{margin-bottom:12px}
-.e3-card-expand-section h4{font-size:10px;font-weight:600;color:var(--text3);text-transform:uppercase;letter-spacing:.07em;margin-bottom:8px}
-.e3-card-expand-section p{font-size:13px;color:var(--text2);line-height:1.6}
+.e3-card-expand-section h4{font-size:12px;font-weight:600;color:var(--text3);text-transform:uppercase;letter-spacing:.07em;margin-bottom:8px}
+.e3-card-expand-section p{font-size:15px;color:var(--text2);line-height:1.6}
 .e3-card-actions{display:flex;gap:8px;margin-top:12px}
 
 /* ═══ MODALS ═══ */
 .modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,.6);display:none;align-items:center;justify-content:center;z-index:100;backdrop-filter:blur(4px)}
 .modal-overlay.open{display:flex}
 .modal{background:var(--surface);border:1px solid var(--border2);border-radius:var(--radius);padding:24px;width:520px;max-width:94vw;max-height:88vh;overflow-y:auto}
-.modal h3{font-size:16px;font-weight:600;margin-bottom:20px}
+.modal h3{font-size:18px;font-weight:600;margin-bottom:20px}
 .form-group{margin-bottom:14px}
-.form-group label{display:block;font-size:11px;font-weight:600;color:var(--text3);text-transform:uppercase;letter-spacing:.06em;margin-bottom:6px}
-.form-group input,.form-group select,.form-group textarea{width:100%;background:var(--surface2);border:1px solid var(--border2);border-radius:var(--radius-sm);color:var(--text);font-family:'DM Sans',sans-serif;font-size:14px;padding:10px 12px;outline:none;transition:border .15s;-webkit-appearance:none}
+.form-group label{display:block;font-size:13px;font-weight:600;color:var(--text3);text-transform:uppercase;letter-spacing:.06em;margin-bottom:6px}
+.form-group input,.form-group select,.form-group textarea{width:100%;background:var(--surface2);border:1px solid var(--border2);border-radius:var(--radius-sm);color:var(--text);font-family:'DM Sans',sans-serif;font-size:16px;padding:10px 12px;outline:none;transition:border .15s;-webkit-appearance:none}
 .form-group input:focus,.form-group select:focus,.form-group textarea:focus{border-color:var(--accent)}
 .form-group select option{background:var(--surface)}
 .form-group textarea{resize:vertical;min-height:80px}
 .modal-actions{display:flex;gap:8px;margin-top:20px;justify-content:flex-end}
 .token-modal{background:var(--surface);border:1px solid var(--border2);border-radius:var(--radius);padding:28px;width:460px;max-width:94vw}
-.token-modal h3{font-size:16px;font-weight:600;margin-bottom:8px}
-.token-modal>p{font-size:13px;color:var(--text2);margin-bottom:20px;line-height:1.6}
-.token-hint{font-size:11px;color:var(--text3);margin-top:8px;line-height:1.5}
+.token-modal h3{font-size:18px;font-weight:600;margin-bottom:8px}
+.token-modal>p{font-size:15px;color:var(--text2);margin-bottom:20px;line-height:1.6}
+.token-hint{font-size:13px;color:var(--text3);margin-top:8px;line-height:1.5}
 .token-hint a{color:var(--accent)}
 
 /* ═══ BOTTOM NAV (mobile) ═══ */
@@ -206,7 +234,7 @@ body.light .fab{box-shadow:0 4px 16px rgba(79,124,255,.25)}
 .bnav-item{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;cursor:pointer;color:var(--text3);font-size:10px;font-weight:500;transition:color .15s;border:none;background:transparent;font-family:'DM Sans',sans-serif;padding:0;-webkit-tap-highlight-color:transparent}
 .bnav-item.active{color:var(--accent)}
 .bnav-icon{font-size:20px;line-height:1}
-.bnav-label{font-size:10px}
+.bnav-label{font-size:12px}
 
 /* ═══ MOBILE FAB ═══ */
 .fab{display:none;position:fixed;bottom:calc(var(--nav-h) + 14px);right:18px;width:48px;height:48px;border-radius:50%;background:var(--accent);color:#fff;border:none;font-size:24px;cursor:pointer;z-index:19;align-items:center;justify-content:center;box-shadow:0 4px 16px rgba(79,124,255,.4);font-family:'DM Sans',sans-serif}
@@ -257,9 +285,9 @@ body.light .fab{box-shadow:0 4px 16px rgba(79,124,255,.25)}
 /* métricas topo */
 .resumo-metricas{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
 .resumo-metrica{background:var(--surface2);border:1px solid var(--border);border-radius:var(--radius-sm);padding:12px 14px;text-align:center}
-.resumo-metrica .val{font-size:26px;font-weight:600;font-family:'DM Mono',monospace;line-height:1}
-.resumo-metrica .lbl{font-size:11px;color:var(--text2);margin-top:5px}
-.resumo-metrica .sub{font-size:10px;color:var(--text3);margin-top:2px}
+.resumo-metrica .val{font-size:28px;font-weight:600;font-family:'DM Mono',monospace;line-height:1}
+.resumo-metrica .lbl{font-size:13px;color:var(--text2);margin-top:5px}
+.resumo-metrica .sub{font-size:12px;color:var(--text3);margin-top:2px}
 
 /* barra geral */
 .resumo-geral{background:var(--surface2);border:1px solid var(--border);border-radius:var(--radius-sm);padding:14px 16px}
@@ -272,16 +300,16 @@ body.light .fab{box-shadow:0 4px 16px rgba(79,124,255,.25)}
 .resumo-bigbar-labels span{font-size:10px;color:var(--text3)}
 
 /* lista subtemas */
-.resumo-lista-titulo{font-size:11px;font-weight:600;color:var(--text3);text-transform:uppercase;letter-spacing:.07em;margin-bottom:10px}
+.resumo-lista-titulo{font-size:13px;font-weight:600;color:var(--text3);text-transform:uppercase;letter-spacing:.07em;margin-bottom:10px}
 .resumo-item{background:var(--surface2);border:1px solid var(--border);border-radius:var(--radius-sm);padding:11px 13px;margin-bottom:8px}
 .resumo-item-top{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:7px}
-.resumo-item-nome{font-size:13px;font-weight:500;color:var(--text)}
+.resumo-item-nome{font-size:15px;font-weight:500;color:var(--text)}
 .resumo-item-right{display:flex;align-items:center;gap:8px;flex-shrink:0}
 .resumo-item-pct{font-size:12px;font-family:'DM Mono',monospace;font-weight:600}
 .resumo-item-etapa{font-size:10px;color:var(--text3);white-space:nowrap}
 .resumo-item-bar{height:4px;background:var(--border);border-radius:2px;overflow:hidden;margin-bottom:6px}
 .resumo-item-fill{height:100%;border-radius:2px}
-.resumo-item-obs{font-size:11px;color:var(--text2);line-height:1.5}
+.resumo-item-obs{font-size:13px;color:var(--text2);line-height:1.5}
 .resumo-item-prazo{font-size:10px;font-family:'DM Mono',monospace;margin-top:4px}
 .prazo-ok{color:var(--text3)}
 .prazo-urgente{color:var(--amber)}
@@ -289,15 +317,15 @@ body.light .fab{box-shadow:0 4px 16px rgba(79,124,255,.25)}
 
 /* eixo2 resumo */
 .resumo-e2{background:rgba(245,166,35,.06);border:1px solid rgba(245,166,35,.25);border-radius:var(--radius-sm);padding:13px 15px}
-.resumo-e2-titulo{font-size:11px;font-weight:600;color:var(--amber);text-transform:uppercase;letter-spacing:.07em;margin-bottom:10px}
+.resumo-e2-titulo{font-size:13px;font-weight:600;color:var(--amber);text-transform:uppercase;letter-spacing:.07em;margin-bottom:10px}
 .resumo-e2-item{display:flex;align-items:center;gap:10px;font-size:12px;padding:5px 0;border-bottom:1px solid rgba(245,166,35,.1)}
 .resumo-e2-item:last-child{border-bottom:none}
 .resumo-e2-dot{width:6px;height:6px;border-radius:50%;flex-shrink:0}
 
 /* footer */
 .resumo-footer{padding:14px 24px;border-top:1px solid var(--border);display:flex;justify-content:space-between;align-items:center;flex-shrink:0}
-.resumo-footer p{font-size:11px;color:var(--text3)}
-.resumo-print{background:transparent;border:1px solid var(--border2);border-radius:var(--radius-sm);color:var(--text2);cursor:pointer;font-family:'DM Sans',sans-serif;font-size:12px;padding:6px 12px;display:flex;align-items:center;gap:6px}
+.resumo-footer p{font-size:13px;color:var(--text3)}
+.resumo-print{background:transparent;border:1px solid var(--border2);border-radius:var(--radius-sm);color:var(--text2);cursor:pointer;font-family:'DM Sans',sans-serif;font-size:14px;padding:6px 12px;display:flex;align-items:center;gap:6px}
 .resumo-print:hover{border-color:var(--accent);color:var(--accent)}
 
 /* light mode resumo */
@@ -311,41 +339,81 @@ body.light .resumo-item-nome{color:#111}
 body.light .resumo-item-obs{color:#444}
 
 @media print{
-  .resumo-overlay{position:static;background:none;padding:0;display:block!important}
-  .resumo-modal{max-height:none;border:none;width:100%}
-  .resumo-close,.resumo-print,.resumo-footer button{display:none}
-  body > *:not(.resumo-overlay){display:none}
+  *{-webkit-print-color-adjust:exact!important;print-color-adjust:exact!important}
+  body{background:#fff!important;color:#000!important;font-family:'DM Sans',Arial,sans-serif}
+  body > *:not(.resumo-overlay){display:none!important}
+  .resumo-overlay{position:static!important;background:none!important;padding:0!important;display:block!important;backdrop-filter:none!important}
+  .resumo-modal{max-height:none!important;border:none!important;width:100%!important;box-shadow:none!important;border-radius:0!important;background:#fff!important}
+  .resumo-close,.resumo-print,.resumo-footer button,.resumo-bigbar-labels{display:none!important}
+  .print-seal{display:block!important;}
+
+  /* CAPA DO DOCUMENTO */
+  .print-cover{display:block!important}
+  .resumo-header{border-bottom:3px solid #1a1d2e!important;padding:0 0 16px!important;margin-bottom:24px!important}
+  .resumo-header-left .tag{font-size:11px!important;color:#555!important;letter-spacing:.1em!important}
+  .resumo-header-left h2{font-size:22px!important;font-weight:700!important;color:#000!important}
+  .resumo-header-left p{font-size:12px!important;color:#555!important}
+
+  /* MÉTRICAS */
+  .resumo-metricas{display:grid!important;grid-template-columns:repeat(3,1fr)!important;gap:12px!important;margin-bottom:20px!important}
+  .resumo-metrica{background:#f5f5f5!important;border:1px solid #ddd!important;border-radius:6px!important;padding:12px!important;text-align:center!important}
+  .resumo-metrica .val{font-size:24px!important;font-weight:700!important;color:#000!important}
+  .resumo-metrica .lbl{font-size:11px!important;font-weight:600!important;color:#333!important}
+  .resumo-metrica .sub{font-size:10px!important;color:#666!important}
+
+  /* BARRA GERAL */
+  .resumo-geral{background:#f5f5f5!important;border:1px solid #ddd!important;border-radius:6px!important;padding:12px 16px!important;margin-bottom:20px!important}
+  .resumo-geral-top span{color:#000!important;font-weight:600!important}
+  .resumo-geral-top .pct{color:#000!important;font-weight:700!important}
+  .resumo-bigbar{background:#ddd!important;height:8px!important}
+  .resumo-bigbar-fill{background:#1a1d2e!important}
+
+  /* TÍTULO DA LISTA */
+  .resumo-lista-titulo{font-size:12px!important;font-weight:700!important;color:#333!important;letter-spacing:.08em!important;margin-bottom:8px!important}
+
+  /* TABELA */
+  .resumo-body > div:last-child > div{border:1px solid #ccc!important;border-radius:6px!important;overflow:hidden!important}
+  table{width:100%!important;border-collapse:collapse!important;font-size:11px!important}
+  thead tr{background:#1a1d2e!important;color:#fff!important}
+  thead th{padding:8px 10px!important;font-size:10px!important;font-weight:700!important;color:#fff!important;text-transform:uppercase!important;letter-spacing:.06em!important;border:none!important}
+  tbody tr:nth-child(even){background:#f5f5f5!important}
+  tbody tr:nth-child(odd){background:#fff!important}
+  tbody tr{border-bottom:1px solid #e0e0e0!important;page-break-inside:avoid!important}
+  tbody td{padding:8px 10px!important;vertical-align:top!important;color:#000!important}
+
+  /* RODAPÉ */
+  .resumo-footer{border-top:2px solid #1a1d2e!important;padding:10px 0 0!important;margin-top:20px!important}
+  .resumo-footer p{font-size:10px!important;color:#666!important}
+
+  /* QUEBRA DE PÁGINA */
+  .resumo-metricas,.resumo-geral{page-break-inside:avoid}
+  .resumo-body > div{page-break-inside:auto}
 }
 </style>
-<script>window.__INIT_DATA__={"updatedAt":"28/05/2026","eixo2":[{"id":"e2-1","subtema":"Seg. Pública / Saúde / Assist. Social","status":"entregue","obs":"Em produção na gráfica"},{"id":"e2-2","subtema":"Recebimento dos Livros na Agência","status":"17/06","obs":"Aguardando entrega pela gráfica"},{"id":"e2-3","subtema":"Lançamento — Teatro Manauara","status":"22/06","obs":"09h30 — data confirmada"}],"eixo3":[{"id":"e3-1","subtema":"Educação","responsavel":"Karina Barros","etapa":7,"prazo":"29/05/2026","obs":"Material entregue passando por revisões de IA para correções","_etapaInicial":1},{"id":"e3-2","subtema":"Cultura","responsavel":"—","etapa":11,"prazo":"","obs":"FINALIZADO OK","_etapaInicial":10},{"id":"e3-3","subtema":"FAPEAM","responsavel":"-","etapa":11,"prazo":"","obs":"FINALIZADO OK","_etapaInicial":8},{"id":"e3-4","subtema":"CETAM","responsavel":"Claudia Albuquerque","etapa":5,"prazo":"29/05/2026","obs":"Ajuste editorial do texto","_etapaInicial":1},{"id":"e3-5","subtema":"Meio Ambiente","responsavel":"Marcelo Pereira","etapa":1,"prazo":"30/05/2026","obs":"Readaptação do material com a inclusão das observações de outros especialistas","_etapaInicial":1},{"id":"e3-6","subtema":"Habitação","responsavel":"Aline Alves","etapa":8,"prazo":"29/05/2026","obs":"Inicio da diagramação\nRaquel - Tabelas e gráficos\nMatheus - Diagramação do texto","_etapaInicial":5},{"id":"e3-7","subtema":"Governo Digital","responsavel":"Ana Maria Souza","etapa":1,"prazo":"30/05/2026","obs":"Sob validação das fontes citadas","_etapaInicial":2},{"id":"e3-8","subtema":"Pol. Indigenistas","responsavel":"—","etapa":11,"prazo":"","obs":"FINALIZADO OK","_etapaInicial":9},{"id":"e3-9","subtema":"Outros Órgãos ADM","responsavel":"Lúcio Meireles","etapa":4,"prazo":"02/06/2026","obs":"Fila de correção de materiais da Claudia","_etapaInicial":1}]}</script></head>
+</head>
 <body>
 <div class="app">
 
 <!-- SIDEBAR (desktop) -->
 <aside class="sidebar">
   <div class="sidebar-logo">
-    <div class="logo-tag">Plano Estratégico Amazonas</div>
+    <div class="logo-tag" style="font-weight:500!important">Plano Estratégico Amazonas</div>
     <h2>Controle dos Eixos<br><span style="font-weight:400;color:var(--text2);font-size:12px;font-style:italic">Aline Alves</span></h2>
   </div>
   <div class="sidebar-section">Visão Geral</div>
   <div class="sidebar-item active" onclick="showView('dashboard',this)">
-    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect><rect x="14" y="14" width="7" height="7"></rect></svg>
-    Progresso Geral
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg>
+    Elementos Textuais
   </div>
-  <div class="sidebar-section">Eixos</div>
-  <div class="sidebar-item" onclick="showView('eixo2',this)">
-    <span class="dot" style="background:var(--amber)"></span>
-    Eixo 2 — Social
-    <span class="count" id="cnt-e2-s">3</span>
-  </div>
-  <div class="sidebar-item" onclick="showView('eixo3',this)">
-    <span class="dot" style="background:var(--accent)"></span>
-    Eixo 3 — Infra / Ed / Tec
-    <span class="count" id="cnt-e3-s">9</span>
+  <div class="sidebar-section">Livro</div>
+  <div class="sidebar-item" onclick="showView('livro',this)">
+    <span class="dot" style="background:var(--teal)"></span>
+    Construção do Livro
+    <span class="count" id="cnt-livro-s">20</span>
   </div>
   <div class="sidebar-bottom">
     <button class="token-btn" onclick="openTokenModal()">
-      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 2l-2 2m-7.61 7.61a5.5 5.5 0 1 1-7.778 7.778 5.5 5.5 0 0 1 7.777-7.777zm0 0L15.5 7.5m0 0l3 3L22 7l-3-3m-3.5 3.5L19 4"></path></svg>
+      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 2l-2 2m-7.61 7.61a5.5 5.5 0 1 1-7.778 7.778 5.5 5.5 0 0 1 7.777-7.777zm0 0L15.5 7.5m0 0l3 3L22 7l-3-3m-3.5 3.5L19 4"/></svg>
       Configurar token GitHub
     </button>
     <div class="save-status" id="save-status-s"></div>
@@ -356,12 +424,12 @@ body.light .resumo-item-obs{color:#444}
 <div class="main">
   <div class="topbar">
     <div class="topbar-left">
-      <h1 id="view-title">Progresso Geral</h1>
+      <h1 id="view-title">Elementos Textuais</h1>
       <p>Atualizado em <span id="last-update">—</span></p>
     </div>
     <div class="topbar-right">
       <button class="btn btn-ghost" onclick="saveToGithub()" id="save-btn">
-        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"></polyline><polyline points="8 6 2 12 8 18"></polyline></svg>
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
         Salvar no GitHub
       </button>
       <button class="btn btn-ghost" onclick="openResumo()" style="white-space:nowrap">📋 Resumo</button>
@@ -386,6 +454,10 @@ body.light .resumo-item-obs{color:#444}
     <span class="bnav-icon">③</span>
     <span class="bnav-label">Eixo 3</span>
   </button>
+  <button class="bnav-item" id="bnav-livro" onclick="showView('livro',this,'bnav')">
+    <span class="bnav-icon">📖</span>
+    <span class="bnav-label">Livro</span>
+  </button>
   <button class="bnav-item" id="bnav-config" onclick="openTokenModal()">
     <span class="bnav-icon">⚙</span>
     <span class="bnav-label">Config</span>
@@ -400,17 +472,28 @@ body.light .resumo-item-obs{color:#444}
 <div class="resumo-overlay" id="resumo-modal">
   <div class="resumo-modal">
     <div class="resumo-header">
-      <div class="resumo-header-left">
-        <div class="tag">Plano Estratégico Amazonas</div>
-        <h2>Resumo Executivo</h2>
-        <p id="resumo-data">—</p>
+      <div class="resumo-header-left" style="flex:1">
+        <div style="display:flex;align-items:flex-start;justify-content:space-between">
+          <div>
+            <div class="tag">Governo do Estado do Amazonas · Plano Estratégico</div>
+            <h2>Resumo Executivo de Produção</h2>
+            <p id="resumo-data">—</p>
+          </div>
+          <div class="print-seal" style="display:none;text-align:right">
+            <div style="font-size:10px;line-height:1.8;color:#555">
+              Documento de uso interno<br>
+              Gestão: <em>Aline Alves</em><br>
+              Classificação: Restrito
+            </div>
+          </div>
+        </div>
       </div>
       <button class="resumo-close" onclick="closeModal('resumo-modal')">✕</button>
     </div>
     <div class="resumo-body" id="resumo-body"><!-- gerado por JS --></div>
     <div class="resumo-footer">
-      <p>Gerado automaticamente pelo dashboard · Plano Estratégico</p>
-      <button class="resumo-print" onclick="window.print()">🖨 Imprimir / PDF</button>
+      <p id="resumo-footer-txt">Plano Estratégico · Estado do Amazonas · <em>Aline Alves</em></p>
+      <button class="resumo-print" onclick="prepareAndPrint()">🖨 Imprimir / PDF</button>
     </div>
   </div>
 </div>
@@ -459,7 +542,7 @@ body.light .resumo-item-obs{color:#444}
     <p class="token-hint">Gere em <a href="https://github.com/settings/tokens" target="_blank">github.com/settings/tokens</a> → Generate new token (classic) → escopo <strong>repo</strong>.</p>
     <div style="display:flex;gap:8px;margin-top:20px">
       <button class="btn btn-ghost" style="flex:1" onclick="saveToGithub()">
-        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"></polyline><polyline points="8 6 2 12 8 18"></polyline></svg>
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
         Salvar no GitHub
       </button>
     </div>
@@ -472,17 +555,24 @@ body.light .resumo-item-obs{color:#444}
 </div>
 
 <script>
+const PIPELINE_LIVRO=[
+  "Elaboração do Texto (Lúcio Meireles)",
+  "Correção Editorial (Claudia Albuquerque)",
+  "Diagramação (Raquel Ponce e Matheus Maquiné)",
+  "Concluído OK"
+];
+
 const PIPELINE=[
-  "Equipe Técnica (Farid, Ana, Marcelo)",
-  "Aline (direcionamento)",
-  "1ª Skill IA (Karina)",
-  "Correção e validação IA (Lúcio)",
-  "Correção Claudia",
-  "Aline (direcionamento)",
-  "2ª Skill IA (Karina)",
-  "Diagramação (Raquel e Matheus)",
-  "Impressão e leitura física (Aline)",
-  "Correção design físico (Raquel e Matheus)",
+  "Equipe Técnica",
+  "Direcionamento (1ª revisão)",
+  "1ª Validação por Skill de IA",
+  "Validação dos apontamentos de IA",
+  "Editorial",
+  "Direcionamento (2ª revisão)",
+  "2ª Validação por Skill de IA",
+  "Diagramação",
+  "Impressão e leitura física",
+  "Correção do design",
   "Capítulo OK"
 ];
 
@@ -493,16 +583,42 @@ let DATA={
     {id:'e2-2',subtema:'Recebimento dos Livros na Agência',status:'17/06',obs:'Aguardando entrega pela gráfica'},
     {id:'e2-3',subtema:'Lançamento — Teatro Manauara',status:'22/06',obs:'09h30 — data confirmada'},
   ],
+  livro:{
+    estruturais:[
+      {id:'lv-e1', nome:'Capa',                          etapa:1, responsavel:'Lúcio Meireles',   obs:''},
+      {id:'lv-e2', nome:'Falsa folha de rosto',           etapa:1, responsavel:'Lúcio Meireles',   obs:''},
+      {id:'lv-e3', nome:'Folha de rosto',                 etapa:1, responsavel:'Lúcio Meireles',   obs:''},
+      {id:'lv-e4', nome:'Verso da folha de rosto',        etapa:1, responsavel:'Lúcio Meireles',   obs:''},
+      {id:'lv-e5', nome:'Apresentação',                   etapa:1, responsavel:'Lúcio Meireles',   obs:''},
+      {id:'lv-e6', nome:'Mensagem de Omar Aziz',          etapa:1, responsavel:'Lúcio Meireles',   obs:''},
+      {id:'lv-e7', nome:'Canal aberto de participações',  etapa:1, responsavel:'Lúcio Meireles',   obs:''},
+      {id:'lv-e8', nome:'Sumário',                        etapa:1, responsavel:'Lúcio Meireles',   obs:''},
+      {id:'lv-e9', nome:'Conclusão',                      etapa:1, responsavel:'Lúcio Meireles',   obs:''},
+      {id:'lv-e10',nome:'Anexos',                         etapa:1, responsavel:'Lúcio Meireles',   obs:''},
+      {id:'lv-e11',nome:'Glossário de siglas citadas',    etapa:1, responsavel:'Lúcio Meireles',   obs:''},
+    ],
+    corpo:[
+      {id:'lv-c1', nome:'Educação',             etapa:1, obs:''},
+      {id:'lv-c2', nome:'Cultura',              etapa:4, obs:'Finalizado no fluxo principal'},
+      {id:'lv-c3', nome:'FAPEAM',               etapa:4, obs:'Finalizado no fluxo principal'},
+      {id:'lv-c4', nome:'CETAM',                etapa:1, obs:''},
+      {id:'lv-c5', nome:'Meio Ambiente',        etapa:1, obs:''},
+      {id:'lv-c6', nome:'Habitação',            etapa:1, obs:''},
+      {id:'lv-c7', nome:'Governo Digital',      etapa:1, obs:''},
+      {id:'lv-c8', nome:'Políticas Indigenistas',etapa:4,obs:'Finalizado no fluxo principal'},
+      {id:'lv-c9', nome:'Outros Órgãos ADM',    etapa:1, obs:''},
+    ]
+  },
   eixo3:[
-    {id:'e3-1',subtema:'Educação',responsavel:'Ana Maria Souza',etapa:1,prazo:'25/06/2026',obs:'Material entregue passando por revisões de IA para correções'},
-    {id:'e3-2',subtema:'Cultura',responsavel:'—',etapa:10,prazo:'22/06/2026',obs:'Correção do design físico'},
-    {id:'e3-3',subtema:'FAPEAM',responsavel:'Aline Alves',etapa:8,prazo:'—',obs:'Diagramação'},
-    {id:'e3-4',subtema:'CETAM',responsavel:'Ana Maria Souza',etapa:1,prazo:'22/05/2026',obs:'Equipe técnica'},
-    {id:'e3-5',subtema:'Meio Ambiente',responsavel:'Marcelo Pereira',etapa:1,prazo:'30/06/2026',obs:'Aguardando resumo de dois especialistas'},
-    {id:'e3-6',subtema:'Habitação',responsavel:'Claudia',etapa:5,prazo:'21/05/2026',obs:'Correção Claudia'},
-    {id:'e3-7',subtema:'Governo Digital',responsavel:'Aline',etapa:2,prazo:'22/05/2026',obs:'Sob validação das fontes citadas'},
-    {id:'e3-8',subtema:'Pol. Indigenistas',responsavel:'—',etapa:9,prazo:'22/06/2026',obs:'Fila de correção design físico (após Cultura)'},
-    {id:'e3-9',subtema:'Outros Órgãos ADM',responsavel:'Lúcio Meireles',etapa:1,prazo:'—',obs:'Equipe técnica'},
+    {id:'e3-1',subtema:'Cultura',responsavel:'—',etapa:11,prazo:'—',obs:'FINALIZADO OK'},
+    {id:'e3-2',subtema:'FAPEAM',responsavel:'—',etapa:11,prazo:'—',obs:'FINALIZADO OK'},
+    {id:'e3-3',subtema:'Pol. Indigenistas',responsavel:'—',etapa:11,prazo:'—',obs:'FINALIZADO OK'},
+    {id:'e3-4',subtema:'Habitação',responsavel:'—',etapa:8,prazo:'29/05/2026',obs:'Início da diagramação — Raquel (Tabelas e gráficos) e Matheus (Diagramação do texto)'},
+    {id:'e3-5',subtema:'Educação',responsavel:'Karina Barros',etapa:7,prazo:'29/05/2026',obs:'Material entregue passando por revisões de IA para correções'},
+    {id:'e3-6',subtema:'CETAM',responsavel:'Claudia Albuquerque',etapa:4,prazo:'29/05/2026',obs:'Ajuste editorial do texto'},
+    {id:'e3-7',subtema:'Outros Órgãos ADM',responsavel:'Lúcio Meireles',etapa:5,prazo:'02/06/2026',obs:'Fila de correção de materiais da Claudia'},
+    {id:'e3-8',subtema:'Meio Ambiente',responsavel:'Marcelo Pereira',etapa:1,prazo:'30/05/2026',obs:'Readaptação do material com a inclusão das observações de outros especialistas'},
+    {id:'e3-9',subtema:'Governo Digital',responsavel:'Ana Maria Souza',etapa:2,prazo:'30/05/2026',obs:'Sob validação das fontes citadas'},
   ]
 };
 
@@ -607,10 +723,10 @@ function showView(v,el,nav){
     document.querySelectorAll('.sidebar-item').forEach((item,i)=>{if(i==={dashboard:0,eixo2:1,eixo3:2}[v])item.classList.add('active')});
   } else {
     if(el)el.classList.add('active');
-    const bmap={dashboard:'bnav-dashboard',eixo2:'bnav-eixo2',eixo3:'bnav-eixo3'};
+    const bmap={dashboard:'bnav-dashboard',eixo2:'bnav-eixo2',eixo3:'bnav-eixo3',livro:'bnav-livro'};
     if(bmap[v])document.getElementById(bmap[v])?.classList.add('active');
   }
-  const titles={dashboard:'Progresso Geral',eixo2:'Eixo 2 — Social e Segurança',eixo3:'Eixo 3 — Infra / Ed / Tec'};
+  const titles={dashboard:'Elementos Textuais',eixo2:'Eixo 2 — Social e Segurança',eixo3:'Eixo 3 — Infra / Ed / Tec',livro:'Construção do Livro'};
   document.getElementById('view-title').textContent=titles[v];
   render();
   window.scrollTo(0,0);
@@ -620,24 +736,29 @@ function render(){
   const el=document.getElementById('main-content');
   if(currentView==='dashboard')el.innerHTML=renderDashboard();
   else if(currentView==='eixo2')el.innerHTML=renderEixo2Full();
+  else if(currentView==='livro')el.innerHTML=renderLivroView();
   else el.innerHTML=renderEixo3Full();
   document.getElementById('last-update').textContent=DATA.updatedAt;
   document.getElementById('cnt-e2-s').textContent=DATA.eixo2.length;
   document.getElementById('cnt-e3-s').textContent=DATA.eixo3.length;
+  const livroTotal=DATA.livro.estruturais.length+DATA.livro.corpo.length;
+  const livroOk=DATA.livro.estruturais.filter(i=>i.etapa>=4).length+DATA.livro.corpo.filter(i=>i.etapa>=4).length;
+  const cntEl=document.getElementById('cnt-livro-s');
+  if(cntEl)cntEl.textContent=livroOk+'/'+livroTotal;
 }
 
 // ── EIXO 2 ──
 function renderEixo2Block(){
   const cards=DATA.eixo2.map((item,i)=>{
     let sc,label;
-    if(item.status==='entregue'){sc='status-done';label='✓ Entregue'}
-    else if(i===1){sc='status-date';label='📅 '+item.status}
-    else{sc='status-launch';label='🎯 '+item.status}
+    if(item.status==='entregue'){sc='status-done';label='Entregue'}
+    else if(i===1){sc='status-date';label=item.status}
+    else{sc='status-launch';label=item.status}
     return`<div class="e2-card"><div class="e2-card-label">${i===0?'Situação atual':i===1?'Próximo evento':'Evento final'}</div><div class="e2-status ${sc}">${label}</div><div class="e2-card-title">${item.subtema}</div><div class="e2-card-obs">${item.obs}</div></div>`;
   }).join('');
   return`<div class="eixo2-block">
     <div class="section-header" style="margin-bottom:12px">
-      <div class="section-title"><span class="eixo-badge badge-e2">Eixo 2</span><span style="color:var(--green);font-weight:400">Produção textual concluída</span></div>
+      <div class="section-title"><span class="eixo-badge badge-e2">Eixo 2</span><span style="color:var(--green);font-weight:500!important">Produção textual concluída</span></div>
       <button class="btn btn-ghost" style="font-size:11px;padding:4px 10px" onclick="showView('eixo2',null)">Ver →</button>
     </div>
     <div class="e2-timeline">${cards}</div>
@@ -660,8 +781,27 @@ function renderEixo2Full(){
 }
 
 // ── EIXO 3 TABLE (desktop) ──
+function sortedEixo3(){
+  const hoje = new Date();
+  hoje.setHours(0,0,0,0);
+  return [...DATA.eixo3].sort((a,b)=>{
+    // Finalizados sempre no fundo
+    const aOk = a.etapa>=11, bOk = b.etapa>=11;
+    if(aOk && !bOk) return 1;
+    if(!aOk && bOk) return -1;
+    if(aOk && bOk) return a.subtema.localeCompare(b.subtema);
+    // Entre não finalizados: etapa menor = mais crítico = topo
+    if(a.etapa !== b.etapa) return a.etapa - b.etapa;
+    // Mesma etapa: prazo mais próximo sobe
+    const parsePrazo = p => {
+      if(!p||p==='—') return new Date(9999,0,1);
+      const x=p.split('/'); return x.length===3?new Date(x[2],x[1]-1,x[0]):new Date(9999,0,1);
+    };
+    return parsePrazo(a.prazo) - parsePrazo(b.prazo);
+  });
+}
 function renderEixo3TableDesktop(showAdd){
-  const rows=DATA.eixo3.map(item=>{
+  const rows=sortedEixo3().map(item=>{
     const p=pct(item.etapa);const color=progColor(item.etapa);
     const pc=isOverdue(item.prazo)?'overdue':isUrgent(item.prazo)?'urgent':'';
     return`<tr class="e3-row" onclick="toggleExpand('${item.id}')">
@@ -695,7 +835,7 @@ function renderEixo3TableDesktop(showAdd){
 
 // ── EIXO 3 CARDS (mobile) ──
 function renderEixo3Cards(){
-  const cards=DATA.eixo3.map(item=>{
+  const cards=sortedEixo3().map(item=>{
     const p=pct(item.etapa);const color=progColor(item.etapa);
     const pc=isOverdue(item.prazo)?'overdue':isUrgent(item.prazo)?'urgent':'';
     return`<div class="e3-card">
@@ -793,7 +933,26 @@ function openEditModal(id,eixo){
 }
 function saveItem(){
   const id=document.getElementById('edit-id').value;
-  const eixo=document.getElementById('edit-eixo').value;
+  const eixoRaw=document.getElementById('edit-eixo').value;
+
+  // Livro: eixo vem como "livro_item_<id>"
+  if(eixoRaw.startsWith('livro_item_')){
+    const lid=eixoRaw.replace('livro_item_','');
+    const novoEtapa=parseInt(document.getElementById('edit-etapa').value);
+    const novoObs=document.getElementById('edit-obs').value;
+    const novoResp=document.getElementById('edit-resp').value;
+    // Busca em estruturais e corpo
+    let idx=DATA.livro.estruturais.findIndex(i=>i.id===lid);
+    if(idx>=0){DATA.livro.estruturais[idx]={...DATA.livro.estruturais[idx],etapa:novoEtapa,responsavel:novoResp,obs:novoObs}}
+    else{idx=DATA.livro.corpo.findIndex(i=>i.id===lid);if(idx>=0)DATA.livro.corpo[idx]={...DATA.livro.corpo[idx],etapa:novoEtapa,obs:novoObs}}
+    // Restaurar select de etapa para pipeline normal
+    const sel=document.getElementById('edit-etapa');
+    sel.innerHTML=PIPELINE.map((s,i)=>`<option value="${i+1}">${i+1} — ${s}</option>`).join('');
+    closeModal('edit-modal');render();
+    return;
+  }
+
+  const eixo=eixoRaw;
   const item={id:id||('e3-'+Date.now()),subtema:document.getElementById('edit-subtema').value,responsavel:document.getElementById('edit-resp').value,etapa:parseInt(document.getElementById('edit-etapa').value),prazo:document.getElementById('edit-prazo').value,obs:document.getElementById('edit-obs').value};
   if(id){const idx=DATA[eixo].findIndex(i=>i.id===id);if(idx>=0)DATA[eixo][idx]={...DATA[eixo][idx],...item}}
   else DATA[eixo].push(item);
@@ -840,18 +999,46 @@ function openResumo(){
   // subtemas ordenados por progresso desc
   const sorted=[...e3].sort((a,b)=>b.etapa-a.etapa);
 
-  const itensHTML = sorted.map(item=>{
-    const pc=isOverdue(item.prazo)?'prazo-vencido':isUrgent(item.prazo)?'prazo-urgente':'prazo-ok';
-    const prazoTxt=item.prazo&&item.prazo!=='—'
-      ?`<span class="resumo-item-prazo ${pc}" style="margin-left:8px">· Prazo: ${item.prazo}${isOverdue(item.prazo)?' ⚠':isUrgent(item.prazo)?' ⚠':''}</span>`:'';
-    return`<div class="resumo-item">
-      <div style="display:flex;align-items:baseline;justify-content:space-between;margin-bottom:5px">
-        <span class="resumo-item-nome">${item.subtema}</span>
-        <span style="font-size:11px;color:var(--text2);flex-shrink:0;margin-left:8px">${item.responsavel}</span>
-      </div>
-      <div class="resumo-item-obs">${item.obs||'Sem observações'}${prazoTxt}</div>
-    </div>`;
-  }).join('');
+  const itensHTML = `
+    <table style="width:100%;border-collapse:collapse">
+      <thead>
+        <tr style="border-bottom:2px solid var(--border2)">
+          <th style="text-align:left;padding:8px 12px;font-size:12px;font-weight:700;color:var(--text3);text-transform:uppercase;letter-spacing:.07em;width:22%">Subtema</th>
+          <th style="text-align:left;padding:8px 12px;font-size:12px;font-weight:700;color:var(--text3);text-transform:uppercase;letter-spacing:.07em;width:18%">Responsável</th>
+          <th style="text-align:left;padding:8px 12px;font-size:12px;font-weight:700;color:var(--text3);text-transform:uppercase;letter-spacing:.07em;width:14%">Prazo</th>
+          <th style="text-align:left;padding:8px 12px;font-size:12px;font-weight:700;color:var(--text3);text-transform:uppercase;letter-spacing:.07em">Observações</th>
+        </tr>
+      </thead>
+      <tbody>
+        ${sorted.map((item,idx)=>{
+          const pc=isOverdue(item.prazo)?'color:var(--red);font-weight:700':isUrgent(item.prazo)?'color:var(--amber);font-weight:700':'color:var(--text2)';
+          const prazoIcon=isOverdue(item.prazo)?' ⚠':isUrgent(item.prazo)?' ⚠':'';
+          const rowBg=idx%2===0?'background:var(--surface2)':'background:var(--surface)';
+          const color=progColor(item.etapa);
+          const p=pct(item.etapa);
+          return`<tr style="${rowBg};border-bottom:1px solid var(--border)">
+            <td style="padding:12px 12px;vertical-align:top">
+              <div style="font-size:14px;font-weight:700;color:var(--text);line-height:1.3">${item.subtema}</div>
+              <div style="margin-top:5px;display:flex;align-items:center;gap:6px">
+                <div style="flex:1;height:4px;background:var(--border);border-radius:2px;overflow:hidden">
+                  <div style="width:${p}%;height:100%;background:${color};border-radius:2px"></div>
+                </div>
+                <span style="font-size:11px;font-family:'DM Mono',monospace;font-weight:700;color:${color}">${p}%</span>
+              </div>
+            </td>
+            <td style="padding:12px 12px;vertical-align:top">
+              <span style="font-size:13px;font-weight:600;color:var(--text)">${item.responsavel}</span>
+            </td>
+            <td style="padding:12px 12px;vertical-align:top;white-space:nowrap">
+              <span style="font-size:13px;font-family:'DM Mono',monospace;font-weight:600;${pc}">${item.prazo||'—'}${prazoIcon}</span>
+            </td>
+            <td style="padding:12px 12px;vertical-align:top">
+              <span style="font-size:13px;color:var(--text2);line-height:1.6">${item.obs||'Sem observações'}</span>
+            </td>
+          </tr>`;
+        }).join('')}
+      </tbody>
+    </table>`;
 
 
 
@@ -889,13 +1076,177 @@ function openResumo(){
 
     <div>
       <div class="resumo-lista-titulo">Eixo 3 — Subtemas (${total} itens)</div>
-      ${itensHTML}
+      <div style="background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;overflow-x:auto">
+        ${itensHTML}
+      </div>
     </div>
 
 
   `;
 
   document.getElementById('resumo-modal').classList.add('open');
+}
+
+function prepareAndPrint(){
+  // Atualiza rodapé com data e hora para o PDF
+  const now = new Date();
+  const dt = now.toLocaleDateString('pt-BR') + ' às ' + now.toLocaleTimeString('pt-BR',{hour:'2-digit',minute:'2-digit'});
+  const el = document.getElementById('resumo-footer-txt');
+  if(el) el.innerHTML = 'Plano Estratégico do Estado do Amazonas &nbsp;·&nbsp; Gerado em '+dt+' &nbsp;·&nbsp; <em>Aline Alves</em>';
+  setTimeout(()=>window.print(), 150);
+}
+
+
+// ── LIVRO ──
+function pctLivro(etapa){ return etapa>=4?100:0 }
+
+function progColorLivro(etapa){
+  if(etapa>=4)return'var(--green)';
+  if(etapa===3)return'var(--teal)';
+  if(etapa===2)return'var(--accent)';
+  return'var(--purple)';
+}
+
+// Corpo do livro — sem barra de progresso, status simples
+function renderCorpoItem(item){
+  // Busca o tema correspondente no Eixo 3 (Elementos Textuais)
+  const e3 = DATA.eixo3.find(i=>i.subtema.toLowerCase()===item.nome.toLowerCase());
+  const etapa = e3 ? e3.etapa : null;
+  const concluido = etapa>=11;
+  const stepLabel = etapa ? PIPELINE[etapa-1] : '—';
+  const color = etapa ? progColor(etapa) : 'var(--text3)';
+  const p = etapa ? pct(etapa) : 0;
+  return`<tr class="e3-row">
+    <td style="padding:14px 14px">
+      <div class="subtema-name">${item.nome}</div>
+      ${concluido
+        ? '<div class="etapa-tag" style="color:var(--green);font-weight:600;margin-top:4px">✓ Concluído</div>'
+        : etapa
+          ? `<div class="etapa-tag" style="margin-top:4px;color:${color}">Etapa ${etapa}/11 — ${stepLabel}</div>`
+          : '<div class="etapa-tag" style="margin-top:4px">Não iniciado</div>'
+      }
+    </td>
+    <td style="padding:14px 12px;text-align:right">
+      ${concluido
+        ? `<span style="font-size:18px;font-weight:500;color:var(--green);font-family:'DM Mono',monospace">${p}%</span>`
+        : etapa
+          ? `<span style="font-size:18px;font-weight:500;font-family:'DM Mono',monospace;color:${color}">${p}%</span>`
+          : ''
+      }
+    </td>
+  </tr>`;
+}
+
+// Elementos estruturais — mantém barra de progresso e expand
+function renderLivroItem(item, showResp){
+  const done = item.etapa>=4;
+  const color = progColorLivro(item.etapa);
+  const stepLabel = PIPELINE_LIVRO[item.etapa-1]||PIPELINE_LIVRO[0];
+  const pc = done?100:Math.round(((item.etapa-1)/3)*100);
+  return`<tr class="e3-row" onclick="toggleExpandLivro('lv-exp-${item.id}')">
+    <td style="padding:12px 14px">
+      <div class="subtema-name">${item.nome}</div>
+      ${done?'<div class="etapa-tag" style="color:var(--green);font-weight:600">✓ Concluído</div>':`<div class="etapa-tag">Etapa ${item.etapa}/4 — ${stepLabel}</div>`}
+    </td>
+    ${showResp?`<td style="padding:12px"><div class="resp-name">${item.responsavel||'—'}</div></td>`:''}
+    <td style="padding:12px">
+      <div class="prog-wrap">
+        <div class="prog-bar"><div class="prog-fill" style="width:${pc}%;background:${color}"></div></div>
+        <span class="prog-pct" style="color:${color}">${pc}%</span>
+      </div>
+    </td>
+    <td style="padding:12px">
+      <button class="btn btn-ghost" style="font-size:11px;padding:4px 10px" onclick="openEditLivro('${item.id}');event.stopPropagation()">Editar</button>
+    </td>
+  </tr>
+  <tr id="lv-exp-${item.id}" style="display:none">
+    <td colspan="${showResp?4:3}" style="padding:0 14px 12px;background:var(--surface2)">
+      <div class="expand-block" style="margin-top:8px">
+        <h4>Fluxo</h4>
+        <div class="pipe-steps-mini">${PIPELINE_LIVRO.map((s,i)=>{
+          const n=i+1;
+          const cls=n<item.etapa?'step-done':n===item.etapa?'step-current':'step-todo';
+          const lc=n<item.etapa?'done-label':n===item.etapa?'current-label':'';
+          return`<div class="pipe-step-mini"><span class="num ${cls}">${n}</span><span class="step-label ${lc}">${s}</span></div>`;
+        }).join('')}</div>
+        ${item.obs?`<p style="margin-top:8px;font-size:12px;color:var(--text2)">${item.obs}</p>`:''}
+      </div>
+    </td>
+  </tr>`;
+}
+
+function toggleExpandLivro(id){
+  const el=document.getElementById(id);
+  if(el)el.style.display=el.style.display==='table-row'?'none':'table-row';
+}
+
+function renderLivroView(){
+  const est = DATA.livro.estruturais;
+  const corp = DATA.livro.corpo;
+  const corpOk = corp.filter(i=>i.etapa>=4).length;
+  const corpPct = Math.round((corpOk/corp.length)*100);
+  const estOk = est.filter(i=>i.etapa>=4).length;
+
+  // KPIs
+  const kpis = `<div class="kpi-row" style="grid-template-columns:repeat(4,1fr)">
+    <div class="kpi-card"><div class="kpi-val" style="color:var(--teal)">${corpPct}%</div><div class="kpi-label">Corpo do livro</div><div class="kpi-sub">${corpOk}/${corp.length} temas finalizados</div></div>
+    <div class="kpi-card"><div class="kpi-val" style="color:var(--accent)">${estOk}</div><div class="kpi-label">Elementos estruturais</div><div class="kpi-sub">${estOk}/${est.length} concluídos</div></div>
+    <div class="kpi-card"><div class="kpi-val" style="color:var(--green)">${corpOk+estOk}</div><div class="kpi-label">Total concluído</div><div class="kpi-sub">de ${corp.length+est.length} itens</div></div>
+    <div class="kpi-card"><div class="kpi-val" style="color:var(--amber)">${Math.round(((corpOk+estOk)/(corp.length+est.length))*100)}%</div><div class="kpi-label">Progresso geral</div><div class="kpi-sub">livro completo</div></div>
+  </div>`;
+
+  // Tabela corpo do livro — sem coluna de progresso
+  const corpRows = corp.map(i=>renderCorpoItem(i)).join('');
+  const tblCorp = `<div style="background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;margin-bottom:24px">
+    <table class="e3-table"><thead><tr>
+      <th style="width:85%">Tema</th>
+      <th style="width:15%"></th>
+    </tr></thead><tbody>${corpRows}
+    </tbody></table>
+  </div>`;
+
+  // Tabela elementos estruturais
+  const estRows = est.map(i=>renderLivroItem(i,true)).join('');
+  const tblEst = `<div style="background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden">
+    <table class="e3-table"><thead><tr>
+      <th style="width:40%">Elemento</th>
+      <th style="width:20%">Responsável</th>
+      <th style="width:25%">Progresso</th>
+      <th style="width:15%"></th>
+    </tr></thead><tbody>${estRows}
+    </tbody></table>
+  </div>`;
+
+  return`${kpis}
+  <div class="section-header" style="margin-bottom:12px">
+    <div class="section-title"><span class="eixo-badge" style="background:rgba(29,212,184,.15);color:var(--teal)">Corpo</span>Temas por eixo</div>
+  </div>
+  ${tblCorp}
+  <div class="section-header" style="margin-bottom:12px">
+    <div class="section-title"><span class="eixo-badge" style="background:rgba(155,109,255,.15);color:var(--purple)">Estrutura</span>Elementos estruturais</div>
+  </div>
+  ${tblEst}`;
+}
+
+// ── EDIT LIVRO MODAL ──
+function openEditLivro(id){
+  // Buscar item em estruturais ou corpo
+  let item = DATA.livro.estruturais.find(i=>i.id===id) || DATA.livro.corpo.find(i=>i.id===id);
+  if(!item)return;
+  document.getElementById('modal-title').textContent='Editar — '+item.nome;
+  document.getElementById('edit-id').value=id;
+  document.getElementById('edit-eixo').value='livro';
+  document.getElementById('edit-subtema').value=item.nome||'';
+  document.getElementById('edit-resp').value=item.responsavel||'';
+  document.getElementById('edit-obs').value=item.obs||'';
+  // Trocar select de etapa temporariamente para pipeline livro
+  const sel=document.getElementById('edit-etapa');
+  sel.innerHTML=PIPELINE_LIVRO.map((s,i)=>`<option value="${i+1}">${i+1} — ${s}</option>`).join('');
+  sel.value=item.etapa||1;
+  document.getElementById('edit-prazo').value=item.prazo||'';
+  document.getElementById('edit-modal').classList.add('open');
+  // Marcar que estamos editando livro
+  document.getElementById('edit-eixo').value='livro_item_'+id;
 }
 
 // ── TEMA ──
@@ -909,17 +1260,17 @@ function toggleTheme(){
   if(saved==="light"){document.body.classList.add("light");const i=document.getElementById("theme-icon");if(i)i.textContent="🌙";}
 })();
 
-// ── INIT ──
-// Guarda o HTML original como template para o buildFullHTML
-// Deve rodar antes de qualquer modificação no DOM
+
 if(!window.__BASE_HTML__){
   window.__BASE_HTML__=document.documentElement.outerHTML;
 }
 if(window.__INIT_DATA__)DATA=window.__INIT_DATA__;
-// snapshot etapa inicial para medir evolução do dia
+
 DATA.eixo3.forEach(i=>{ if(!i._etapaInicial) i._etapaInicial=i.etapa; });
 const _c=getGHConfig();
 if(_c.user){document.getElementById('gh-user-input').value=_c.user;document.getElementById('gh-repo-input').value=_c.repo}
 document.getElementById('last-update').textContent=DATA.updatedAt;
 render();
-</script></div></body></html>
+</script>
+</body>
+</html>
