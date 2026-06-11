@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html lang="pt-BR"><head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -288,6 +289,10 @@ body.light .fab{box-shadow:0 4px 16px rgba(79,124,255,.25)}
 .resumo-metrica .sub{font-size:12px;color:var(--text3);margin-top:2px}
 
 /* barra geral */
+.resumo-colunas{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.resumo-coluna{min-width:0}
+@media(max-width:640px){.resumo-colunas{grid-template-columns:1fr}}
+@media print{.resumo-colunas{grid-template-columns:1fr 1fr!important}}
 .resumo-geral{background:var(--surface2);border:1px solid var(--border);border-radius:var(--radius-sm);padding:14px 16px}
 .resumo-geral-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px}
 .resumo-geral-top span{font-size:12px;font-weight:600;color:var(--text)}
@@ -553,14 +558,45 @@ body.light .resumo-item-obs{color:#444}
 </div>
 
 <script>
-const PIPELINE_LIVRO=[
+/**
+ * Dashboard de Controle dos Eixos
+ * Plano Estratégico de Desenvolvimento do Estado do Amazonas
+ *
+ * Responsável: Aline Alves
+ * Repositório: github.com/euammes/plano_2027
+ *
+ * Como funciona o ciclo de dados:
+ *   - Na primeira carga, o HTML original é capturado em window.__BASE_HTML__
+ *     antes de qualquer modificação no DOM.
+ *   - Os dados operacionais ficam em window.__INIT_DATA__ (JSON injetado no <head>
+ *     pelo buildFullHTML antes de cada push para o GitHub).
+ *   - Quando o usuário edita e clica em "Salvar no GitHub", buildFullHTML recombina
+ *     o template limpo com os dados atualizados e envia via API REST do GitHub.
+ *   - O SHA do arquivo atual é sempre buscado antes do PUT — a API v3 do GitHub
+ *     exige o SHA para atualizar um arquivo existente (evita conflitos de versão).
+ */
+
+
+// ---------------------------------------------------------------------------
+// CONSTANTES DE FLUXO
+// ---------------------------------------------------------------------------
+
+/**
+ * Fluxo de produção dos elementos estruturais do livro (4 etapas).
+ * Cada item do livro.estruturais tem um campo `etapa` de 1 a 4.
+ */
+const PIPELINE_LIVRO = [
   "Elaboração do Texto (Lúcio Meireles)",
   "Correção Editorial (Claudia Albuquerque)",
   "Diagramação (Raquel Ponce e Matheus Maquiné)",
   "Concluído OK"
 ];
 
-const PIPELINE=[
+/**
+ * Fluxo de produção dos subtemas do Eixo 3 (11 etapas).
+ * O índice corresponde a etapa - 1, então etapa 1 = PIPELINE[0].
+ */
+const PIPELINE = [
   "Equipe Técnica",
   "Direcionamento (1ª revisão)",
   "1ª Validação por Skill de IA",
@@ -574,269 +610,540 @@ const PIPELINE=[
   "Capítulo OK"
 ];
 
-let DATA={
-  updatedAt:new Date().toLocaleDateString('pt-BR'),
-  eixo2:[
-    {id:'e2-1',subtema:'Seg. Pública / Saúde / Assist. Social',status:'entregue',obs:'Em produção na gráfica'},
-    {id:'e2-2',subtema:'Recebimento dos Livros na Agência',status:'17/06',obs:'Aguardando entrega pela gráfica'},
-    {id:'e2-3',subtema:'Lançamento — Teatro Manauara',status:'22/06',obs:'09h30 — data confirmada'},
+
+// ---------------------------------------------------------------------------
+// DADOS OPERACIONAIS
+// ---------------------------------------------------------------------------
+
+/**
+ * Estrutura principal de dados do dashboard.
+ * Em produção, este objeto é sobrescrito pelo window.__INIT_DATA__
+ * que vem embutido no <head> pelo último push ao GitHub.
+ * Os valores abaixo funcionam como fallback para desenvolvimento local.
+ */
+let DATA = {
+
+  // Data da última atualização publicada (preenchida automaticamente no save)
+  updatedAt: new Date().toLocaleDateString('pt-BR'),
+
+  // Eixo 2 — marcos pós-textuais (Desenvolvimento Social e Segurança)
+  // status: 'entregue' | 'DD/MM' (data do próximo evento)
+  eixo2: [
+    { id: 'e2-1', subtema: 'Seg. Pública / Saúde / Assist. Social', status: 'entregue', obs: 'Em produção na gráfica' },
+    { id: 'e2-2', subtema: 'Recebimento dos Livros na Agência',      status: '17/06',    obs: 'Aguardando entrega pela gráfica' },
+    { id: 'e2-3', subtema: 'Lançamento — Teatro Manauara',           status: '06/07',    obs: '09h30 — data confirmada' },
   ],
-  livro:{
-    estruturais:[
-      {id:'lv-e1', nome:'Capa',                          etapa:1, responsavel:'Lúcio Meireles',   obs:''},
-      {id:'lv-e2', nome:'Falsa folha de rosto',           etapa:1, responsavel:'Lúcio Meireles',   obs:''},
-      {id:'lv-e3', nome:'Folha de rosto',                 etapa:1, responsavel:'Lúcio Meireles',   obs:''},
-      {id:'lv-e4', nome:'Verso da folha de rosto',        etapa:1, responsavel:'Lúcio Meireles',   obs:''},
-      {id:'lv-e5', nome:'Apresentação',                   etapa:1, responsavel:'Lúcio Meireles',   obs:''},
-      {id:'lv-e6', nome:'Mensagem de Omar Aziz',          etapa:1, responsavel:'Lúcio Meireles',   obs:''},
-      {id:'lv-e7', nome:'Canal aberto de participações',  etapa:1, responsavel:'Lúcio Meireles',   obs:''},
-      {id:'lv-e8', nome:'Sumário',                        etapa:1, responsavel:'Lúcio Meireles',   obs:''},
-      {id:'lv-e9', nome:'Conclusão',                      etapa:1, responsavel:'Lúcio Meireles',   obs:''},
-      {id:'lv-e10',nome:'Anexos',                         etapa:1, responsavel:'Lúcio Meireles',   obs:''},
-      {id:'lv-e11',nome:'Glossário de siglas citadas',    etapa:1, responsavel:'Lúcio Meireles',   obs:''},
+
+  // Construção do Livro — dividido em duas partes
+  livro: {
+
+    // Elementos estruturais: capa, folhas de rosto, sumário etc.
+    // etapa: 1–4, seguindo PIPELINE_LIVRO
+    estruturais: [
+      { id: 'lv-e1',  nome: 'Capa',                         etapa: 1, responsavel: 'Lúcio Meireles',  obs: '' },
+      { id: 'lv-e2',  nome: 'Falsa folha de rosto',          etapa: 1, responsavel: 'Lúcio Meireles',  obs: '' },
+      { id: 'lv-e3',  nome: 'Folha de rosto',                etapa: 1, responsavel: 'Lúcio Meireles',  obs: '' },
+      { id: 'lv-e4',  nome: 'Verso da folha de rosto',       etapa: 1, responsavel: 'Lúcio Meireles',  obs: '' },
+      { id: 'lv-e5',  nome: 'Apresentação',                  etapa: 1, responsavel: 'Lúcio Meireles',  obs: '' },
+      { id: 'lv-e6',  nome: 'Mensagem de Omar Aziz',         etapa: 1, responsavel: 'Lúcio Meireles',  obs: '' },
+      { id: 'lv-e7',  nome: 'Canal aberto de participações', etapa: 1, responsavel: 'Lúcio Meireles',  obs: '' },
+      { id: 'lv-e8',  nome: 'Sumário',                       etapa: 1, responsavel: 'Lúcio Meireles',  obs: '' },
+      { id: 'lv-e9',  nome: 'Conclusão',                     etapa: 1, responsavel: 'Lúcio Meireles',  obs: '' },
+      { id: 'lv-e10', nome: 'Anexos',                        etapa: 1, responsavel: 'Lúcio Meireles',  obs: '' },
+      { id: 'lv-e11', nome: 'Glossário de siglas citadas',   etapa: 1, responsavel: 'Raquel / Matheus', obs: '' },
     ],
-    corpo:[
-      {id:'lv-c1', nome:'Educação',              etapa:1, obs:''},
-      {id:'lv-c2', nome:'Meio Ambiente',         etapa:1, obs:''},
-      {id:'lv-c3', nome:'Cultura',               etapa:4, obs:'Finalizado no fluxo principal'},
-      {id:'lv-c4', nome:'FAPEAM',                etapa:4, obs:'Finalizado no fluxo principal'},
-      {id:'lv-c5', nome:'CETAM',                 etapa:1, obs:''},
-      {id:'lv-c6', nome:'Habitação',             etapa:1, obs:''},
-      {id:'lv-c7', nome:'Governo Digital',       etapa:1, obs:''},
-      {id:'lv-c8', nome:'Pol. Indigenistas',     etapa:4, obs:'Finalizado no fluxo principal'},
-      {id:'lv-c9', nome:'Outros Órgãos ADM',     etapa:1, obs:''},
+
+    // Corpo do livro: os 9 temas do Eixo 3, na ordem de publicação.
+    // etapa: 1 = em andamento, 4 = concluído no fluxo do livro.
+    // O percentual exibido vem do Eixo 3 (PIPELINE de 11 etapas), não daqui.
+    corpo: [
+      { id: 'lv-c1', nome: 'Educação',            etapa: 1, obs: '' },
+      { id: 'lv-c2', nome: 'Meio Ambiente',        etapa: 1, obs: '' },
+      { id: 'lv-c3', nome: 'Cultura',              etapa: 4, obs: 'Finalizado no fluxo principal' },
+      { id: 'lv-c4', nome: 'FAPEAM',               etapa: 4, obs: 'Finalizado no fluxo principal' },
+      { id: 'lv-c5', nome: 'CETAM',                etapa: 1, obs: '' },
+      { id: 'lv-c6', nome: 'Habitação',            etapa: 1, obs: '' },
+      { id: 'lv-c7', nome: 'Governo Digital',      etapa: 1, obs: '' },
+      { id: 'lv-c8', nome: 'Pol. Indigenistas',    etapa: 4, obs: 'Finalizado no fluxo principal' },
+      { id: 'lv-c9', nome: 'Outros Órgãos ADM',   etapa: 1, obs: '' },
     ]
   },
-  eixo3:[
-    {id:'e3-1',subtema:'Cultura',responsavel:'—',etapa:11,prazo:'—',obs:'FINALIZADO OK'},
-    {id:'e3-2',subtema:'FAPEAM',responsavel:'—',etapa:11,prazo:'—',obs:'FINALIZADO OK'},
-    {id:'e3-3',subtema:'Pol. Indigenistas',responsavel:'—',etapa:11,prazo:'—',obs:'FINALIZADO OK'},
-    {id:'e3-4',subtema:'Habitação',responsavel:'—',etapa:8,prazo:'29/05/2026',obs:'Início da diagramação — Raquel (Tabelas e gráficos) e Matheus (Diagramação do texto)'},
-    {id:'e3-5',subtema:'Educação',responsavel:'Karina Barros',etapa:7,prazo:'29/05/2026',obs:'Material entregue passando por revisões de IA para correções'},
-    {id:'e3-6',subtema:'CETAM',responsavel:'Claudia Albuquerque',etapa:4,prazo:'29/05/2026',obs:'Ajuste editorial do texto'},
-    {id:'e3-7',subtema:'Outros Órgãos ADM',responsavel:'Lúcio Meireles',etapa:5,prazo:'02/06/2026',obs:'Fila de correção de materiais da Claudia'},
-    {id:'e3-8',subtema:'Meio Ambiente',responsavel:'Marcelo Pereira',etapa:1,prazo:'30/05/2026',obs:'Readaptação do material com a inclusão das observações de outros especialistas'},
-    {id:'e3-9',subtema:'Governo Digital',responsavel:'Ana Maria Souza',etapa:2,prazo:'30/05/2026',obs:'Sob validação das fontes citadas'},
+
+  // Eixo 3 — subtemas em produção (Infraestrutura, Educação e Tecnologia)
+  // etapa: 1–11, seguindo PIPELINE. Etapa 11 = Capítulo OK (finalizado).
+  eixo3: [
+    { id: 'e3-1', subtema: 'Cultura',           responsavel: '—',                etapa: 11, prazo: '—',          obs: 'FINALIZADO OK' },
+    { id: 'e3-2', subtema: 'FAPEAM',            responsavel: '—',                etapa: 11, prazo: '—',          obs: 'FINALIZADO OK' },
+    { id: 'e3-3', subtema: 'Pol. Indigenistas', responsavel: '—',                etapa: 11, prazo: '—',          obs: 'FINALIZADO OK' },
+    { id: 'e3-4', subtema: 'Habitação',         responsavel: '—',                etapa: 8,  prazo: '29/05/2026', obs: 'Início da diagramação — Raquel (Tabelas e gráficos) e Matheus (Diagramação do texto)' },
+    { id: 'e3-5', subtema: 'Educação',          responsavel: 'Karina Barros',    etapa: 7,  prazo: '29/05/2026', obs: 'Material em revisão de IA para correções' },
+    { id: 'e3-6', subtema: 'CETAM',             responsavel: 'Claudia Albuquerque', etapa: 4, prazo: '29/05/2026', obs: 'Ajuste editorial do texto' },
+    { id: 'e3-7', subtema: 'Outros Órgãos ADM', responsavel: 'Lúcio Meireles',  etapa: 5,  prazo: '02/06/2026', obs: 'Fila de correção — aguardando Claudia' },
+    { id: 'e3-8', subtema: 'Meio Ambiente',     responsavel: 'Marcelo Pereira',  etapa: 1,  prazo: '30/05/2026', obs: 'Readaptação com inclusão das observações dos especialistas' },
+    { id: 'e3-9', subtema: 'Governo Digital',   responsavel: 'Ana Maria Souza',  etapa: 2,  prazo: '30/05/2026', obs: 'Sob validação das fontes citadas' },
   ]
 };
 
-// ── GITHUB ──
-function getGHConfig(){return{token:localStorage.getItem('gh_token')||'',user:localStorage.getItem('gh_user')||'',repo:localStorage.getItem('gh_repo')||''}}
-function saveToken(){
-  localStorage.setItem('gh_token',document.getElementById('token-input').value.trim());
-  localStorage.setItem('gh_user',document.getElementById('gh-user-input').value.trim());
-  localStorage.setItem('gh_repo',document.getElementById('gh-repo-input').value.trim());
-  closeModal('token-modal');
-  setStatus('Token salvo ✓','var(--green)');
+
+// ---------------------------------------------------------------------------
+// INTEGRAÇÃO COM GITHUB
+// ---------------------------------------------------------------------------
+
+/**
+ * Lê as credenciais do GitHub salvas no localStorage do navegador.
+ * O token nunca é embutido no HTML — fica apenas no dispositivo do usuário.
+ */
+function getGHConfig() {
+  return {
+    token: localStorage.getItem('gh_token') || '',
+    user:  localStorage.getItem('gh_user')  || '',
+    repo:  localStorage.getItem('gh_repo')  || ''
+  };
 }
-function openTokenModal(){
-  const c=getGHConfig();
-  document.getElementById('token-input').value=c.token;
-  document.getElementById('gh-user-input').value=c.user;
-  document.getElementById('gh-repo-input').value=c.repo;
+
+/** Persiste as credenciais no localStorage e fecha o modal de configuração. */
+function saveToken() {
+  localStorage.setItem('gh_token', document.getElementById('token-input').value.trim());
+  localStorage.setItem('gh_user',  document.getElementById('gh-user-input').value.trim());
+  localStorage.setItem('gh_repo',  document.getElementById('gh-repo-input').value.trim());
+  closeModal('token-modal');
+  setStatus('Token salvo ✓', 'var(--green)');
+}
+
+/** Abre o modal de configuração do token, pré-preenchendo os campos salvos. */
+function openTokenModal() {
+  const c = getGHConfig();
+  document.getElementById('token-input').value    = c.token;
+  document.getElementById('gh-user-input').value  = c.user;
+  document.getElementById('gh-repo-input').value  = c.repo;
   document.getElementById('token-modal').classList.add('open');
 }
-async function saveToGithub(){
-  const c=getGHConfig();
-  if(!c.token||!c.user||!c.repo){openTokenModal();return}
 
-  // Salva cópia dos dados antes de qualquer operação de rede
-  const dadosBackup=JSON.parse(JSON.stringify(DATA));
+/**
+ * Publica o dashboard atualizado no GitHub Pages.
+ *
+ * Fluxo:
+ *   1. Busca o SHA do arquivo atual (obrigatório pela API v3 para evitar conflitos).
+ *   2. Gera o HTML completo com os dados atuais embutidos via buildFullHTML().
+ *   3. Codifica em Base64 e envia via PUT para a API do GitHub.
+ *   4. Em caso de falha, restaura os dados do backup para não perder o que foi editado.
+ */
+async function saveToGithub() {
+  const c = getGHConfig();
 
-  setStatus('Salvando…','var(--text3)');
-  const btn=document.getElementById('save-btn');
-  btn.disabled=true;
+  if (!c.token || !c.user || !c.repo) {
+    openTokenModal();
+    return;
+  }
 
-  const apiUrl=`https://api.github.com/repos/${c.user}/${c.repo}/contents/index.html`;
-  const headers={'Authorization':'token '+c.token,'Accept':'application/vnd.github.v3+json','Content-Type':'application/json'};
+  // Guarda cópia profunda dos dados antes de qualquer operação de rede.
+  // Se o PUT falhar, restauramos daqui para o usuário não perder o trabalho.
+  const dadosBackup = JSON.parse(JSON.stringify(DATA));
 
-  try{
-    // 1. Busca SHA atual — obrigatório para update no GitHub
-    let sha='';
-    const rGet=await fetch(apiUrl,{headers});
-    if(rGet.ok){
-      const j=await rGet.json();
-      sha=j.sha;
-    } else if(rGet.status===401){
-      setStatus('Token inválido ou expirado','var(--red)');
-      btn.disabled=false;
+  setStatus('Salvando…', 'var(--text3)');
+  const btn = document.getElementById('save-btn');
+  btn.disabled = true;
+
+  const apiUrl  = `https://api.github.com/repos/${c.user}/${c.repo}/contents/index.html`;
+  const headers = {
+    'Authorization': 'token ' + c.token,
+    'Accept':        'application/vnd.github.v3+json',
+    'Content-Type':  'application/json'
+  };
+
+  try {
+    // Etapa 1: buscar SHA do arquivo atual no repositório.
+    // A API v3 recusa atualizações sem o SHA correto — é o mecanismo
+    // de controle de versão que impede sobrescrever mudanças concorrentes.
+    let sha = '';
+    const rGet = await fetch(apiUrl, { headers });
+
+    if (rGet.ok) {
+      const meta = await rGet.json();
+      sha = meta.sha;
+    } else if (rGet.status === 401) {
+      setStatus('Token inválido ou expirado', 'var(--red)');
+      btn.disabled = false;
       return;
     }
 
-    // 2. Gera HTML com dados atuais embutidos
-    const html=buildFullHTML();
-    const b64=btoa(unescape(encodeURIComponent(html)));
+    // Etapa 2: montar o HTML final com os dados atuais embutidos.
+    const html = buildFullHTML();
+    const b64  = btoa(unescape(encodeURIComponent(html)));
 
-    // 3. Envia para o GitHub
-    const body={message:'Atualização — '+new Date().toLocaleString('pt-BR'),content:b64};
-    if(sha)body.sha=sha;
+    // Etapa 3: enviar para o GitHub.
+    const body = {
+      message: 'Atualização — ' + new Date().toLocaleString('pt-BR'),
+      content: b64
+    };
+    if (sha) body.sha = sha;
 
-    const rPut=await fetch(apiUrl,{method:'PUT',headers,body:JSON.stringify(body)});
+    const rPut = await fetch(apiUrl, {
+      method:  'PUT',
+      headers: headers,
+      body:    JSON.stringify(body)
+    });
 
-    if(rPut.ok){
-      DATA.updatedAt=new Date().toLocaleDateString('pt-BR');
-      document.getElementById('last-update').textContent=DATA.updatedAt;
-      setStatus('Publicado ✓','var(--green)');
+    if (rPut.ok) {
+      DATA.updatedAt = new Date().toLocaleDateString('pt-BR');
+      document.getElementById('last-update').textContent = DATA.updatedAt;
+      setStatus('Publicado ✓', 'var(--green)');
     } else {
-      // Falhou — restaura backup dos dados e avisa
-      DATA=dadosBackup;
-      const err=await rPut.json();
-      const msg=err.message||'Erro desconhecido';
-      if(rPut.status===409||rPut.status===422){
-        setStatus('Conflito no GitHub — tente novamente','var(--amber)');
+      // Falha no PUT — restaura o backup e informa o motivo.
+      DATA = dadosBackup;
+      const err = await rPut.json();
+      if (rPut.status === 409 || rPut.status === 422) {
+        setStatus('Conflito no GitHub — tente novamente', 'var(--amber)');
       } else {
-        setStatus('Erro: '+msg,'var(--red)');
+        setStatus('Erro: ' + (err.message || 'desconhecido'), 'var(--red)');
       }
     }
-  } catch(e){
-    // Erro de rede — restaura backup
-    DATA=dadosBackup;
-    setStatus('Sem conexão — dados preservados localmente','var(--amber)');
+
+  } catch (e) {
+    // Falha de rede — dados preservados localmente.
+    DATA = dadosBackup;
+    setStatus('Sem conexão — dados preservados localmente', 'var(--amber)');
   }
 
-  btn.disabled=false;
-}
-function setStatus(msg,color){
-  ['save-status-s','save-status-m'].forEach(id=>{const el=document.getElementById(id);if(el){el.textContent=msg;el.style.color=color}});
-  if(color==='var(--green)')setTimeout(()=>{document.querySelectorAll('.save-status').forEach(el=>el.textContent='')},4000);
+  btn.disabled = false;
 }
 
-// ── HELPERS ──
-function pct(e){return Math.round((e/11)*100)}
-function progColor(e){if(e>=11)return'var(--green)';if(e>=7)return'var(--teal)';if(e>=4)return'var(--accent)';return'var(--purple)'}
-function isOverdue(p){if(!p||p==='—')return false;const x=p.split('/');if(x.length<3)return false;return new Date(x[2],x[1]-1,x[0])<new Date()}
-function isUrgent(p){if(!p||p==='—')return false;const x=p.split('/');if(x.length<3)return false;const d=new Date(x[2],x[1]-1,x[0]);return d>=new Date()&&(d-new Date())/(864e5)<=7}
+/**
+ * Exibe uma mensagem de status nos dois elementos de feedback da interface
+ * (sidebar desktop e modal mobile). Limpa automaticamente após 4s em sucesso.
+ */
+function setStatus(msg, color) {
+  ['save-status-s', 'save-status-m'].forEach(id => {
+    const el = document.getElementById(id);
+    if (el) {
+      el.textContent = msg;
+      el.style.color = color;
+    }
+  });
 
-// ── VIEWS ──
-let currentView='dashboard';
-function showView(v,el,nav){
-  currentView=v;
-  // sidebar
-  document.querySelectorAll('.sidebar-item').forEach(i=>i.classList.remove('active'));
-  // bottom nav
-  document.querySelectorAll('.bnav-item').forEach(i=>i.classList.remove('active'));
-  if(nav==='bnav'){
-    if(el)el.classList.add('active');
-    const map={dashboard:'bnav-dashboard',eixo2:'bnav-eixo2',eixo3:'bnav-eixo3'};
-    document.querySelectorAll('.sidebar-item').forEach((item,i)=>{if(i==={dashboard:0,eixo2:1,eixo3:2}[v])item.classList.add('active')});
+  if (color === 'var(--green)') {
+    setTimeout(() => {
+      document.querySelectorAll('.save-status').forEach(el => el.textContent = '');
+    }, 4000);
+  }
+}
+
+
+// ---------------------------------------------------------------------------
+// FUNÇÕES AUXILIARES
+// ---------------------------------------------------------------------------
+
+/**
+ * Calcula o percentual de conclusão de um subtema do Eixo 3.
+ * A fórmula é linear: etapa / 11 * 100.
+ * Com 11 etapas, cada uma vale ~9%. Etapa 11 = 100%.
+ */
+function pct(etapa) {
+  return Math.round((etapa / 11) * 100);
+}
+
+/**
+ * Retorna a cor da barra de progresso conforme a fase do subtema.
+ * As faixas foram definidas para refletir criticidade visual:
+ *   roxo  = início (1–3), azul = meio (4–6), teal = avançado (7–10), verde = concluído (11).
+ */
+function progColor(etapa) {
+  if (etapa >= 11) return 'var(--green)';
+  if (etapa >= 7)  return 'var(--teal)';
+  if (etapa >= 4)  return 'var(--accent)';
+  return 'var(--purple)';
+}
+
+/**
+ * Verifica se o prazo de um subtema já passou.
+ * Espera formato DD/MM/AAAA. Retorna false para '—' ou formato inválido.
+ */
+function isOverdue(prazo) {
+  if (!prazo || prazo === '—') return false;
+  const partes = prazo.split('/');
+  if (partes.length < 3) return false;
+  return new Date(partes[2], partes[1] - 1, partes[0]) < new Date();
+}
+
+/**
+ * Verifica se o prazo vence nos próximos 7 dias (urgente, mas não vencido).
+ * Usado para colorir a tag de prazo em laranja antes de virar vermelho.
+ */
+function isUrgent(prazo) {
+  if (!prazo || prazo === '—') return false;
+  const partes = prazo.split('/');
+  if (partes.length < 3) return false;
+  const data = new Date(partes[2], partes[1] - 1, partes[0]);
+  const hoje = new Date();
+  return data >= hoje && (data - hoje) / 86400000 <= 7;
+}
+
+
+// ---------------------------------------------------------------------------
+// NAVEGAÇÃO E RENDERIZAÇÃO
+// ---------------------------------------------------------------------------
+
+let currentView = 'dashboard';
+
+/**
+ * Troca a view ativa, atualiza os estados de seleção na sidebar e na
+ * bottom nav mobile, e dispara a re-renderização do conteúdo principal.
+ *
+ * @param {string} v   - Identificador da view: 'dashboard' | 'eixo2' | 'eixo3' | 'livro'
+ * @param {Element} el - Elemento clicado (para aplicar .active)
+ * @param {string} nav - 'bnav' quando o clique vem da bottom nav mobile
+ */
+function showView(v, el, nav) {
+  currentView = v;
+
+  // Limpa seleção em ambas as navegações antes de marcar a nova
+  document.querySelectorAll('.sidebar-item').forEach(i => i.classList.remove('active'));
+  document.querySelectorAll('.bnav-item').forEach(i => i.classList.remove('active'));
+
+  if (nav === 'bnav') {
+    if (el) el.classList.add('active');
+    // Espelha a seleção na sidebar para consistência visual
+    document.querySelectorAll('.sidebar-item').forEach((item, i) => {
+      if (i === { dashboard: 0, eixo2: 1, eixo3: 2 }[v]) item.classList.add('active');
+    });
   } else {
-    if(el)el.classList.add('active');
-    const bmap={dashboard:'bnav-dashboard',eixo2:'bnav-eixo2',eixo3:'bnav-eixo3',livro:'bnav-livro'};
-    if(bmap[v])document.getElementById(bmap[v])?.classList.add('active');
+    if (el) el.classList.add('active');
+    const bmap = { dashboard: 'bnav-dashboard', eixo2: 'bnav-eixo2', eixo3: 'bnav-eixo3', livro: 'bnav-livro' };
+    if (bmap[v]) document.getElementById(bmap[v])?.classList.add('active');
   }
-  const titles={dashboard:'Elementos Textuais',eixo2:'Eixo 2 — Social e Segurança',eixo3:'Eixo 3 — Infra / Ed / Tec',livro:'Construção do Livro'};
-  document.getElementById('view-title').textContent=titles[v];
+
+  const titulos = {
+    dashboard: 'Elementos Textuais',
+    eixo2:     'Eixo 2 — Social e Segurança',
+    eixo3:     'Eixo 3 — Infra / Ed / Tec',
+    livro:     'Construção do Livro'
+  };
+  document.getElementById('view-title').textContent = titulos[v];
+
   render();
-  window.scrollTo(0,0);
+  window.scrollTo(0, 0);
 }
 
-function render(){
-  const el=document.getElementById('main-content');
-  if(currentView==='dashboard')el.innerHTML=renderDashboard();
-  else if(currentView==='eixo2')el.innerHTML=renderEixo2Full();
-  else if(currentView==='livro')el.innerHTML=renderLivroView();
-  else el.innerHTML=renderEixo3Full();
-  document.getElementById('last-update').textContent=DATA.updatedAt;
-  document.getElementById('cnt-e2-s').textContent=DATA.eixo2.length;
-  document.getElementById('cnt-e3-s').textContent=DATA.eixo3.length;
-  const livroTotal=DATA.livro.estruturais.length+DATA.livro.corpo.length;
-  const livroOk=DATA.livro.estruturais.filter(i=>i.etapa>=4).length+DATA.livro.corpo.filter(i=>i.etapa>=4).length;
-  const cntEl=document.getElementById('cnt-livro-s');
-  if(cntEl)cntEl.textContent=livroOk+'/'+livroTotal;
+/**
+ * Re-renderiza o conteúdo principal e atualiza os contadores da sidebar.
+ * Chamada toda vez que os dados mudam (edição de item, troca de view).
+ */
+function render() {
+  const el = document.getElementById('main-content');
+
+  if      (currentView === 'dashboard') el.innerHTML = renderDashboard();
+  else if (currentView === 'eixo2')     el.innerHTML = renderEixo2Full();
+  else if (currentView === 'livro')     el.innerHTML = renderLivroView();
+  else                                  el.innerHTML = renderEixo3Full();
+
+  // Optional chaining: estes elementos podem não existir dependendo de quais
+  // seções estão presentes no sidebar (a seção "Eixos" foi removida).
+  const elUpdate = document.getElementById('last-update');
+  if (elUpdate) elUpdate.textContent = DATA.updatedAt;
+
+  const elCntE2 = document.getElementById('cnt-e2-s');
+  if (elCntE2) elCntE2.textContent = DATA.eixo2.length;
+
+  const elCntE3 = document.getElementById('cnt-e3-s');
+  if (elCntE3) elCntE3.textContent = DATA.eixo3.length;
+
+  // Contador da sidebar do livro: mostra "concluídos / total"
+  const livroTotal = DATA.livro.estruturais.length + DATA.livro.corpo.length;
+  // Corpo: usa Eixo 3 como fonte de verdade (etapa 11 = concluído no fluxo principal)
+  const corpoConcluido = DATA.livro.corpo.filter(item => {
+    const e3 = DATA.eixo3.find(i => i.subtema.toLowerCase() === item.nome.toLowerCase());
+    return e3 ? e3.etapa >= 11 : item.etapa >= 4;
+  }).length;
+  const livroOk = DATA.livro.estruturais.filter(i => i.etapa >= 4).length + corpoConcluido;
+  const cntLivro   = document.getElementById('cnt-livro-s');
+  if (cntLivro) cntLivro.textContent = livroOk + '/' + livroTotal;
 }
 
-// ── EIXO 2 ──
-function renderEixo2Block(){
-  const cards=DATA.eixo2.map((item,i)=>{
-    let sc,label;
-    if(item.status==='entregue'){sc='status-done';label='Entregue'}
-    else if(i===1){sc='status-date';label=item.status}
-    else{sc='status-launch';label=item.status}
-    return`<div class="e2-card"><div class="e2-card-label">${i===0?'Situação atual':i===1?'Próximo evento':'Evento final'}</div><div class="e2-status ${sc}">${label}</div><div class="e2-card-title">${item.subtema}</div><div class="e2-card-obs">${item.obs}</div></div>`;
+
+// ---------------------------------------------------------------------------
+// EIXO 2
+// ---------------------------------------------------------------------------
+
+/**
+ * Renderiza o bloco compacto do Eixo 2 que aparece no topo do dashboard.
+ * Cada item do eixo2 vira um card com label de fase, status colorido e observação.
+ */
+function renderEixo2Block() {
+  const cards = DATA.eixo2.map((item, i) => {
+    let classeStatus, label;
+
+    if (item.status === 'entregue') {
+      classeStatus = 'status-done';
+      label = 'Entregue';
+    } else if (i === 1) {
+      classeStatus = 'status-date';
+      label = item.status;
+    } else {
+      classeStatus = 'status-launch';
+      label = item.status;
+    }
+
+    const faseLabel = i === 0 ? 'Situação atual' : i === 1 ? 'Próximo evento' : 'Evento final';
+
+    return `<div class="e2-card">
+      <div class="e2-card-label">${faseLabel}</div>
+      <div class="e2-status ${classeStatus}">${label}</div>
+      <div class="e2-card-title">${item.subtema}</div>
+      <div class="e2-card-obs">${item.obs}</div>
+    </div>`;
   }).join('');
-  return`<div class="eixo2-block">
+
+  return `<div class="eixo2-block">
     <div class="section-header" style="margin-bottom:12px">
-      <div class="section-title"><span class="eixo-badge badge-e2">Eixo 2</span><span style="color:var(--green);font-weight:500!important">Produção textual concluída</span></div>
+      <div class="section-title">
+        <span class="eixo-badge badge-e2">Eixo 2</span>
+        <span style="color:var(--green);font-weight:500!important">Produção textual concluída</span>
+      </div>
       <button class="btn btn-ghost" style="font-size:11px;padding:4px 10px" onclick="showView('eixo2',null)">Ver →</button>
     </div>
     <div class="e2-timeline">${cards}</div>
   </div>`;
 }
-function renderEixo2Full(){
-  return renderEixo2Block()+`
+
+/** Renderiza a view completa do Eixo 2 com timeline pós-textual detalhada. */
+function renderEixo2Full() {
+  const fases = [
+    'Na gráfica (em produção)',
+    'Recebimento na agência — 17/06/2026',
+    'Lançamento — Teatro Manauara · 06/07/2026 · 9h30'
+  ];
+
+  const linhasFase = fases.map((texto, i) => {
+    const cores = [
+      'background:rgba(34,201,122,.15);color:var(--green);border:1px solid rgba(34,201,122,.3)',
+      'background:rgba(79,124,255,.15);color:var(--accent);border:1px solid rgba(79,124,255,.3)',
+      'background:rgba(155,109,255,.15);color:var(--purple);border:1px solid rgba(155,109,255,.3)'
+    ];
+    const badge = i === 0
+      ? '<div style="margin-left:auto;font-size:11px;padding:3px 8px;background:rgba(34,201,122,.1);color:var(--green);border-radius:10px;white-space:nowrap">Em andamento</div>'
+      : '';
+    return `<div style="display:flex;align-items:center;gap:12px;background:var(--surface2);border:1px solid var(--border);border-radius:var(--radius-sm);padding:12px 14px">
+      <div style="width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;font-family:'DM Mono',monospace;flex-shrink:0;${cores[i]}">${i + 1}</div>
+      <div style="font-size:13px;color:var(--text)">${texto}</div>
+      ${badge}
+    </div>`;
+  }).join('');
+
+  return renderEixo2Block() + `
   <div style="margin-top:16px;background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:18px 20px">
     <h3 style="font-size:13px;font-weight:600;margin-bottom:14px;color:var(--text2)">Fase pós-textual</h3>
-    <div style="display:flex;flex-direction:column;gap:10px">
-      ${['Na gráfica (em produção)','Recebimento na agência — 17/06/2026','Lançamento — Teatro Manauara · 22/06/2026 · 9h30'].map((t,i)=>`
-      <div style="display:flex;align-items:center;gap:12px;background:var(--surface2);border:1px solid var(--border);border-radius:var(--radius-sm);padding:12px 14px">
-        <div style="width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;font-family:'DM Mono',monospace;flex-shrink:0;
-          ${i===0?'background:rgba(34,201,122,.15);color:var(--green);border:1px solid rgba(34,201,122,.3)':i===1?'background:rgba(79,124,255,.15);color:var(--accent);border:1px solid rgba(79,124,255,.3)':'background:rgba(155,109,255,.15);color:var(--purple);border:1px solid rgba(155,109,255,.3)'}">${i+1}</div>
-        <div style="font-size:13px;color:var(--text)">${t}</div>
-        ${i===0?'<div style="margin-left:auto;font-size:11px;padding:3px 8px;background:rgba(34,201,122,.1);color:var(--green);border-radius:10px;white-space:nowrap">Em andamento</div>':''}
-      </div>`).join('')}
-    </div>
+    <div style="display:flex;flex-direction:column;gap:10px">${linhasFase}</div>
   </div>`;
 }
 
-// ── EIXO 3 TABLE (desktop) ──
-function sortedEixo3(){
-  const hoje = new Date();
-  hoje.setHours(0,0,0,0);
-  return [...DATA.eixo3].sort((a,b)=>{
-    // Finalizados sempre no fundo
-    const aOk = a.etapa>=11, bOk = b.etapa>=11;
-    if(aOk && !bOk) return 1;
-    if(!aOk && bOk) return -1;
-    if(aOk && bOk) return a.subtema.localeCompare(b.subtema);
-    // Entre não finalizados: etapa menor = mais crítico = topo
-    if(a.etapa !== b.etapa) return a.etapa - b.etapa;
-    // Mesma etapa: prazo mais próximo sobe
+
+// ---------------------------------------------------------------------------
+// EIXO 3
+// ---------------------------------------------------------------------------
+
+/**
+ * Retorna os subtemas do Eixo 3 ordenados por criticidade:
+ *   1. Não finalizados, da etapa mais baixa (mais crítico) para a mais alta.
+ *   2. Empate de etapa: prazo mais próximo sobe.
+ *   3. Finalizados (etapa 11) vão sempre para o fundo, em ordem alfabética.
+ */
+function sortedEixo3() {
+  return [...DATA.eixo3].sort((a, b) => {
+    const aOk = a.etapa >= 11;
+    const bOk = b.etapa >= 11;
+
+    if (aOk && !bOk) return 1;
+    if (!aOk && bOk) return -1;
+    if (aOk && bOk)  return a.subtema.localeCompare(b.subtema);
+
+    if (a.etapa !== b.etapa) return a.etapa - b.etapa;
+
+    // Desempate por prazo: sem prazo vai para o fundo
     const parsePrazo = p => {
-      if(!p||p==='—') return new Date(9999,0,1);
-      const x=p.split('/'); return x.length===3?new Date(x[2],x[1]-1,x[0]):new Date(9999,0,1);
+      if (!p || p === '—') return new Date(9999, 0, 1);
+      const x = p.split('/');
+      return x.length === 3 ? new Date(x[2], x[1] - 1, x[0]) : new Date(9999, 0, 1);
     };
     return parsePrazo(a.prazo) - parsePrazo(b.prazo);
   });
 }
-function renderEixo3TableDesktop(showAdd){
-  const rows=sortedEixo3().map(item=>{
-    const p=pct(item.etapa);const color=progColor(item.etapa);
-    const pc=isOverdue(item.prazo)?'overdue':isUrgent(item.prazo)?'urgent':'';
-    return`<tr class="e3-row" onclick="toggleExpand('${item.id}')">
+
+/** Gera a tabela do Eixo 3 para desktop. Cada linha expande ao clicar. */
+function renderEixo3TableDesktop(showAdd) {
+  const rows = sortedEixo3().map(item => {
+    const progresso   = pct(item.etapa);
+    const cor         = progColor(item.etapa);
+    const classePrazo = isOverdue(item.prazo) ? 'overdue' : isUrgent(item.prazo) ? 'urgent' : '';
+
+    const linhasFluxo = PIPELINE.map((s, i) => {
+      const n   = i + 1;
+      const cls = n < item.etapa ? 'step-done' : n === item.etapa ? 'step-current' : 'step-todo';
+      const lc  = n < item.etapa ? 'done-label' : n === item.etapa ? 'current-label' : '';
+      return `<div class="pipe-step-mini"><span class="num ${cls}">${n}</span><span class="step-label ${lc}">${s}</span></div>`;
+    }).join('');
+
+    return `<tr class="e3-row" onclick="toggleExpand('${item.id}')">
       <td><div class="subtema-name">${item.subtema}</div></td>
       <td><div class="resp-name">${item.responsavel}</div></td>
       <td>
-        <div class="prog-wrap"><div class="prog-bar"><div class="prog-fill" style="width:${p}%;background:${color}"></div></div><span class="prog-pct">${p}%</span></div>
-        <div class="etapa-tag">Etapa ${item.etapa}/11 — ${PIPELINE[item.etapa-1]}</div>
+        <div class="prog-wrap">
+          <div class="prog-bar"><div class="prog-fill" style="width:${progresso}%;background:${cor}"></div></div>
+          <span class="prog-pct">${progresso}%</span>
+        </div>
+        <div class="etapa-tag">Etapa ${item.etapa}/11 — ${PIPELINE[item.etapa - 1]}</div>
       </td>
-      <td><span class="prazo-tag ${pc}">${item.prazo}</span></td>
+      <td><span class="prazo-tag ${classePrazo}">${item.prazo}</span></td>
       <td><button class="btn btn-ghost" style="font-size:11px;padding:4px 10px" onclick="openEditModal('${item.id}','eixo3');event.stopPropagation()">Editar</button></td>
     </tr>
     <tr class="expand-row" id="expand-${item.id}">
       <td colspan="5" class="expand-cell">
         <div class="expand-inner">
-          <div class="expand-block"><h4>Observações</h4><p>${item.obs||'—'}</p></div>
-          <div class="expand-block" style="grid-column:span 2"><h4>Fluxo de produção</h4>
-            <div class="pipe-steps-mini">${PIPELINE.map((s,i)=>{const n=i+1;const cls=n<item.etapa?'step-done':n===item.etapa?'step-current':'step-todo';const lc=n<item.etapa?'done-label':n===item.etapa?'current-label':'';return`<div class="pipe-step-mini"><span class="num ${cls}">${n}</span><span class="step-label ${lc}">${s}</span></div>`}).join('')}</div>
+          <div class="expand-block">
+            <h4>Observações</h4>
+            <p>${item.obs || '—'}</p>
+          </div>
+          <div class="expand-block" style="grid-column:span 2">
+            <h4>Fluxo de produção</h4>
+            <div class="pipe-steps-mini">${linhasFluxo}</div>
           </div>
         </div>
       </td>
     </tr>`;
   }).join('');
-  const addRow=showAdd?`<tr class="add-row"><td colspan="5"><button class="add-btn" onclick="openEditModal(null,'eixo3')">+ Adicionar subtema</button></td></tr>`:'';
-  return`<div class="e3-table-wrap" style="background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden">
-    <table class="e3-table"><thead><tr>
-      <th style="width:22%">Subtema</th><th style="width:16%">Responsável</th><th style="width:35%">Progresso</th><th style="width:12%">Prazo</th><th style="width:10%"></th>
-    </tr></thead><tbody>${rows}${addRow}</tbody></table>
+
+  const addRow = showAdd
+    ? `<tr class="add-row"><td colspan="5"><button class="add-btn" onclick="openEditModal(null,'eixo3')">+ Adicionar subtema</button></td></tr>`
+    : '';
+
+  return `<div class="e3-table-wrap" style="background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden">
+    <table class="e3-table">
+      <thead><tr>
+        <th style="width:22%">Subtema</th>
+        <th style="width:16%">Responsável</th>
+        <th style="width:35%">Progresso</th>
+        <th style="width:12%">Prazo</th>
+        <th style="width:10%"></th>
+      </tr></thead>
+      <tbody>${rows}${addRow}</tbody>
+    </table>
   </div>`;
 }
 
-// ── EIXO 3 CARDS (mobile) ──
-function renderEixo3Cards(){
-  const cards=sortedEixo3().map(item=>{
-    const p=pct(item.etapa);const color=progColor(item.etapa);
-    const pc=isOverdue(item.prazo)?'overdue':isUrgent(item.prazo)?'urgent':'';
-    return`<div class="e3-card">
+/** Gera os cards do Eixo 3 para mobile. Toque expande detalhes e fluxo. */
+function renderEixo3Cards() {
+  const cards = sortedEixo3().map(item => {
+    const progresso   = pct(item.etapa);
+    const cor         = progColor(item.etapa);
+    const classePrazo = isOverdue(item.prazo) ? 'overdue' : isUrgent(item.prazo) ? 'urgent' : '';
+
+    const linhasFluxo = PIPELINE.map((s, i) => {
+      const n   = i + 1;
+      const cls = n < item.etapa ? 'step-done' : n === item.etapa ? 'step-current' : 'step-todo';
+      const lc  = n < item.etapa ? 'done-label' : n === item.etapa ? 'current-label' : '';
+      return `<div class="pipe-step-mini"><span class="num ${cls}">${n}</span><span class="step-label ${lc}">${s}</span></div>`;
+    }).join('');
+
+    return `<div class="e3-card">
       <div class="e3-card-header" onclick="toggleExpandCard('card-exp-${item.id}')">
         <div class="e3-card-top">
           <div>
@@ -844,19 +1151,20 @@ function renderEixo3Cards(){
             <div class="e3-card-resp">${item.responsavel}</div>
           </div>
           <div class="e3-card-right">
-            <span class="prazo-tag ${pc}" style="font-size:12px">${item.prazo}</span>
+            <span class="prazo-tag ${classePrazo}" style="font-size:12px">${item.prazo}</span>
           </div>
         </div>
         <div class="e3-card-prog">
-          <div class="e3-card-bar"><div class="e3-card-fill" style="width:${p}%;background:${color}"></div></div>
-          <span class="e3-card-pct">${p}%</span>
+          <div class="e3-card-bar"><div class="e3-card-fill" style="width:${progresso}%;background:${cor}"></div></div>
+          <span class="e3-card-pct">${progresso}%</span>
         </div>
-        <div class="e3-card-etapa">Etapa ${item.etapa}/11 — ${PIPELINE[item.etapa-1]}</div>
+        <div class="e3-card-etapa">Etapa ${item.etapa}/11 — ${PIPELINE[item.etapa - 1]}</div>
       </div>
       <div class="e3-card-expand" id="card-exp-${item.id}">
-        <div class="e3-card-expand-section"><h4>Observações</h4><p>${item.obs||'—'}</p></div>
-        <div class="e3-card-expand-section"><h4>Fluxo</h4>
-          <div class="pipe-steps-mini">${PIPELINE.map((s,i)=>{const n=i+1;const cls=n<item.etapa?'step-done':n===item.etapa?'step-current':'step-todo';const lc=n<item.etapa?'done-label':n===item.etapa?'current-label':'';return`<div class="pipe-step-mini"><span class="num ${cls}">${n}</span><span class="step-label ${lc}">${s}</span></div>`}).join('')}</div>
+        <div class="e3-card-expand-section"><h4>Observações</h4><p>${item.obs || '—'}</p></div>
+        <div class="e3-card-expand-section">
+          <h4>Fluxo</h4>
+          <div class="pipe-steps-mini">${linhasFluxo}</div>
         </div>
         <div class="e3-card-actions">
           <button class="btn btn-ghost" style="flex:1;justify-content:center" onclick="openEditModal('${item.id}','eixo3')">Editar</button>
@@ -864,19 +1172,28 @@ function renderEixo3Cards(){
       </div>
     </div>`;
   }).join('');
-  return`<div class="e3-cards">${cards}<button class="add-btn" style="padding:12px 0;width:100%;justify-content:center;border:1px dashed var(--border2);border-radius:var(--radius)" onclick="openEditModal(null,'eixo3')">+ Adicionar subtema</button></div>`;
+
+  return `<div class="e3-cards">
+    ${cards}
+    <button class="add-btn" style="padding:12px 0;width:100%;justify-content:center;border:1px dashed var(--border2);border-radius:var(--radius)" onclick="openEditModal(null,'eixo3')">+ Adicionar subtema</button>
+  </div>`;
 }
 
-function toggleExpandCard(id){document.getElementById(id)?.classList.toggle('open')}
+function toggleExpandCard(id) {
+  document.getElementById(id)?.classList.toggle('open');
+}
 
-// ── DASHBOARD ──
-function renderDashboard(){
-  const total=DATA.eixo3.length;
-  const ok=DATA.eixo3.filter(i=>i.etapa>=11).length;
-  const av=DATA.eixo3.filter(i=>i.etapa>=7&&i.etapa<11).length;
-  const ini=DATA.eixo3.filter(i=>i.etapa<=3).length;
-  const avg=Math.round(DATA.eixo3.reduce((a,i)=>a+pct(i.etapa),0)/total);
-  return`
+/** Renderiza a view do dashboard principal com bloco Eixo 2 e KPIs + tabela do Eixo 3. */
+function renderDashboard() {
+  const total = DATA.eixo3.length;
+  const ok    = DATA.eixo3.filter(i => i.etapa >= 11).length;
+  const av    = DATA.eixo3.filter(i => i.etapa >= 7 && i.etapa < 11).length;
+  const ini   = DATA.eixo3.filter(i => i.etapa <= 3).length;
+
+  // Progresso médio: soma dos percentuais individuais dividida pelo total de subtemas
+  const avg = Math.round(DATA.eixo3.reduce((acc, i) => acc + pct(i.etapa), 0) / total);
+
+  return `
   ${renderEixo2Block()}
   <div class="kpi-row">
     <div class="kpi-card"><div class="kpi-val" style="color:var(--accent)">${total}</div><div class="kpi-label">Total Eixo 3</div><div class="kpi-sub">subtemas</div></div>
@@ -885,272 +1202,443 @@ function renderDashboard(){
     <div class="kpi-card"><div class="kpi-val" style="color:var(--purple)">${ini}</div><div class="kpi-label">Fase inicial</div><div class="kpi-sub">etapas 1–3</div></div>
     <div class="kpi-card"><div class="kpi-val" style="color:var(--amber)">${avg}%</div><div class="kpi-label">Progresso médio</div><div class="kpi-sub">Eixo 3</div></div>
   </div>
-  <div class="section-header"><div class="section-title"><span class="eixo-badge badge-e3">Eixo 3</span>Infraestrutura, Educação e Tecnologia</div></div>
+  <div class="section-header">
+    <div class="section-title"><span class="eixo-badge badge-e3">Eixo 3</span>Infraestrutura, Educação e Tecnologia</div>
+  </div>
   ${renderEixo3TableDesktop(false)}
   ${renderEixo3Cards()}`;
 }
 
-// ── EIXO 3 FULL ──
-function renderEixo3Full(){
-  return`
+/** Renderiza a view completa do Eixo 3 com fluxo de produção e tabela editável. */
+function renderEixo3Full() {
+  const etapasFluxo = PIPELINE.map((s, i) => {
+    const seta = i < PIPELINE.length - 1 ? '<span style="color:var(--border2);font-size:10px">→</span>' : '';
+    return `<div style="display:flex;align-items:center;gap:4px">
+      <div style="background:var(--surface2);border:1px solid var(--border2);border-radius:var(--radius-sm);padding:4px 8px;font-size:10px;color:var(--text2)">
+        <span style="font-family:'DM Mono',monospace;color:var(--text3);margin-right:4px">${i + 1}</span>${s}
+      </div>
+      ${seta}
+    </div>`;
+  }).join('');
+
+  return `
   <div class="section-header">
     <div class="section-title"><span class="eixo-badge badge-e3">Eixo 3</span>Infraestrutura, Educação e Tecnologia</div>
     <button class="btn btn-primary" onclick="openEditModal(null,'eixo3')">+ Novo subtema</button>
   </div>
   <div style="margin-bottom:16px;background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:14px 18px;overflow-x:auto">
     <div style="font-size:10px;font-weight:600;color:var(--text3);text-transform:uppercase;letter-spacing:.07em;margin-bottom:10px">Fluxo de produção</div>
-    <div style="display:flex;gap:4px;align-items:center;flex-wrap:wrap">
-      ${PIPELINE.map((s,i)=>`<div style="display:flex;align-items:center;gap:4px"><div style="background:var(--surface2);border:1px solid var(--border2);border-radius:var(--radius-sm);padding:4px 8px;font-size:10px;color:var(--text2)"><span style="font-family:'DM Mono',monospace;color:var(--text3);margin-right:4px">${i+1}</span>${s}</div>${i<PIPELINE.length-1?'<span style="color:var(--border2);font-size:10px">→</span>':''}</div>`).join('')}
-    </div>
+    <div style="display:flex;gap:4px;align-items:center;flex-wrap:wrap">${etapasFluxo}</div>
   </div>
   ${renderEixo3TableDesktop(true)}
   ${renderEixo3Cards()}`;
 }
 
-// ── EXPAND TABLE ──
-function toggleExpand(id){document.getElementById('expand-'+id)?.classList.toggle('open')}
+function toggleExpand(id) {
+  document.getElementById('expand-' + id)?.classList.toggle('open');
+}
 
-// ── EDIT MODAL ──
-function openEditModal(id,eixo){
-  document.getElementById('edit-eixo').value=eixo;
-  if(id){
-    const item=DATA[eixo].find(i=>i.id===id);if(!item)return;
-    document.getElementById('modal-title').textContent='Editar subtema';
-    document.getElementById('edit-id').value=id;
-    document.getElementById('edit-subtema').value=item.subtema||'';
-    document.getElementById('edit-resp').value=item.responsavel||'';
-    document.getElementById('edit-etapa').value=item.etapa||1;
-    document.getElementById('edit-prazo').value=item.prazo||'';
-    document.getElementById('edit-obs').value=item.obs||'';
-  }else{
-    document.getElementById('modal-title').textContent='Novo subtema';
-    ['edit-id','edit-subtema','edit-resp','edit-prazo','edit-obs'].forEach(i=>document.getElementById(i).value='');
-    document.getElementById('edit-etapa').value=1;
+
+// ---------------------------------------------------------------------------
+// MODAIS DE EDIÇÃO
+// ---------------------------------------------------------------------------
+
+/**
+ * Abre o modal de edição de um subtema do Eixo 3.
+ * Se id for null, abre em modo "novo" com campos em branco.
+ *
+ * @param {string|null} id   - ID do item a editar, ou null para novo
+ * @param {string} eixo      - Nome do array em DATA ('eixo3')
+ */
+function openEditModal(id, eixo) {
+  document.getElementById('edit-eixo').value = eixo;
+
+  if (id) {
+    const item = DATA[eixo].find(i => i.id === id);
+    if (!item) return;
+
+    document.getElementById('modal-title').textContent        = 'Editar subtema';
+    document.getElementById('edit-id').value                  = id;
+    document.getElementById('edit-subtema').value             = item.subtema     || '';
+    document.getElementById('edit-resp').value                = item.responsavel || '';
+    document.getElementById('edit-etapa').value               = item.etapa       || 1;
+    document.getElementById('edit-prazo').value               = item.prazo       || '';
+    document.getElementById('edit-obs').value                 = item.obs         || '';
+  } else {
+    document.getElementById('modal-title').textContent = 'Novo subtema';
+    ['edit-id', 'edit-subtema', 'edit-resp', 'edit-prazo', 'edit-obs'].forEach(id => {
+      document.getElementById(id).value = '';
+    });
+    document.getElementById('edit-etapa').value = 1;
   }
+
   document.getElementById('edit-modal').classList.add('open');
 }
-function saveItem(){
-  const id=document.getElementById('edit-id').value;
-  const eixoRaw=document.getElementById('edit-eixo').value;
 
-  // Livro: eixo vem como "livro_item_<id>"
-  if(eixoRaw.startsWith('livro_item_')){
-    const lid=eixoRaw.replace('livro_item_','');
-    const novoEtapa=parseInt(document.getElementById('edit-etapa').value);
-    const novoObs=document.getElementById('edit-obs').value;
-    const novoResp=document.getElementById('edit-resp').value;
-    // Busca em estruturais e corpo
-    let idx=DATA.livro.estruturais.findIndex(i=>i.id===lid);
-    if(idx>=0){DATA.livro.estruturais[idx]={...DATA.livro.estruturais[idx],etapa:novoEtapa,responsavel:novoResp,obs:novoObs}}
-    else{idx=DATA.livro.corpo.findIndex(i=>i.id===lid);if(idx>=0)DATA.livro.corpo[idx]={...DATA.livro.corpo[idx],etapa:novoEtapa,obs:novoObs}}
-    // Restaurar select de etapa para pipeline normal
-    const sel=document.getElementById('edit-etapa');
-    sel.innerHTML=PIPELINE.map((s,i)=>`<option value="${i+1}">${i+1} — ${s}</option>`).join('');
-    closeModal('edit-modal');render();
+/**
+ * Salva as alterações do modal de edição no objeto DATA e re-renderiza.
+ * Trata tanto itens do Eixo 3 quanto do livro (via prefixo 'livro_item_').
+ */
+function saveItem() {
+  const id       = document.getElementById('edit-id').value;
+  const eixoRaw  = document.getElementById('edit-eixo').value;
+
+  // Edição de item do livro — identificado pelo prefixo no campo oculto edit-eixo
+  if (eixoRaw.startsWith('livro_item_')) {
+    const lid       = eixoRaw.replace('livro_item_', '');
+    const novaEtapa = parseInt(document.getElementById('edit-etapa').value);
+    const novoObs   = document.getElementById('edit-obs').value;
+    const novoResp  = document.getElementById('edit-resp').value;
+
+    // Procura primeiro em estruturais, depois em corpo
+    let idx = DATA.livro.estruturais.findIndex(i => i.id === lid);
+    if (idx >= 0) {
+      DATA.livro.estruturais[idx] = { ...DATA.livro.estruturais[idx], etapa: novaEtapa, responsavel: novoResp, obs: novoObs };
+    } else {
+      idx = DATA.livro.corpo.findIndex(i => i.id === lid);
+      if (idx >= 0) DATA.livro.corpo[idx] = { ...DATA.livro.corpo[idx], etapa: novaEtapa, obs: novoObs };
+    }
+
+    // Restaura o select de etapa para o pipeline do Eixo 3 (padrão)
+    const sel = document.getElementById('edit-etapa');
+    sel.innerHTML = PIPELINE.map((s, i) => `<option value="${i + 1}">${i + 1} — ${s}</option>`).join('');
+
+    closeModal('edit-modal');
+    render();
     return;
   }
 
-  const eixo=eixoRaw;
-  const item={id:id||('e3-'+Date.now()),subtema:document.getElementById('edit-subtema').value,responsavel:document.getElementById('edit-resp').value,etapa:parseInt(document.getElementById('edit-etapa').value),prazo:document.getElementById('edit-prazo').value,obs:document.getElementById('edit-obs').value};
-  if(id){const idx=DATA[eixo].findIndex(i=>i.id===id);if(idx>=0)DATA[eixo][idx]={...DATA[eixo][idx],...item}}
-  else DATA[eixo].push(item);
-  closeModal('edit-modal');render();
+  // Edição de item do Eixo 3
+  const novoItem = {
+    id:          id || ('e3-' + Date.now()),
+    subtema:     document.getElementById('edit-subtema').value,
+    responsavel: document.getElementById('edit-resp').value,
+    etapa:       parseInt(document.getElementById('edit-etapa').value),
+    prazo:       document.getElementById('edit-prazo').value,
+    obs:         document.getElementById('edit-obs').value
+  };
+
+  if (id) {
+    const idx = DATA[eixoRaw].findIndex(i => i.id === id);
+    if (idx >= 0) DATA[eixoRaw][idx] = { ...DATA[eixoRaw][idx], ...novoItem };
+  } else {
+    DATA[eixoRaw].push(novoItem);
+  }
+
+  closeModal('edit-modal');
+  render();
 }
-function closeModal(id){document.getElementById(id).classList.remove('open')}
 
-// ── BUILD HTML ──
-function buildFullHTML(){
-  // Usa o template original guardado na primeira carga
-  // em vez do outerHTML (que corrompe o JS ao serializar)
-  let src=window.__BASE_HTML__;
-  // Remove qualquer __INIT_DATA__ anterior
-  src=src.replace(/<script[^>]*>window\.__INIT_DATA__[\s\S]*?<\/script>/g,'');
-  // Injeta dados atuais
-  const dataTag='<sc'+'ript>window.__INIT_DATA__='+JSON.stringify(DATA)+'</'+'script>';
-  return src.replace('</head>',dataTag+'</head>');
+function closeModal(id) {
+  document.getElementById(id).classList.remove('open');
 }
 
 
-// ── RESUMO EXECUTIVO ──
-function openResumo(){
-  const now = new Date();
+// ---------------------------------------------------------------------------
+// GERAÇÃO DO HTML PARA PUBLICAÇÃO
+// ---------------------------------------------------------------------------
+
+/**
+ * Monta o HTML completo que será publicado no GitHub Pages.
+ *
+ * Por que não usar document.documentElement.outerHTML diretamente?
+ * Porque o navegador, ao serializar o DOM, escapa aspas, barras e
+ * caracteres especiais do JavaScript — o que quebra o código quando
+ * o arquivo é carregado novamente. A solução é usar o template original
+ * capturado em window.__BASE_HTML__ antes de qualquer modificação no DOM.
+ *
+ * O script __INIT_DATA__ anterior é removido com regex antes de injetar
+ * o novo, garantindo que só exista um bloco de dados no arquivo final.
+ */
+function buildFullHTML() {
+  // outerHTML não inclui o DOCTYPE — adicionamos manualmente para
+  // garantir que o navegador renderize a página (sem ele, alguns
+  // navegadores exibem o HTML como texto puro).
+  let src = '<!DOCTYPE html>\n' + window.__BASE_HTML__;
+
+  // Remove dados antigos para não acumular múltiplos blocos __INIT_DATA__
+  src = src.replace(/<script[^>]*>window\.__INIT_DATA__[\s\S]*?<\/script>/g, '');
+
+  // Injeta os dados atuais logo antes do </head>
+  // A tag é montada por concatenação para o navegador não interpretar
+  // o fechamento como fim deste bloco de código.
+  const dataTag = '<sc' + 'ript>window.__INIT_DATA__=' + JSON.stringify(DATA) + '<' + '/script>';
+
+  return src.replace('</head>', dataTag + '</head>');
+}
+
+
+// ---------------------------------------------------------------------------
+// RESUMO EXECUTIVO
+// ---------------------------------------------------------------------------
+
+/**
+ * Abre o modal de resumo executivo.
+ *
+ * O resumo é focado na CONSTRUÇÃO DO LIVRO:
+ *   - Métricas: corpo do livro, elementos estruturais e progresso geral.
+ *   - Barra de progresso geral = livro completo (corpo + estruturais).
+ *   - Duas colunas: Produção de Texto (corpo, lido do Eixo 3) e
+ *     Elementos Gráficos (estruturais do livro).
+ *   - Em cada coluna, os itens em andamento aparecem antes dos concluídos.
+ */
+function openResumo() {
+  const agora = new Date();
   document.getElementById('resumo-data').textContent =
-    'Gerado em ' + now.toLocaleDateString('pt-BR') + ' às ' + now.toLocaleTimeString('pt-BR',{hour:'2-digit',minute:'2-digit'});
+    'Gerado em ' + agora.toLocaleDateString('pt-BR') + ' às ' + agora.toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' });
 
-  const e3 = DATA.eixo3;
-  const total = e3.length;
-  const avgPct = Math.round(e3.reduce((a,i)=>a+pct(i.etapa),0)/total);
-  const concluidos = e3.filter(i=>i.etapa>=11).length;
-  const avancados = e3.filter(i=>i.etapa>=7&&i.etapa<11).length;
-  const emRisco = e3.filter(i=>isOverdue(i.prazo)&&i.etapa<11).length;
-  const evolucaoDia = e3.filter(i=>i._etapaInicial&&i.etapa>i._etapaInicial).length;
-  const ganhoMedio = e3.reduce((a,i)=>{
-    const delta=i._etapaInicial?Math.max(0,i.etapa-i._etapaInicial):0;
-    return a+Math.round((delta/11)*100);
-  },0);
+  const corp = DATA.livro.corpo;
+  const est  = DATA.livro.estruturais;
 
-  // métricas cor
-  const c1 = avgPct>=70?'var(--green)':avgPct>=40?'var(--accent)':'var(--purple)';
-  const c2 = evolucaoDia>0?'var(--teal)':'var(--text3)';
-  const c3 = emRisco>0?'var(--red)':'var(--green)';
+  // --- Resolve o status de cada tema do corpo a partir do Eixo 3 ---
+  // O corpo do livro espelha o progresso real dos subtemas em produção.
+  const corpoResolvido = corp.map(item => {
+    const e3 = DATA.eixo3.find(i => i.subtema.toLowerCase() === item.nome.toLowerCase());
+    const etapa = e3 ? e3.etapa : (item.etapa >= 4 ? 11 : 1);
+    return {
+      nome: item.nome,
+      responsavel: e3 ? e3.responsavel : '—',
+      etapa: etapa,                 // escala de 11 (fluxo do Eixo 3)
+      pct: pct(etapa),
+      concluido: etapa >= 11,
+      obs: e3 ? e3.obs : (item.obs || '')
+    };
+  });
 
-  // subtemas ordenados por progresso desc
-  const sorted=[...e3].sort((a,b)=>b.etapa-a.etapa);
+  // --- Resolve o status de cada elemento estrutural (escala de 4) ---
+  const estruturalResolvido = est.map(item => {
+    const concluido = item.etapa >= 4;
+    return {
+      nome: item.nome,
+      responsavel: item.responsavel || '—',
+      etapa: item.etapa,
+      pct: concluido ? 100 : Math.round(((item.etapa - 1) / 3) * 100),
+      concluido: concluido,
+      etapaLabel: PIPELINE_LIVRO[item.etapa - 1] || PIPELINE_LIVRO[0]
+    };
+  });
 
-  const itensHTML = `
-    <table style="width:100%;border-collapse:collapse">
-      <thead>
-        <tr style="border-bottom:2px solid var(--border2)">
-          <th style="text-align:left;padding:8px 12px;font-size:12px;font-weight:700;color:var(--text3);text-transform:uppercase;letter-spacing:.07em;width:22%">Subtema</th>
-          <th style="text-align:left;padding:8px 12px;font-size:12px;font-weight:700;color:var(--text3);text-transform:uppercase;letter-spacing:.07em;width:18%">Responsável</th>
-          <th style="text-align:left;padding:8px 12px;font-size:12px;font-weight:700;color:var(--text3);text-transform:uppercase;letter-spacing:.07em;width:14%">Prazo</th>
-          <th style="text-align:left;padding:8px 12px;font-size:12px;font-weight:700;color:var(--text3);text-transform:uppercase;letter-spacing:.07em">Observações</th>
-        </tr>
-      </thead>
-      <tbody>
-        ${sorted.map((item,idx)=>{
-          const pc=isOverdue(item.prazo)?'color:var(--red);font-weight:700':isUrgent(item.prazo)?'color:var(--amber);font-weight:700':'color:var(--text2)';
-          const prazoIcon=isOverdue(item.prazo)?' ⚠':isUrgent(item.prazo)?' ⚠':'';
-          const rowBg=idx%2===0?'background:var(--surface2)':'background:var(--surface)';
-          const color=progColor(item.etapa);
-          const p=pct(item.etapa);
-          return`<tr style="${rowBg};border-bottom:1px solid var(--border)">
-            <td style="padding:12px 12px;vertical-align:top">
-              <div style="font-size:14px;font-weight:700;color:var(--text);line-height:1.3">${item.subtema}</div>
-              <div style="margin-top:5px;display:flex;align-items:center;gap:6px">
-                <div style="flex:1;height:4px;background:var(--border);border-radius:2px;overflow:hidden">
-                  <div style="width:${p}%;height:100%;background:${color};border-radius:2px"></div>
-                </div>
-                <span style="font-size:11px;font-family:'DM Mono',monospace;font-weight:700;color:${color}">${p}%</span>
-              </div>
-            </td>
-            <td style="padding:12px 12px;vertical-align:top">
-              <span style="font-size:13px;font-weight:600;color:var(--text)">${item.responsavel}</span>
-            </td>
-            <td style="padding:12px 12px;vertical-align:top;white-space:nowrap">
-              <span style="font-size:13px;font-family:'DM Mono',monospace;font-weight:600;${pc}">${item.prazo||'—'}${prazoIcon}</span>
-            </td>
-            <td style="padding:12px 12px;vertical-align:top">
-              <span style="font-size:13px;color:var(--text2);line-height:1.6">${item.obs||'Sem observações'}</span>
-            </td>
-          </tr>`;
-        }).join('')}
-      </tbody>
-    </table>`;
+  // --- Ordenação: em andamento primeiro, depois concluídos ---
+  // Entre os em andamento, etapa menor (mais distante do fim) vem antes.
+  const ordenar = (a, b) => {
+    if (a.concluido !== b.concluido) return a.concluido ? 1 : -1;
+    if (!a.concluido) return a.etapa - b.etapa;
+    return a.nome.localeCompare(b.nome);
+  };
+  corpoResolvido.sort(ordenar);
+  estruturalResolvido.sort(ordenar);
 
+  // --- Métricas do livro ---
+  const corpOk  = corpoResolvido.filter(i => i.concluido).length;
+  const estOk   = estruturalResolvido.filter(i => i.concluido).length;
+  const corpPct = Math.round((corpOk / corp.length) * 100);
+  const estPct  = Math.round((estOk / est.length) * 100);
+  const geralPct = Math.round(((corpOk + estOk) / (corp.length + est.length)) * 100);
 
+  const corGeral = geralPct >= 70 ? 'var(--green)' : geralPct >= 40 ? 'var(--accent)' : 'var(--purple)';
+
+  // --- Helper: renderiza uma linha de item dentro de uma coluna ---
+  const linhaItem = (item, escala) => {
+    const cor = item.concluido ? 'var(--green)'
+              : escala === 11 ? progColor(item.etapa)
+              : progColorLivro(item.etapa);
+    const statusTxt = item.concluido
+      ? '✓ Concluído'
+      : escala === 11
+        ? `Etapa ${item.etapa}/11 — ${PIPELINE[item.etapa - 1]}`
+        : `Etapa ${item.etapa}/4 — ${item.etapaLabel}`;
+    const respTxt = item.responsavel && item.responsavel !== '—'
+      ? `<div style="font-size:11px;color:var(--text3);margin-top:2px">${item.responsavel}</div>`
+      : '';
+
+    return `<div style="padding:10px 12px;border-bottom:1px solid var(--border);${item.concluido ? '' : 'background:rgba(245,166,35,.05)'}">
+      <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:8px">
+        <div style="flex:1;min-width:0">
+          <div style="font-size:13px;font-weight:700;color:var(--text);line-height:1.3">${item.nome}</div>
+          <div style="font-size:11px;color:${cor};margin-top:2px;font-weight:600">${statusTxt}</div>
+          ${respTxt}
+        </div>
+        <span style="font-size:15px;font-family:'DM Mono',monospace;font-weight:700;color:${cor};white-space:nowrap">${item.pct}%</span>
+      </div>
+      <div style="margin-top:6px;height:4px;background:var(--border);border-radius:2px;overflow:hidden">
+        <div style="width:${item.pct}%;height:100%;background:${cor};border-radius:2px"></div>
+      </div>
+    </div>`;
+  };
+
+  // --- Coluna: Produção de Texto (corpo do livro, escala 11) ---
+  const colTexto = corpoResolvido.map(i => linhaItem(i, 11)).join('');
+
+  // --- Coluna: Elementos Gráficos (estruturais, escala 4) ---
+  const colGrafico = estruturalResolvido.map(i => linhaItem(i, 4)).join('');
 
   document.getElementById('resumo-body').innerHTML = `
     <div class="resumo-metricas">
       <div class="resumo-metrica">
-        <div class="val" style="color:${c1}">${avgPct}%</div>
-        <div class="lbl">Conclusão geral</div>
-        <div class="sub">média Eixo 3</div>
+        <div class="val" style="color:var(--teal)">${corpPct}%</div>
+        <div class="lbl">Corpo do livro</div>
+        <div class="sub">${corpOk}/${corp.length} temas finalizados</div>
       </div>
       <div class="resumo-metrica">
-        <div class="val" style="color:${c2}">${evolucaoDia}</div>
-        <div class="lbl">Itens evoluídos hoje</div>
-        <div class="sub">${ganhoMedio>0?'+'+ganhoMedio+'% acumulado':'desde abertura'}</div>
+        <div class="val" style="color:var(--purple)">${estPct}%</div>
+        <div class="lbl">Elementos estruturais</div>
+        <div class="sub">${estOk}/${est.length} concluídos</div>
       </div>
       <div class="resumo-metrica">
-        <div class="val" style="color:${c3}">${emRisco}</div>
-        <div class="lbl">Em risco</div>
-        <div class="sub">${concluidos} concluído${concluidos!==1?'s':''} · ${avancados} fase final</div>
+        <div class="val" style="color:${corGeral}">${geralPct}%</div>
+        <div class="lbl">Livro completo</div>
+        <div class="sub">${corpOk + estOk}/${corp.length + est.length} itens</div>
       </div>
     </div>
 
     <div class="resumo-geral">
       <div class="resumo-geral-top">
-        <span>Progresso geral do Eixo 3</span>
-        <span class="pct">${avgPct}%</span>
+        <span>Progresso geral do livro completo</span>
+        <span class="pct">${geralPct}%</span>
       </div>
-      <div class="resumo-bigbar"><div class="resumo-bigbar-fill" style="width:${avgPct}%"></div></div>
+      <div class="resumo-bigbar"><div class="resumo-bigbar-fill" style="width:${geralPct}%"></div></div>
       <div class="resumo-bigbar-labels">
         <span>0% — Início</span>
-        <span>50% — Meio do fluxo</span>
+        <span>50% — Meio da produção</span>
         <span>100% — Concluído</span>
       </div>
     </div>
 
-    <div>
-      <div class="resumo-lista-titulo">Eixo 3 — Subtemas (${total} itens)</div>
-      <div style="background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;overflow-x:auto">
-        ${itensHTML}
+    <div class="resumo-colunas">
+      <div class="resumo-coluna">
+        <div class="resumo-lista-titulo">
+          <span class="eixo-badge" style="background:rgba(29,212,184,.15);color:var(--teal)">Texto</span>
+          Produção de texto (${corp.length})
+        </div>
+        <div style="background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden">
+          ${colTexto}
+        </div>
       </div>
-    </div>
-
-
-  `;
+      <div class="resumo-coluna">
+        <div class="resumo-lista-titulo">
+          <span class="eixo-badge" style="background:rgba(155,109,255,.15);color:var(--purple)">Gráfico</span>
+          Elementos gráficos (${est.length})
+        </div>
+        <div style="background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden">
+          ${colGrafico}
+        </div>
+      </div>
+    </div>`;
 
   document.getElementById('resumo-modal').classList.add('open');
 }
 
-function prepareAndPrint(){
-  // Atualiza rodapé com data e hora para o PDF
-  const now = new Date();
-  const dt = now.toLocaleDateString('pt-BR') + ' às ' + now.toLocaleTimeString('pt-BR',{hour:'2-digit',minute:'2-digit'});
-  const el = document.getElementById('resumo-footer-txt');
-  if(el) el.innerHTML = 'Plano Estratégico do Estado do Amazonas &nbsp;·&nbsp; Gerado em '+dt+' &nbsp;·&nbsp; <em>Aline Alves</em>';
-  setTimeout(()=>window.print(), 150);
+/**
+ * Prepara o rodapé com timestamp antes de acionar window.print().
+ * O setTimeout garante que o DOM atualize antes do diálogo de impressão abrir.
+ */
+function prepareAndPrint() {
+  const agora = new Date();
+  const dt    = agora.toLocaleDateString('pt-BR') + ' às ' + agora.toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' });
+  const el    = document.getElementById('resumo-footer-txt');
+  if (el) el.innerHTML = 'Plano Estratégico do Estado do Amazonas &nbsp;·&nbsp; Gerado em ' + dt + ' &nbsp;·&nbsp; <em>Aline Alves</em>';
+  setTimeout(() => window.print(), 150);
 }
 
 
-// ── LIVRO ──
-function pctLivro(etapa){ return etapa>=4?100:0 }
+// ---------------------------------------------------------------------------
+// CONSTRUÇÃO DO LIVRO
+// ---------------------------------------------------------------------------
 
-function progColorLivro(etapa){
-  if(etapa>=4)return'var(--green)';
-  if(etapa===3)return'var(--teal)';
-  if(etapa===2)return'var(--accent)';
-  return'var(--purple)';
+/**
+ * Calcula o percentual de conclusão de um elemento estrutural do livro.
+ * O fluxo tem 4 etapas, então etapa 4 = 100% e qualquer etapa anterior = 0%
+ * (a conclusão do livro é binária — não faz sentido exibir 50% de uma capa).
+ */
+function pctLivro(etapa) {
+  return etapa >= 4 ? 100 : 0;
 }
 
-// Corpo do livro — sem barra de progresso, status simples
-function renderCorpoItem(item){
-  // Busca o tema correspondente no Eixo 3 (Elementos Textuais)
-  const e3 = DATA.eixo3.find(i=>i.subtema.toLowerCase()===item.nome.toLowerCase());
-  const etapa = e3 ? e3.etapa : null;
-  const concluido = etapa>=11;
-  const stepLabel = etapa ? PIPELINE[etapa-1] : '—';
-  const color = etapa ? progColor(etapa) : 'var(--text3)';
-  const p = etapa ? pct(etapa) : 0;
-  return`<tr class="e3-row">
-    <td style="padding:14px 14px">
+/**
+ * Retorna a cor da barra de progresso dos elementos estruturais do livro,
+ * seguindo a mesma lógica visual do Eixo 3 mas em 4 faixas.
+ */
+function progColorLivro(etapa) {
+  if (etapa >= 4) return 'var(--green)';
+  if (etapa === 3) return 'var(--teal)';
+  if (etapa === 2) return 'var(--accent)';
+  return 'var(--purple)';
+}
+
+/**
+ * Renderiza uma linha da tabela de temas do Corpo do Livro.
+ * O status exibido é lido do Eixo 3 (não do livro.corpo), porque o corpo
+ * do livro espelha o progresso real dos subtemas em produção.
+ */
+function renderCorpoItem(item) {
+  const e3Match  = DATA.eixo3.find(i => i.subtema.toLowerCase() === item.nome.toLowerCase());
+  const etapa    = e3Match ? e3Match.etapa : null;
+  const concluido = etapa >= 11;
+  const stepLabel = etapa ? PIPELINE[etapa - 1] : '—';
+  const cor       = etapa ? progColor(etapa) : 'var(--text3)';
+  const p         = etapa ? pct(etapa) : 0;
+
+  let statusHtml;
+  if (concluido) {
+    statusHtml = '<div class="etapa-tag" style="color:var(--green);font-weight:600;margin-top:4px">✓ Concluído</div>';
+  } else if (etapa) {
+    statusHtml = `<div class="etapa-tag" style="margin-top:4px;color:${cor}">Etapa ${etapa}/11 — ${stepLabel}</div>`;
+  } else {
+    statusHtml = '<div class="etapa-tag" style="margin-top:4px">Não iniciado</div>';
+  }
+
+  const percentualHtml = concluido
+    ? `<span style="font-size:18px;font-weight:500;color:var(--green);font-family:'DM Mono',monospace">${p}%</span>`
+    : etapa
+      ? `<span style="font-size:18px;font-weight:500;font-family:'DM Mono',monospace;color:${cor}">${p}%</span>`
+      : '';
+
+  return `<tr class="e3-row">
+    <td style="padding:14px">
       <div class="subtema-name">${item.nome}</div>
-      ${concluido
-        ? '<div class="etapa-tag" style="color:var(--green);font-weight:600;margin-top:4px">✓ Concluído</div>'
-        : etapa
-          ? `<div class="etapa-tag" style="margin-top:4px;color:${color}">Etapa ${etapa}/11 — ${stepLabel}</div>`
-          : '<div class="etapa-tag" style="margin-top:4px">Não iniciado</div>'
-      }
+      ${statusHtml}
     </td>
-    <td style="padding:14px 12px;text-align:right">
-      ${concluido
-        ? `<span style="font-size:18px;font-weight:500;color:var(--green);font-family:'DM Mono',monospace">${p}%</span>`
-        : etapa
-          ? `<span style="font-size:18px;font-weight:500;font-family:'DM Mono',monospace;color:${color}">${p}%</span>`
-          : ''
-      }
-    </td>
+    <td style="padding:14px;text-align:right">${percentualHtml}</td>
   </tr>`;
 }
 
-// Elementos estruturais — mantém barra de progresso e expand
-function renderLivroItem(item, showResp){
-  const done = item.etapa>=4;
-  const color = progColorLivro(item.etapa);
-  const stepLabel = PIPELINE_LIVRO[item.etapa-1]||PIPELINE_LIVRO[0];
-  const pc = done?100:Math.round(((item.etapa-1)/3)*100);
-  return`<tr class="e3-row" onclick="toggleExpandLivro('lv-exp-${item.id}')">
+/**
+ * Renderiza uma linha da tabela de Elementos Estruturais do livro.
+ * Exibe barra de progresso (4 etapas) e expande para mostrar o fluxo.
+ *
+ * @param {Object} item     - Item de DATA.livro.estruturais
+ * @param {boolean} showResp - Se true, exibe coluna de responsável
+ */
+function renderLivroItem(item, showResp) {
+  const done      = item.etapa >= 4;
+  const cor       = progColorLivro(item.etapa);
+  const stepLabel = PIPELINE_LIVRO[item.etapa - 1] || PIPELINE_LIVRO[0];
+  const pc        = done ? 100 : Math.round(((item.etapa - 1) / 3) * 100);
+
+  const linhasFluxo = PIPELINE_LIVRO.map((s, i) => {
+    const n   = i + 1;
+    const cls = n < item.etapa ? 'step-done' : n === item.etapa ? 'step-current' : 'step-todo';
+    const lc  = n < item.etapa ? 'done-label' : n === item.etapa ? 'current-label' : '';
+    return `<div class="pipe-step-mini"><span class="num ${cls}">${n}</span><span class="step-label ${lc}">${s}</span></div>`;
+  }).join('');
+
+  const colunaResp = showResp
+    ? `<td style="padding:12px"><div class="resp-name">${item.responsavel || '—'}</div></td>`
+    : '';
+
+  return `<tr class="e3-row" onclick="toggleExpandLivro('lv-exp-${item.id}')">
     <td style="padding:12px 14px">
       <div class="subtema-name">${item.nome}</div>
-      ${done?'<div class="etapa-tag" style="color:var(--green);font-weight:600">✓ Concluído</div>':`<div class="etapa-tag">Etapa ${item.etapa}/4 — ${stepLabel}</div>`}
+      ${done
+        ? '<div class="etapa-tag" style="color:var(--green);font-weight:600">✓ Concluído</div>'
+        : `<div class="etapa-tag">Etapa ${item.etapa}/4 — ${stepLabel}</div>`
+      }
     </td>
-    ${showResp?`<td style="padding:12px"><div class="resp-name">${item.responsavel||'—'}</div></td>`:''}
+    ${colunaResp}
     <td style="padding:12px">
       <div class="prog-wrap">
-        <div class="prog-bar"><div class="prog-fill" style="width:${pc}%;background:${color}"></div></div>
-        <span class="prog-pct" style="color:${color}">${pc}%</span>
+        <div class="prog-bar"><div class="prog-fill" style="width:${pc}%;background:${cor}"></div></div>
+        <span class="prog-pct" style="color:${cor}">${pc}%</span>
       </div>
     </td>
     <td style="padding:12px">
@@ -1158,63 +1646,66 @@ function renderLivroItem(item, showResp){
     </td>
   </tr>
   <tr id="lv-exp-${item.id}" style="display:none">
-    <td colspan="${showResp?4:3}" style="padding:0 14px 12px;background:var(--surface2)">
+    <td colspan="${showResp ? 4 : 3}" style="padding:0 14px 12px;background:var(--surface2)">
       <div class="expand-block" style="margin-top:8px">
         <h4>Fluxo</h4>
-        <div class="pipe-steps-mini">${PIPELINE_LIVRO.map((s,i)=>{
-          const n=i+1;
-          const cls=n<item.etapa?'step-done':n===item.etapa?'step-current':'step-todo';
-          const lc=n<item.etapa?'done-label':n===item.etapa?'current-label':'';
-          return`<div class="pipe-step-mini"><span class="num ${cls}">${n}</span><span class="step-label ${lc}">${s}</span></div>`;
-        }).join('')}</div>
-        ${item.obs?`<p style="margin-top:8px;font-size:12px;color:var(--text2)">${item.obs}</p>`:''}
+        <div class="pipe-steps-mini">${linhasFluxo}</div>
+        ${item.obs ? `<p style="margin-top:8px;font-size:12px;color:var(--text2)">${item.obs}</p>` : ''}
       </div>
     </td>
   </tr>`;
 }
 
-function toggleExpandLivro(id){
-  const el=document.getElementById(id);
-  if(el)el.style.display=el.style.display==='table-row'?'none':'table-row';
+function toggleExpandLivro(id) {
+  const el = document.getElementById(id);
+  if (el) el.style.display = el.style.display === 'table-row' ? 'none' : 'table-row';
 }
 
-function renderLivroView(){
-  const est = DATA.livro.estruturais;
-  const corp = DATA.livro.corpo;
-  const corpOk = corp.filter(i=>i.etapa>=4).length;
-  const corpPct = Math.round((corpOk/corp.length)*100);
-  const estOk = est.filter(i=>i.etapa>=4).length;
+/** Renderiza a view completa da Construção do Livro com KPIs, corpo e estruturais. */
+function renderLivroView() {
+  const est     = DATA.livro.estruturais;
+  const corp    = DATA.livro.corpo;
+  // O progresso do corpo é lido do Eixo 3 (fonte de verdade),
+  // pois o corpo.etapa pode estar defasado em relação ao fluxo real.
+  const corpOk = corp.filter(item => {
+    const e3 = DATA.eixo3.find(i => i.subtema.toLowerCase() === item.nome.toLowerCase());
+    return e3 ? e3.etapa >= 11 : item.etapa >= 4;
+  }).length;
+  const corpPct = Math.round((corpOk / corp.length) * 100);
+  const estOk   = est.filter(i => i.etapa >= 4).length;
+  const geral   = Math.round(((corpOk + estOk) / (corp.length + est.length)) * 100);
 
-  // KPIs
   const kpis = `<div class="kpi-row" style="grid-template-columns:repeat(3,1fr)">
     <div class="kpi-card"><div class="kpi-val" style="color:var(--teal)">${corpPct}%</div><div class="kpi-label">Corpo do livro</div><div class="kpi-sub">${corpOk}/${corp.length} temas finalizados</div></div>
     <div class="kpi-card"><div class="kpi-val" style="color:var(--accent)">${estOk}</div><div class="kpi-label">Elementos estruturais</div><div class="kpi-sub">${estOk}/${est.length} concluídos</div></div>
-    <div class="kpi-card"><div class="kpi-val" style="color:var(--amber)">${Math.round(((corpOk+estOk)/(corp.length+est.length))*100)}%</div><div class="kpi-label">Progresso geral</div><div class="kpi-sub">livro completo</div></div>
+    <div class="kpi-card"><div class="kpi-val" style="color:var(--amber)">${geral}%</div><div class="kpi-label">Progresso geral</div><div class="kpi-sub">livro completo</div></div>
   </div>`;
 
-  // Tabela corpo do livro — sem coluna de progresso
-  const corpRows = corp.map(i=>renderCorpoItem(i)).join('');
-  const tblCorp = `<div style="background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;margin-bottom:24px">
-    <table class="e3-table"><thead><tr>
-      <th style="width:85%">Tema</th>
-      <th style="width:15%"></th>
-    </tr></thead><tbody>${corpRows}
-    </tbody></table>
+  const corpRows = corp.map(i => renderCorpoItem(i)).join('');
+  const tblCorp  = `<div style="background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;margin-bottom:24px">
+    <table class="e3-table">
+      <thead><tr>
+        <th style="width:85%">Tema</th>
+        <th style="width:15%"></th>
+      </tr></thead>
+      <tbody>${corpRows}</tbody>
+    </table>
   </div>`;
 
-  // Tabela elementos estruturais
-  const estRows = est.map(i=>renderLivroItem(i,true)).join('');
-  const tblEst = `<div style="background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden">
-    <table class="e3-table"><thead><tr>
-      <th style="width:40%">Elemento</th>
-      <th style="width:20%">Responsável</th>
-      <th style="width:25%">Progresso</th>
-      <th style="width:15%"></th>
-    </tr></thead><tbody>${estRows}
-    </tbody></table>
+  const estRows = est.map(i => renderLivroItem(i, true)).join('');
+  const tblEst  = `<div style="background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden">
+    <table class="e3-table">
+      <thead><tr>
+        <th style="width:40%">Elemento</th>
+        <th style="width:20%">Responsável</th>
+        <th style="width:25%">Progresso</th>
+        <th style="width:15%"></th>
+      </tr></thead>
+      <tbody>${estRows}</tbody>
+    </table>
   </div>`;
 
-  return`${kpis}
+  return `${kpis}
   <div class="section-header" style="margin-bottom:12px">
     <div class="section-title"><span class="eixo-badge" style="background:rgba(29,212,184,.15);color:var(--teal)">Corpo</span>Temas por eixo</div>
   </div>
@@ -1225,49 +1716,89 @@ function renderLivroView(){
   ${tblEst}`;
 }
 
-// ── EDIT LIVRO MODAL ──
-function openEditLivro(id){
-  // Buscar item em estruturais ou corpo
-  let item = DATA.livro.estruturais.find(i=>i.id===id) || DATA.livro.corpo.find(i=>i.id===id);
-  if(!item)return;
-  document.getElementById('modal-title').textContent='Editar — '+item.nome;
-  document.getElementById('edit-id').value=id;
-  document.getElementById('edit-eixo').value='livro';
-  document.getElementById('edit-subtema').value=item.nome||'';
-  document.getElementById('edit-resp').value=item.responsavel||'';
-  document.getElementById('edit-obs').value=item.obs||'';
-  // Trocar select de etapa temporariamente para pipeline livro
-  const sel=document.getElementById('edit-etapa');
-  sel.innerHTML=PIPELINE_LIVRO.map((s,i)=>`<option value="${i+1}">${i+1} — ${s}</option>`).join('');
-  sel.value=item.etapa||1;
-  document.getElementById('edit-prazo').value=item.prazo||'';
+/**
+ * Abre o modal de edição para um item do livro (estrutural ou corpo).
+ * Substitui temporariamente o select de etapa pelo PIPELINE_LIVRO (4 etapas).
+ */
+function openEditLivro(id) {
+  const item = DATA.livro.estruturais.find(i => i.id === id)
+            || DATA.livro.corpo.find(i => i.id === id);
+  if (!item) return;
+
+  document.getElementById('modal-title').textContent   = 'Editar — ' + item.nome;
+  document.getElementById('edit-id').value             = id;
+  document.getElementById('edit-subtema').value        = item.nome         || '';
+  document.getElementById('edit-resp').value           = item.responsavel  || '';
+  document.getElementById('edit-obs').value            = item.obs          || '';
+  document.getElementById('edit-prazo').value          = item.prazo        || '';
+
+  // Troca o select para refletir o fluxo de 4 etapas do livro
+  const sel = document.getElementById('edit-etapa');
+  sel.innerHTML = PIPELINE_LIVRO.map((s, i) => `<option value="${i + 1}">${i + 1} — ${s}</option>`).join('');
+  sel.value = item.etapa || 1;
+
+  // O prefixo 'livro_item_' sinaliza para saveItem() que este é um item do livro
+  document.getElementById('edit-eixo').value = 'livro_item_' + id;
+
   document.getElementById('edit-modal').classList.add('open');
-  // Marcar que estamos editando livro
-  document.getElementById('edit-eixo').value='livro_item_'+id;
 }
 
-// ── TEMA ──
-function toggleTheme(){
-  const isLight=document.body.classList.toggle("light");
-  document.getElementById("theme-icon").textContent=isLight?"🌙":"☀️";
-  localStorage.setItem("theme",isLight?"light":"dark");
+
+// ---------------------------------------------------------------------------
+// TEMA (CLARO / ESCURO)
+// ---------------------------------------------------------------------------
+
+function toggleTheme() {
+  const isLight = document.body.classList.toggle('light');
+  document.getElementById('theme-icon').textContent = isLight ? '🌙' : '☀️';
+  localStorage.setItem('theme', isLight ? 'light' : 'dark');
 }
-(function(){
-  const saved=localStorage.getItem("theme");
-  if(saved==="light"){document.body.classList.add("light");const i=document.getElementById("theme-icon");if(i)i.textContent="🌙";}
+
+// Aplica o tema salvo imediatamente ao carregar, antes do primeiro render
+(function aplicarTemaSalvo() {
+  const salvo = localStorage.getItem('theme');
+  if (salvo === 'light') {
+    document.body.classList.add('light');
+    const icone = document.getElementById('theme-icon');
+    if (icone) icone.textContent = '🌙';
+  }
 })();
 
-// ── INIT ──
-// Guarda o HTML original como template para o buildFullHTML
-// Deve rodar antes de qualquer modificação no DOM
-if(!window.__BASE_HTML__){
-  window.__BASE_HTML__=document.documentElement.outerHTML;
+
+// ---------------------------------------------------------------------------
+// INICIALIZAÇÃO
+// ---------------------------------------------------------------------------
+
+/**
+ * Captura o HTML original antes de qualquer modificação no DOM.
+ * Este snapshot é usado por buildFullHTML() como template limpo para o push.
+ * Precisa rodar antes do primeiro render() para garantir que o JS está intacto.
+ */
+if (!window.__BASE_HTML__) {
+  window.__BASE_HTML__ = document.documentElement.outerHTML;
 }
-if(window.__INIT_DATA__)DATA=window.__INIT_DATA__;
-// snapshot etapa inicial para medir evolução do dia
-DATA.eixo3.forEach(i=>{ if(!i._etapaInicial) i._etapaInicial=i.etapa; });
-const _c=getGHConfig();
-if(_c.user){document.getElementById('gh-user-input').value=_c.user;document.getElementById('gh-repo-input').value=_c.repo}
-document.getElementById('last-update').textContent=DATA.updatedAt;
+
+// Se há dados publicados (injetados pelo último push), eles sobrescrevem o fallback
+if (window.__INIT_DATA__) {
+  DATA = window.__INIT_DATA__;
+}
+
+// Guarda a etapa atual de cada subtema para medir evolução no Resumo Executivo
+DATA.eixo3.forEach(item => {
+  if (!item._etapaInicial) item._etapaInicial = item.etapa;
+});
+
+// Pré-preenche campos do modal de token com o que foi salvo anteriormente
+const configSalva = getGHConfig();
+if (configSalva.user) {
+  const elUser = document.getElementById('gh-user-input');
+  const elRepo = document.getElementById('gh-repo-input');
+  if (elUser) elUser.value = configSalva.user;
+  if (elRepo) elRepo.value = configSalva.repo;
+}
+
+// Primeira renderização
+const elLastUpdate = document.getElementById('last-update');
+if (elLastUpdate) elLastUpdate.textContent = DATA.updatedAt;
 render();
 </script></div></body></html>
